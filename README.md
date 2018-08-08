@@ -1,4 +1,4 @@
-EvoLib Version 1.0.0 - 10/02/2017
+EvoLib Version 2.0.0 - 8/8/2018
 ---------------------------------
 EvoLib is an open source implementation of NSGA-II, Unified NSGA-III
 (U-NSGA-III) and Balanced NSGA-III (B-NSGA-III).
@@ -18,10 +18,8 @@ be coded in Matlab and exported as a JAR using Matlab Java Builder toolbox.
 
 DEPENDENCIES
 ------------
-(1) Tx2Ex: An open source mathematical expressions parser
-(2) KKTPM Calculator: An open source library for calculating all KKTPM 
-approximations.
-(3) Matlab Runtime R2016a 9.0.1 (https://www.mathworks.com/products/compiler/mcr.html)
+(1) Tx2Ex: An open source mathematical expressions parser (Apache L2 License)
+(2) Apache Commons Lang3 (Apache L2 License)
 
 FEATURES
 --------
