@@ -1,0 +1,6 @@
+BUG FIX: 
+    A separate epsilon has been added to the reference directions library.
+    Adding the new ReferenceDirection.DIR_EPSILON which can be different from
+    Mathematics.EPSILON avoids the problems arising in the reference directions
+    library because of changing the main precision variable Mathematics.EPSILON.
+    

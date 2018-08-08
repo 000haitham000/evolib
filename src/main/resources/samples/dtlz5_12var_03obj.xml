@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this template, choose Tools | Templates
+and open the template in the editor.
+-->
+
+<!-- id can be anything. type is either "single-objective", "multi-objective"
+or "many-objective" -->
+<optimization-problem id="dtlz5_12var_03obj" type="mutli-objective">
+    <!-- a seed has to be in the range ]0,1[ -->
+    <seed>
+        0.5
+    </seed>
+    <!-- All the variables along with their types (either real or binary) -->
+    <variables>
+        <variable type="real" min="0" max="1">x0</variable>
+        <variable type="real" min="0" max="1">x1</variable>
+        <variable type="real" min="0" max="1">x2</variable>
+        <variable type="real" min="0" max="1">x3</variable>
+        <variable type="real" min="0" max="1">x4</variable>
+        <variable type="real" min="0" max="1">x5</variable>
+        <variable type="real" min="0" max="1">x6</variable>
+        <variable type="real" min="0" max="1">x7</variable>
+        <variable type="real" min="0" max="1">x8</variable>
+        <variable type="real" min="0" max="1">x9</variable>
+        <variable type="real" min="0" max="1">x10</variable>
+        <variable type="real" min="0" max="1">x11</variable>
+    </variables>
+    <!-- Objective functions. Only the variables defined above can be used in 
+    any of these function -->
+    <objectives>
+        <objective type="min">0</objective>
+        <objective type="min">0</objective>
+        <objective type="min">0</objective>
+    </objectives>
+    <!-- structured reference points -->
+    <structured-reference-points steps="12" adaptive="false"/>
+    <!-- population size -->
+    <population-size>
+        92
+    </population-size>
+    <!-- number of generations -->
+    <generations-count>
+        300
+    </generations-count>
+    <!-- real crossover & mutation probabilities -->
+    <real-crossover-probability>1</real-crossover-probability>
+    <real-mutation-probability>0.083</real-mutation-probability>
+    <!-- real crossover & mutation distribution indices -->
+    <real-crossover-distribution-index>30</real-crossover-distribution-index>
+    <real-mutation-distribution-index>20</real-mutation-distribution-index>
+    <!-- binary crossover and mutation probabilities (the following information
+    should be removed since we have no binary variables but the code will 
+    generate exceptions if the following tags are removed. This should be
+    fixed) -->
+    <binary-crossover-probability>0.75</binary-crossover-probability>
+    <binary-mutation-probability>0.02</binary-mutation-probability>
+</optimization-problem>

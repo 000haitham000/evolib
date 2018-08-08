@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this template, choose Tools | Templates
+and open the template in the editor.
+-->
+
+<!-- id can be anything. type is either "single-objective", "multi-objective"
+or "many-objective" -->
+<optimization-problem id="zdt4-02-30" type="mutli-objective">
+    <!-- a seed has to be in the range ]0,1[ -->
+    <seed>
+        0.5
+    </seed>
+    <!-- All the variables along with their types (either real or binary) -->
+    <variables>
+        <variable type="real" min="0" max="1">x0</variable>
+        <variable type="real" min="-1" max="1">x1</variable>
+        <variable type="real" min="-1" max="1">x2</variable>
+        <variable type="real" min="-1" max="1">x3</variable>
+        <variable type="real" min="-1" max="1">x4</variable>
+        <variable type="real" min="-1" max="1">x5</variable>
+        <variable type="real" min="-1" max="1">x6</variable>
+        <variable type="real" min="-1" max="1">x7</variable>
+        <variable type="real" min="-1" max="1">x8</variable>
+        <variable type="real" min="-1" max="1">x9</variable>
+        <variable type="real" min="-1" max="1">x10</variable>
+        <variable type="real" min="-1" max="1">x11</variable>
+        <variable type="real" min="-1" max="1">x12</variable>
+        <variable type="real" min="-1" max="1">x13</variable>
+        <variable type="real" min="-1" max="1">x14</variable>
+        <variable type="real" min="-1" max="1">x15</variable>
+        <variable type="real" min="-1" max="1">x16</variable>
+        <variable type="real" min="-1" max="1">x17</variable>
+        <variable type="real" min="-1" max="1">x18</variable>
+        <variable type="real" min="-1" max="1">x19</variable>
+        <variable type="real" min="-1" max="1">x20</variable>
+        <variable type="real" min="-1" max="1">x21</variable>
+        <variable type="real" min="-1" max="1">x22</variable>
+        <variable type="real" min="-1" max="1">x23</variable>
+        <variable type="real" min="-1" max="1">x24</variable>
+        <variable type="real" min="-1" max="1">x25</variable>
+        <variable type="real" min="-1" max="1">x26</variable>
+        <variable type="real" min="-1" max="1">x27</variable>
+        <variable type="real" min="-1" max="1">x28</variable>
+        <variable type="real" min="-1" max="1">x29</variable>
+    </variables>
+    <!-- Objective functions. Only the variables defined above can be used in 
+    any of these function -->
+    <objectives>
+        <objective type="min">x0</objective>
+        <objective type="min">
+            (1 + 10 * 29 + pow(x1,2) - 10 * cos(4 * 3.14159 * x1) + pow(x2,2) - 10 * cos(4 * 3.14159 * x2) + pow(x3,2) - 10 * cos(4 * 3.14159 * x3) + pow(x4,2) - 10 * cos(4 * 3.14159 * x4) + pow(x5,2) - 10 * cos(4 * 3.14159 * x5) + pow(x6,2) - 10 * cos(4 * 3.14159 * x6) + pow(x7,2) - 10 * cos(4 * 3.14159 * x7) + pow(x8,2) - 10 * cos(4 * 3.14159 * x8) + pow(x9,2) - 10 * cos(4 * 3.14159 * x9) + pow(x10,2) - 10 * cos(4 * 3.14159 * x10) + pow(x11,2) - 10 * cos(4 * 3.14159 * x11) + pow(x12,2) - 10 * cos(4 * 3.14159 * x12) + pow(x13,2) - 10 * cos(4 * 3.14159 * x13) + pow(x14,2) - 10 * cos(4 * 3.14159 * x14) + pow(x15,2) - 10 * cos(4 * 3.14159 * x15) + pow(x16,2) - 10 * cos(4 * 3.14159 * x16) + pow(x17,2) - 10 * cos(4 * 3.14159 * x17) + pow(x18,2) - 10 * cos(4 * 3.14159 * x18) + pow(x19,2) - 10 * cos(4 * 3.14159 * x19) + pow(x20,2) - 10 * cos(4 * 3.14159 * x20) + pow(x21,2) - 10 * cos(4 * 3.14159 * x21) + pow(x22,2) - 10 * cos(4 * 3.14159 * x22) + pow(x23,2) - 10 * cos(4 * 3.14159 * x23) + pow(x24,2) - 10 * cos(4 * 3.14159 * x24) + pow(x25,2) - 10 * cos(4 * 3.14159 * x25) + pow(x26,2) - 10 * cos(4 * 3.14159 * x26) + pow(x27,2) - 10 * cos(4 * 3.14159 * x27) + pow(x28,2) - 10 * cos(4 * 3.14159 * x28) + pow(x29,2) - 10 * cos(4 * 3.14159 * x29)) *
+            (1 - sqrt(x0 / (1 + 10 * 29 + pow(x1,2) - 10 * cos(4 * 3.14159 * x1) + pow(x2,2) - 10 * cos(4 * 3.14159 * x2) + pow(x3,2) - 10 * cos(4 * 3.14159 * x3) + pow(x4,2) - 10 * cos(4 * 3.14159 * x4) + pow(x5,2) - 10 * cos(4 * 3.14159 * x5) + pow(x6,2) - 10 * cos(4 * 3.14159 * x6) + pow(x7,2) - 10 * cos(4 * 3.14159 * x7) + pow(x8,2) - 10 * cos(4 * 3.14159 * x8) + pow(x9,2) - 10 * cos(4 * 3.14159 * x9) + pow(x10,2) - 10 * cos(4 * 3.14159 * x10) + pow(x11,2) - 10 * cos(4 * 3.14159 * x11) + pow(x12,2) - 10 * cos(4 * 3.14159 * x12) + pow(x13,2) - 10 * cos(4 * 3.14159 * x13) + pow(x14,2) - 10 * cos(4 * 3.14159 * x14) + pow(x15,2) - 10 * cos(4 * 3.14159 * x15) + pow(x16,2) - 10 * cos(4 * 3.14159 * x16) + pow(x17,2) - 10 * cos(4 * 3.14159 * x17) + pow(x18,2) - 10 * cos(4 * 3.14159 * x18) + pow(x19,2) - 10 * cos(4 * 3.14159 * x19) + pow(x20,2) - 10 * cos(4 * 3.14159 * x20) + pow(x21,2) - 10 * cos(4 * 3.14159 * x21) + pow(x22,2) - 10 * cos(4 * 3.14159 * x22) + pow(x23,2) - 10 * cos(4 * 3.14159 * x23) + pow(x24,2) - 10 * cos(4 * 3.14159 * x24) + pow(x25,2) - 10 * cos(4 * 3.14159 * x25) + pow(x26,2) - 10 * cos(4 * 3.14159 * x26) + pow(x27,2) - 10 * cos(4 * 3.14159 * x27) + pow(x28,2) - 10 * cos(4 * 3.14159 * x28) + pow(x29,2) - 10 * cos(4 * 3.14159 * x29))))
+        </objective>
+    </objectives>
+    <!-- structured reference points -->
+    <structured-reference-points steps="199" adaptive="false"/>
+    <!-- population size -->
+    <population-size>
+        200
+    </population-size>
+    <!-- number of generations -->
+    <generations-count>
+        500
+    </generations-count>
+    <!-- real crossover & mutation probabilities -->
+    <real-crossover-probability>1</real-crossover-probability>
+    <real-mutation-probability>0.0333</real-mutation-probability>
+    <!-- real crossover & mutation distribution indices -->
+    <real-crossover-distribution-index>0</real-crossover-distribution-index>
+    <real-mutation-distribution-index>0</real-mutation-distribution-index>
+    <!-- binary crossover and mutation probabilities (the following information
+    should be removed since we have no binary variables but the code will 
+    generate exceptions if the following tags are removed. This should be
+    fixed) -->
+    <binary-crossover-probability>0.75</binary-crossover-probability>
+    <binary-mutation-probability>0.02</binary-mutation-probability>
+</optimization-problem>

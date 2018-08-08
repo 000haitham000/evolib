@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this template, choose Tools | Templates
+and open the template in the editor.
+-->
+
+<!-- id can be anything. type is either "single-objective", "multi-objective"
+or "many-objective" -->
+<optimization-problem id="sample-constrained-1" type="mutli-objective">
+    <!-- a seed has to be in the range ]0,1[ -->
+    <seed>
+        0.5
+    </seed>
+    <!-- All the variables along with their types (either real or binary) -->
+    <variables>
+        <variable type="real" min="0" max="10">x0</variable>
+        <variable type="real" min="0" max="10">x1</variable>
+    </variables>
+    <!-- Objective functions. Only the variables defined above can be used in 
+    any of these function -->
+    <objectives>
+        <objective type="min">-1*x0</objective>
+        <objective type="min">-1*x1</objective>
+    </objectives>
+    <!-- constraints -->
+    <constraints>
+        <constraint type="inequality">x0*x0+x1*x1-4</constraint>
+        <constraint type="inequality">5-x0</constraint>
+        <constraint type="inequality">5-x1</constraint>
+    </constraints>
+    <!-- structured reference points -->
+    <structured-reference-points steps="247" adaptive="false"/>
+    <!-- population size -->
+    <population-size>
+        248
+    </population-size>
+    <!-- number of generations -->
+    <generations-count>
+        100
+    </generations-count>
+    <!-- real crossover & mutation probabilities -->
+    <real-crossover-probability>0.9</real-crossover-probability>
+    <real-mutation-probability>0.0333</real-mutation-probability>
+    <!-- real crossover & mutation distribution indices -->
+    <real-crossover-distribution-index>0</real-crossover-distribution-index>
+    <real-mutation-distribution-index>0</real-mutation-distribution-index>
+    <!-- binary crossover and mutation probabilities (the following information
+    should be removed since we have no binary variables but the code will 
+    generate exceptions if the following tags are removed. This should be
+    fixed) -->
+    <binary-crossover-probability>0.75</binary-crossover-probability>
+    <binary-mutation-probability>0.02</binary-mutation-probability>
+</optimization-problem>
