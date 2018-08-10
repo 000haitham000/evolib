@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="Gradle: :tx2ex:">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/libs/tx2ex.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
