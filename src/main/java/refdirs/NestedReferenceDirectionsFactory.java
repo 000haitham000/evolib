@@ -31,9 +31,8 @@ public class NestedReferenceDirectionsFactory
 
     /**
      *
-     * @param objectivesCount
-     * @param divisions
-     * @return
+     * @param divisions the number of steps in each layer of the nested layers mode
+     * @return a list of reference directions
      */
     public List generateDirections(int[] divisions) {
         // Create a list to accumulate all final reference directions

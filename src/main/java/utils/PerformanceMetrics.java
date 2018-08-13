@@ -9,23 +9,27 @@ import emo.OptimizationProblem;
 import emo.OptimizationUtilities;
 import emo.VirtualIndividual;
 import engines.AbstractGeneticEngine;
+
 import static engines.AbstractGeneticEngine.DEBUG_ALL;
 import static engines.AbstractGeneticEngine.DEBUG_INTERCEPTS;
 import static engines.AbstractGeneticEngine.MIN_DOUBLE_VALUE;
+
 import engines.NSGA3Engine;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import javax.xml.stream.XMLStreamException;
+
 import parsing.IndividualEvaluator;
 import parsing.InvalidOptimizationProblemException;
 import refdirs.ReferenceDirection;
 
 /**
  * Provides the functionality of calculating some performance metrics.
- *
+ * <p>
  * TODO: replace this implementation with an external dependency (library) that
  * provides a wider support for metric calculations.
  *
@@ -66,8 +70,8 @@ public class PerformanceMetrics {
         outerLoop:
         for (Individual individual : individuals) {
             for (int i = 0;
-                    i < geneticEngine.optimizationProblem.objectives.length;
-                    i++) {
+                 i < geneticEngine.optimizationProblem.objectives.length;
+                 i++) {
                 if (Mathematics.compare(
                         individual.getObjective(i),
                         referencePoint[i])
@@ -129,7 +133,7 @@ public class PerformanceMetrics {
      * No check is made to ensure this property i.e. if it is not true, the
      * method will return wrong result with NO exceptions or flags.
      *
-     * @param optimizationProblem
+     * @param objCount
      * @param individuals
      * @param paretoFrontMembers
      * @param power
@@ -167,7 +171,7 @@ public class PerformanceMetrics {
      * No check is made to ensure this property i.e. if it is not true, the
      * method will return wrong result with NO exceptions or flags.
      *
-     * @param optimizationProblem
+     * @param objCount
      * @param individuals
      * @param paretoFrontMembers
      * @param power
@@ -420,8 +424,8 @@ public class PerformanceMetrics {
             paretoFront[intervalN[0] + i].real[0] = x0;
             // Assign Zero to all the other real variables of the individual
             for (int j = 1;
-                    j < paretoFront[intervalN[0] + i].real.length;
-                    j++) {
+                 j < paretoFront[intervalN[0] + i].real.length;
+                 j++) {
                 paretoFront[intervalN[0] + i].real[j] = 0;
             }
             // Update objective values to reflect the new variables values
@@ -438,8 +442,8 @@ public class PerformanceMetrics {
             paretoFront[intervalN[0] + intervalN[1] + i].real[0] = x0;
             // Assign Zero to all the other real variables of the individual
             for (int j = 1;
-                    j < paretoFront[intervalN[0] + intervalN[1] + i].real.length;
-                    j++) {
+                 j < paretoFront[intervalN[0] + intervalN[1] + i].real.length;
+                 j++) {
                 paretoFront[intervalN[0] + intervalN[1] + i].real[j] = 0;
             }
             // Update objective values to reflect the new variables values
@@ -456,9 +460,9 @@ public class PerformanceMetrics {
             paretoFront[intervalN[0] + intervalN[1] + intervalN[2] + i].real[0] = x0;
             // Assign Zero to all the other real variables of the individual
             for (int j = 1;
-                    j < paretoFront[intervalN[0] + intervalN[1] + intervalN[2]
-                    + i].real.length;
-                    j++) {
+                 j < paretoFront[intervalN[0] + intervalN[1] + intervalN[2]
+                         + i].real.length;
+                 j++) {
                 paretoFront[intervalN[0] + intervalN[1] + intervalN[2]
                         + i].real[j] = 0;
             }
@@ -485,7 +489,7 @@ public class PerformanceMetrics {
             individualEvaluator.updateIndividualObjectivesAndConstraints(
                     optimizationProblem,
                     paretoFront[intervalN[0] + intervalN[1] + intervalN[2]
-                    + intervalN[3] + i]);
+                            + intervalN[3] + i]);
             // Increment the first real variable
             x0 += intervalSapn[4] / (intervalN[4] - 1);
         }
@@ -609,11 +613,15 @@ public class PerformanceMetrics {
     /**
      * Get the Pareto front members (solutions) of the test problem OSY
      *
-     * @param n
+     * @param individualEvaluator
+     * @param n1
+     * @param n2
+     * @param n3
+     * @param n4
+     * @param n5
      * @return
      * @throws InvalidOptimizationProblemException
      * @throws XMLStreamException
-     * @throws EvaluationException
      */
     public static Individual[] getOSYParetoFront(
             IndividualEvaluator individualEvaluator,
@@ -739,55 +747,6 @@ public class PerformanceMetrics {
         return getDTLZ2ParetoFront(refDirs);
     }
 
-    public static Individual[] getSampleConstarined1ParetoFront(
-            IndividualEvaluator individualEvaluator,
-            int n)
-            throws
-            InvalidOptimizationProblemException,
-            XMLStreamException {
-        // Load SampleConstrained1 problem
-        OptimizationProblem optimizationProblem
-                = InputOutput.getProblem("../samples/sample-constrained-1.xml");
-        // Create a random population
-        Individual[] paretoFront = new Individual[n];
-        for (int i = 0; i < paretoFront.length; i++) {
-            paretoFront[i] = new Individual(
-                    optimizationProblem,
-                    individualEvaluator);
-        }
-        // Override the original random real variables of the population
-        double x0 = 0; // Intialize the first real variable (the only non-zero 
-        // variable in ZDT1)
-        for (int i = 0; i < n; i++) {
-            // Set the first real variable of the individual to x0
-            paretoFront[i].real[0] = x0;
-            // Account for precision errors that can come at the end of x0 interval
-            if (i == n - 1 && x0 > 2) {
-                x0 = 2;
-            }
-            // Calculate the value of the second real variable
-            paretoFront[i].real[1] = Math.sqrt(4 - Math.pow(x0, 2));
-            // Update objective values to reflect the new variables values
-            individualEvaluator.updateIndividualObjectivesAndConstraints(
-                    optimizationProblem,
-                    paretoFront[i]);
-            // Increment the first real variable
-            x0 += 2.0 / (n - 1);
-        }
-        // Some housekeeping (remember that these individuals are not coming out
-        // of any ranking or niching procedure. They are the ultimate 
-        // non-dominated solutions of the problem). So, the following house
-        // keeping is done just to prevent the user from misusing these
-        // individuals in any unexpected way.
-        for (Individual individual : paretoFront) {
-            individual.validConstraintsViolationValues = false;
-            individual.validRankValue = false;
-            individual.validReferenceDirection = false;
-        }
-        // Return thr pareto front
-        return paretoFront;
-    }
-
     public static double calculateHyperVolumeForTwoObjectivesOnly(
             AbstractGeneticEngine engine,
             Individual[] individuals,
@@ -798,9 +757,9 @@ public class PerformanceMetrics {
         // Select only one individual for each reference direction
         Individual[] selectedIndividualsArr
                 = OptimizationUtilities
-                        .selectOnlyOneIndividualForEachDirection(
-                                individuals,
-                                referenceDirectionsList);
+                .selectOnlyOneIndividualForEachDirection(
+                        individuals,
+                        referenceDirectionsList);
         // Now call hypervolume only on the selected individuals
         return calculateHyperVolumeForTwoObjectivesOnly(
                 engine,
@@ -809,226 +768,4 @@ public class PerformanceMetrics {
                 hvIdealPoint,
                 epsilon);
     }
-
-    public static double getSurvivingPercent(
-            Individual[] population1,
-            Individual[] population2) {
-        Set<Integer> blackSet;
-        blackSet = new HashSet<Integer>();
-        int survivialCount = 0;
-        for (int i = 0; i < population1.length; i++) {
-            for (int j = 0; j < population2.length; j++) {
-                // The following condition prevents a single individual in
-                // population2 from being matched with more than one
-                // individual from population1.
-                if (!blackSet.contains(j)) {
-                    if (population1[i].equals(population2[j])) {
-                        survivialCount++;
-                        blackSet.add(j);
-                        break;
-                    }
-                }
-            }
-        }
-        return survivialCount * 1.0 / population1.length;
-    }
-
-    /**
-     * This methods assumes that all its inputs are feasible i.e. it does not
-     * check the feasibility of the individuals passed to it.
-     *
-     * @param individuals
-     * @param refDirs
-     * @param utopian_epsilon
-     * @return
-     */
-    public static double calculateDiversityMetric(
-            VirtualIndividual[] individuals,
-            VirtualIndividual[] refDirs,
-            double utopian_epsilon) {
-        VirtualIndividual[] nonDominated
-                = OptimizationUtilities.getNonDominatedIndividuals(
-                        individuals,
-                        0);
-        double[] idealPoint = OptimizationUtilities.getIdealPoint(nonDominated);
-        VirtualIndividual[] extremePoints
-                = OptimizationUtilities.getExtremePoints(
-                        null,
-                        idealPoint,
-                        null,
-                        individuals);
-        double[] intercepts = getIntercepts(
-                nonDominated,
-                idealPoint,
-                extremePoints,
-                null);
-        List<ReferenceDirection> refDirsList = new ArrayList<>();
-        for (VirtualIndividual refDir : refDirs) {
-            double[] direction = new double[refDir.getObjectivesCount()];
-            for (int i = 0; i < direction.length; i++) {
-                direction[i] = refDir.getObjective(i);
-            }
-            refDirsList.add(new ReferenceDirection(direction));
-        }
-        double[][] distanceMatrix
-                = new double[individuals.length][refDirsList.size()];
-        for (int i = 0; i < individuals.length; i++) {
-            for (int j = 0; j < refDirsList.size(); j++) {
-                distanceMatrix[i][j] = NSGA3Engine.getPerpendicularDistance(
-                        individuals[i],
-                        refDirsList.get(j),
-                        idealPoint,
-                        intercepts,
-                        utopian_epsilon);
-            }
-        }
-        double diversityMetric = 0;
-        for (int i = 0; i < refDirsList.size(); i++) {
-            double minDist = distanceMatrix[0][i];
-            for (int j = 1; j < individuals.length; j++) {
-                if (distanceMatrix[j][i] < minDist) {
-                    minDist = distanceMatrix[j][i];
-                }
-            }
-            diversityMetric += minDist;
-        }
-        return diversityMetric;
-    }
-
-    /**
-     * This method assumes that all its input individuals are feasible and in
-     * the first front.
-     *
-     * @param population
-     * @param currentIdealPoint
-     * @param extremePoints
-     * @param optionalDisplayMessage
-     * @return
-     */
-    public static double[] getIntercepts(
-            VirtualIndividual[] population,
-            double[] currentIdealPoint,
-            VirtualIndividual[] extremePoints,
-            String optionalDisplayMessage) {
-        int objCount = extremePoints[0].getObjectivesCount();
-        // Calculating the vector of maximum objective values & the Nadir point
-        // Initialize the structures & set all their initial values to
-        // Negative Infinity
-        double[] maxObjValues = new double[objCount];
-        double[] nadirPoint = new double[objCount];
-        for (int i = 0; i < nadirPoint.length; i++) {
-            maxObjValues[i] = -1 * Double.MIN_VALUE;
-            nadirPoint[i] = -1 * Double.MIN_VALUE;
-        }
-        // Traverse all the individuals of the population and get their maximum
-        // value of objective (The simplest way of calculating the nadir point 
-        // is to get these maximum values among the first front individuals)
-        for (int i = 0; i < population.length; i++) {
-            for (int j = 0; j < objCount; j++) {
-                if (maxObjValues[j] < population[i].getObjective(j)
-                        - currentIdealPoint[j]) {
-                    maxObjValues[j] = population[i].getObjective(j)
-                            - currentIdealPoint[j];
-                }
-                if (nadirPoint[j] < population[i].getObjective(j)
-                        - currentIdealPoint[j]) {
-                    nadirPoint[j] = population[i].getObjective(j)
-                            - currentIdealPoint[j];
-                }
-            }
-        }
-        if (DEBUG_ALL || DEBUG_INTERCEPTS) {
-            System.out.println("-----------");
-            System.out.println("Nadir Point");
-            System.out.println("-----------");
-            System.out.print("(");
-            for (int i = 0; i < nadirPoint.length; i++) {
-                System.out.format("%5.2f", nadirPoint[i]);
-                if (i != nadirPoint.length - 1) {
-                    System.out.print(",");
-                }
-            }
-            System.out.println(")");
-
-            System.out.println("-----------");
-            System.out.println("Max Vector");
-            System.out.println("-----------");
-            System.out.print("(");
-            for (int i = 0; i < maxObjValues.length; i++) {
-                System.out.format("%5.2f", maxObjValues[i]);
-                if (i != maxObjValues.length - 1) {
-                    System.out.print(",");
-                }
-            }
-            System.out.println(")");
-        }
-        // Caculating the currentIntercepts
-        double[] intercepts = new double[objCount];
-        // Create the hyperplane
-        // Prepare your arrays for gaussian elimination
-        double[][] Z = new double[objCount][objCount];
-        for (int i = 0; i < Z.length; i++) {
-            for (int j = 0; j < Z[i].length; j++) {
-                Z[i][j] = extremePoints[i].getObjective(j);
-            }
-        }
-        double[] u = new double[objCount];
-        for (int i = 0; i < u.length; i++) {
-            u[i] = 1;
-        }
-        boolean useNadir = false;
-        // Solve the system of equations using gaussian elimination
-        try {
-            intercepts = Mathematics.gaussianElimination(Z, u);
-        } catch (Mathematics.SingularMatrixException ex) {
-            useNadir = true;
-        }
-        // If gaussian elimination resulted in -ve or infinite currentIntercepts,
-        // again use the nadir point.
-        if (useNadir) {
-            for (double intercept : intercepts) {
-                if (intercept < MIN_DOUBLE_VALUE) {
-                    useNadir = true;
-                    break;
-                }
-            }
-        }
-        // Now get the intercept = 1/alpha
-        if (!useNadir) {
-            for (int i = 0; i < intercepts.length; i++) {
-                intercepts[i] = 1 / intercepts[i];
-                if (intercepts[i] == Double.NaN) {
-                    useNadir = true;
-                }
-            }
-        }
-        // If the follwing condition is true this means that you have to resort 
-        // to the nadir point
-        if (useNadir) {
-            System.arraycopy(nadirPoint, 0, intercepts, 0, intercepts.length);
-        }
-        // If any of the currentIntercepts is still Zero (which means that one
-        // of the nadir values is Zero), then use the maximum value of each
-        // objective instead (remember that these values were calculated among
-        // all the individuals, not just the first-front individuals)
-        for (double intercept : intercepts) {
-            if (intercept < MIN_DOUBLE_VALUE) {
-                System.arraycopy(
-                        maxObjValues,
-                        0,
-                        intercepts,
-                        0,
-                        intercepts.length
-                );
-                break;
-            }
-        }
-        // Debugging
-        if (DEBUG_ALL || DEBUG_INTERCEPTS) {
-            InputOutput.displayIntercepts(optionalDisplayMessage != null
-                    ? optionalDisplayMessage : "", intercepts);
-        }
-        return intercepts;
-    }
-
 }

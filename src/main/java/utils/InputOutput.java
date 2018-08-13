@@ -827,8 +827,7 @@ public class InputOutput {
      * of a later population will hide individuals of an earlier population if
      * plotted at the same position.
      *
-     * @param printer
-     * @param evaluator
+     * @param sb
      * @param individualsArrays
      */
     public static void printMatlabCode2D(StringBuilder sb, VirtualIndividual[]... individualsArrays) {

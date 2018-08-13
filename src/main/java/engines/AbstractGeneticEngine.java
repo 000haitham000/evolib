@@ -833,7 +833,6 @@ public abstract class AbstractGeneticEngine {
      * @param lastFrontSubset contains selected individuals from the last front
      * to be accommodated
      * @param lastFrontIndex the index of the limiting front (the front before
-     * @throws EvaluationException
      */
     public void reFillPopulation(
             Individual[] destinationPopulation,
@@ -903,7 +902,6 @@ public abstract class AbstractGeneticEngine {
      * selected
      * @param lastFrontIndex the index of the limiting front (the front before
      * which the method should stop).
-     * @throws EvaluationException
      */
     public void reFillPopulation(
             Individual[] destinationPopulation,

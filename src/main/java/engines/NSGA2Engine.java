@@ -9,15 +9,16 @@ import emo.DoubleAssignmentException;
 import emo.Individual;
 import emo.OptimizationProblem;
 import emo.OptimizationUtilities;
+
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 import java.io.File;
+
 import parsing.IndividualEvaluator;
 
 /**
- *
  * @author toshiba
  */
 public class NSGA2Engine extends AbstractGeneticEngine {
@@ -156,14 +157,18 @@ public class NSGA2Engine extends AbstractGeneticEngine {
     }
 
     /**
+     * Complete the population through niching
      *
      * @param fronts
      * @param mergedPopulation
      * @throws DoubleAssignmentException
-     * @throws EvaluationException
      */
     @Override
-    protected void fillUpPopulation(List<List<Individual>> fronts, Individual[] mergedPopulation) throws DoubleAssignmentException {
+    protected void fillUpPopulation(
+            List<List<Individual>> fronts,
+            Individual[] mergedPopulation)
+            throws
+            DoubleAssignmentException {
         // Get reamining individuals
         int remainingIndividualsCount = getRemainingCount(fronts);
         // Niching
