@@ -974,7 +974,7 @@ public abstract class NSGA3Engine extends AbstractGeneticEngine {
         HashMap<String, StringBuilder> dumpMap
                 = super.reportGenerationWiseInfo();
         // <editor-fold desc="Dumping reference directions data" defaultstate="collapsed">
-        if (DUMP_ALL_GENERATIONS_REF_DIRS) {
+        if (DUMP_ALL_GENERATIONS_REF_DIRS && DUMP_ALL_GENERATIONS_META_DATA) {
             // Dump all reference directions list
             // This section needs to be modified to write ref-dirs files in
             // a separate directory.
@@ -986,7 +986,7 @@ public abstract class NSGA3Engine extends AbstractGeneticEngine {
         }
         // </editor-fold>
         // <editor-fold desc="Append extreme points to the meta data" defaultstate="collapsed">
-        if (DUMP_ALL_GENERATIONS_EXTREME_POINTS) {
+        if (DUMP_ALL_GENERATIONS_EXTREME_POINTS && DUMP_ALL_GENERATIONS_META_DATA) {
             StringBuilder metaDataSb = dumpMap.get("meta.txt");
             if (this.currentExtremePoints != null) {
                 for (int i = 0; i < this.currentExtremePoints.length; i++) {
