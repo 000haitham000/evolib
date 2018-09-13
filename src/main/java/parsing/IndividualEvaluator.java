@@ -37,10 +37,10 @@ public class IndividualEvaluator implements Serializable {
     public IndividualEvaluator(OptimizationProblem problem) {
         // Initialize your variables manager
         vm = new VariablesManager();
-        for (int i = 0; i < problem.variablesSpecs.length; i++) {
-            if (problem.variablesSpecs[i] instanceof NumericVariable) {
+        for (int i = 0; i < problem.getVariablesSpecs().length; i++) {
+            if (problem.getVariablesSpecs()[i] instanceof NumericVariable) {
                 NumericVariable numericVariable
-                        = (NumericVariable) problem.variablesSpecs[i];
+                        = (NumericVariable) problem.getVariablesSpecs()[i];
                 vm.set(
                         numericVariable.getName(),
                         numericVariable.getMinValue());
@@ -95,21 +95,21 @@ public class IndividualEvaluator implements Serializable {
             Individual individual) {
         int realCounter = 0;
         int binaryCounter = 0;
-        for (int i = 0; i < problem.variablesSpecs.length; i++) {
+        for (int i = 0; i < problem.getVariablesSpecs().length; i++) {
             // Get the name of the variable
-            String varName = problem.variablesSpecs[i].getName();
+            String varName = problem.getVariablesSpecs()[i].getName();
             // Get the value of the variable from the individual
             double value;
-            if (problem.variablesSpecs[i] instanceof BinaryVariableSpecs) {
+            if (problem.getVariablesSpecs()[i] instanceof BinaryVariableSpecs) {
                 // If the variable is a binary variable get its corresponding
                 // decimal value.
                 value = individual.binary[binaryCounter].getDecimalValue();
                 binaryCounter++;
-            } else if (problem.variablesSpecs[i] instanceof RealVariableSpecs) {
+            } else if (problem.getVariablesSpecs()[i] instanceof RealVariableSpecs) {
                 // If the variable is real get its value directly
                 value = individual.real[realCounter];
                 realCounter++;
-            } else  if (problem.variablesSpecs[i] instanceof CustomVariableSpecs) {
+            } else  if (problem.getVariablesSpecs()[i] instanceof CustomVariableSpecs) {
                 value = Double.NaN; // for custom values
             } else {
                 throw new UnsupportedOperationException("Unknown variable type:"

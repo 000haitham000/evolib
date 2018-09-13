@@ -91,17 +91,17 @@ public class Individual extends VirtualIndividual
         // The following counter is used only if the call specified design variables values
         int realCounter = 0;
         // Separate real from binary, each to its designated list.
-        for (int i = 0; i < problem.variablesSpecs.length; i++) {
-            if (problem.variablesSpecs[i] instanceof BinaryVariableSpecs) {
+        for (int i = 0; i < problem.getVariablesSpecs().length; i++) {
+            if (problem.getVariablesSpecs()[i] instanceof BinaryVariableSpecs) {
                 binaryVariablesList.add(
-                        new BinaryVariable((BinaryVariableSpecs) problem.variablesSpecs[i]));
-            } else if (problem.variablesSpecs[i] instanceof RealVariableSpecs) {
+                        new BinaryVariable((BinaryVariableSpecs) problem.getVariablesSpecs()[i]));
+            } else if (problem.getVariablesSpecs()[i] instanceof RealVariableSpecs) {
                 if (realDesignVariables == null) {
                     // This part is responsible for randomly generating decision
                     // variables values (e.g. for initial random population)
                     double rndreal = RandomNumberGenerator.next(
-                            ((NumericVariable) problem.variablesSpecs[i]).getMinValue(),
-                            ((NumericVariable) problem.variablesSpecs[i]).getMaxValue());
+                            ((NumericVariable) problem.getVariablesSpecs()[i]).getMinValue(),
+                            ((NumericVariable) problem.getVariablesSpecs()[i]).getMaxValue());
                     realVariablesList.add(rndreal);
                 } else {
                     // This part is responsible for creating and individual with
@@ -111,9 +111,9 @@ public class Individual extends VirtualIndividual
                     realVariablesList.add(realDesignVariables[realCounter]);
                     realCounter++;
                 }
-            } else if (problem.variablesSpecs[i] instanceof CustomVariableSpecs) {
+            } else if (problem.getVariablesSpecs()[i] instanceof CustomVariableSpecs) {
                 customVariablesList.add(new CustomVariable(
-                        (CustomVariableSpecs) problem.variablesSpecs[i]));
+                        (CustomVariableSpecs) problem.getVariablesSpecs()[i]));
             }
         }
         // Copy real variables from their temporary list to their original array
@@ -249,20 +249,20 @@ public class Individual extends VirtualIndividual
         int binaryCounter = 0;
         int realCounter = 0;
         int customCounter = 0;
-        for (int i = 0; i < optimizationProblem.variablesSpecs.length; i++) {
-            if (optimizationProblem.variablesSpecs[i] instanceof BinaryVariableSpecs) {
+        for (int i = 0; i < optimizationProblem.getVariablesSpecs().length; i++) {
+            if (optimizationProblem.getVariablesSpecs()[i] instanceof BinaryVariableSpecs) {
                 result += String.format(" {%-5s= %-7.3f (B)}",
-                        optimizationProblem.variablesSpecs[i].getName(),
+                        optimizationProblem.getVariablesSpecs()[i].getName(),
                         binary[binaryCounter].getDecimalValue());
                 binaryCounter++;
-            } else if (optimizationProblem.variablesSpecs[i] instanceof RealVariableSpecs) {
+            } else if (optimizationProblem.getVariablesSpecs()[i] instanceof RealVariableSpecs) {
                 result += String.format(" {%-5s= %-7.3f (R)}",
-                        optimizationProblem.variablesSpecs[i].getName(),
+                        optimizationProblem.getVariablesSpecs()[i].getName(),
                         real[realCounter]);
                 realCounter++;
-            } else if (optimizationProblem.variablesSpecs[i] instanceof CustomVariableSpecs) {
+            } else if (optimizationProblem.getVariablesSpecs()[i] instanceof CustomVariableSpecs) {
                 result += String.format(" {%-5s= %s (C)}",
-                        optimizationProblem.variablesSpecs[i].getName(),
+                        optimizationProblem.getVariablesSpecs()[i].getName(),
                         custom[customCounter].toString());
                 binaryCounter++;
             }
@@ -288,16 +288,16 @@ public class Individual extends VirtualIndividual
         int binaryCounter = 0;
         int realCounter = 0;
         int customCounter = 0;
-        for (int i = 0; i < optimizationProblem.variablesSpecs.length; i++) {
-            if (optimizationProblem.variablesSpecs[i] instanceof BinaryVariableSpecs) {
+        for (int i = 0; i < optimizationProblem.getVariablesSpecs().length; i++) {
+            if (optimizationProblem.getVariablesSpecs()[i] instanceof BinaryVariableSpecs) {
                 result += String.format("%7.2f(B)",
                         binary[binaryCounter].getDecimalValue());
                 binaryCounter++;
-            } else if (optimizationProblem.variablesSpecs[i] instanceof RealVariableSpecs) {
+            } else if (optimizationProblem.getVariablesSpecs()[i] instanceof RealVariableSpecs) {
                 result += String.format("%7.2f(R)",
                         real[realCounter]);
                 realCounter++;
-            } else if (optimizationProblem.variablesSpecs[i] instanceof CustomVariableSpecs) {
+            } else if (optimizationProblem.getVariablesSpecs()[i] instanceof CustomVariableSpecs) {
                 result += String.format("%s(C)",
                         custom[customCounter]);
                 customCounter++;
@@ -314,13 +314,13 @@ public class Individual extends VirtualIndividual
         int binaryCounter = 0;
         int realCounter = 0;
         int customCounter = 0;
-        for (int i = 0; i < optimizationProblem.variablesSpecs.length; i++) {
-            if (optimizationProblem.variablesSpecs[i] instanceof BinaryVariableSpecs) {
+        for (int i = 0; i < optimizationProblem.getVariablesSpecs().length; i++) {
+            if (optimizationProblem.getVariablesSpecs()[i] instanceof BinaryVariableSpecs) {
                 result += String.format(" {%-5s= %-10.5f (B)}",
-                        optimizationProblem.variablesSpecs[i].getName(),
+                        optimizationProblem.getVariablesSpecs()[i].getName(),
                         binary[binaryCounter].getDecimalValue());
                 binaryCounter++;
-            } else if (optimizationProblem.variablesSpecs[i] instanceof RealVariableSpecs) {
+            } else if (optimizationProblem.getVariablesSpecs()[i] instanceof RealVariableSpecs) {
                 result += String.format(" %-15.10f", real[realCounter]);
                 /*
                  result += String.format(" {%-5s= %-7.3f (R)}",
@@ -328,7 +328,7 @@ public class Individual extends VirtualIndividual
                  real[realCounter]);
                  */
                 realCounter++;
-            } else if (optimizationProblem.variablesSpecs[i] instanceof CustomVariableSpecs) {
+            } else if (optimizationProblem.getVariablesSpecs()[i] instanceof CustomVariableSpecs) {
                 result += String.format(" %s", custom[customCounter]);
                 customCounter++;
             }

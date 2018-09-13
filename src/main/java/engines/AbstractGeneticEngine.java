@@ -363,11 +363,11 @@ public abstract class AbstractGeneticEngine {
                 // Get the specs object of that real variable
                 RealVariableSpecs specs = null;
                 int realVarIndex = -1;
-                for (int k = 0; k < optimizationProblem.variablesSpecs.length; k++) {
-                    if (optimizationProblem.variablesSpecs[k] instanceof RealVariableSpecs) {
+                for (int k = 0; k < optimizationProblem.getVariablesSpecs().length; k++) {
+                    if (optimizationProblem.getVariablesSpecs()[k] instanceof RealVariableSpecs) {
                         realVarIndex++;
                         if (realVarIndex == j) {
-                            specs = (RealVariableSpecs) optimizationProblem.variablesSpecs[k];
+                            specs = (RealVariableSpecs) optimizationProblem.getVariablesSpecs()[k];
                         }
                     }
                 }
@@ -552,11 +552,11 @@ public abstract class AbstractGeneticEngine {
                 // Get the specs object of that real variable
                 RealVariableSpecs specs = null;
                 int realVarIndex = -1;
-                for (int k = 0; k < optimizationProblem.variablesSpecs.length; k++) {
-                    if (optimizationProblem.variablesSpecs[k] instanceof RealVariableSpecs) {
+                for (int k = 0; k < optimizationProblem.getVariablesSpecs().length; k++) {
+                    if (optimizationProblem.getVariablesSpecs()[k] instanceof RealVariableSpecs) {
                         realVarIndex++;
                         if (realVarIndex == j) {
-                            specs = (RealVariableSpecs) optimizationProblem.variablesSpecs[k];
+                            specs = (RealVariableSpecs) optimizationProblem.getVariablesSpecs()[k];
                         }
                     }
                 }

@@ -711,7 +711,7 @@ public class OptimizationUtilities {
         List<RealVariableSpecs> specs
                 = new ArrayList<RealVariableSpecs>();
         for (Variable variableSpecs
-                : optimizationProblem.variablesSpecs) {
+                : optimizationProblem.getVariablesSpecs()) {
             if (variableSpecs instanceof RealVariableSpecs) {
                 specs.add((RealVariableSpecs) variableSpecs);
             }

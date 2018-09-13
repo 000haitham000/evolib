@@ -989,13 +989,13 @@ public class InputOutput {
         StringBuilder sb = new StringBuilder();
         for (Individual individual : individuals) {
             int realCounter = 0;
-            for (int j = 0; j < optimizationProblem.variablesSpecs.length; j++) {
-                if (optimizationProblem.variablesSpecs[j] instanceof RealVariableSpecs) {
+            for (int j = 0; j < optimizationProblem.getVariablesSpecs().length; j++) {
+                if (optimizationProblem.getVariablesSpecs()[j] instanceof RealVariableSpecs) {
                     // Write decision variable value
                     sb.append(String.format("%15.14f", individual.real[realCounter++]));
                 }
                 // Write a space if this is not the last variable
-                if (j != optimizationProblem.variablesSpecs.length - 1) {
+                if (j != optimizationProblem.getVariablesSpecs().length - 1) {
                     sb.append(" ");
                 }
             }

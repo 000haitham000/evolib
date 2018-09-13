@@ -26,7 +26,7 @@ public class OptimizationProblem implements Serializable {
     private String problemID;
     private int type;
     private double seed;
-    public Variable[] variablesSpecs;
+    private Variable[] variablesSpecs;
     public Objective[] objectives;
     public Constraint[] constraints;
     private int steps;
@@ -61,7 +61,7 @@ public class OptimizationProblem implements Serializable {
             double customMutationProbability,
             double seed) {
         this.problemID = id;
-        this.variablesSpecs = variables;
+        this.setVariablesSpecs(variables);
         this.objectives = objectives;
         this.constraints = constraints;
         this.steps = steps;
@@ -265,23 +265,23 @@ public class OptimizationProblem implements Serializable {
     private String getVariablesAsString() {
         // Variables string
         String variablesString = "Variables {";
-        for (int i = 0; i < variablesSpecs.length; i++) {
+        for (int i = 0; i < getVariablesSpecs().length; i++) {
             String varType;
-            if (variablesSpecs[i] instanceof BinaryVariableSpecs) {
+            if (getVariablesSpecs()[i] instanceof BinaryVariableSpecs) {
                 int bitsCountIfBinary
-                        = ((BinaryVariableSpecs) variablesSpecs[i])
+                        = ((BinaryVariableSpecs) getVariablesSpecs()[i])
                                 .getNumberOfBits();
                 varType = String.format("binary:%d bits", bitsCountIfBinary);
-            } else if (variablesSpecs[i] instanceof RealVariableSpecs) {
+            } else if (getVariablesSpecs()[i] instanceof RealVariableSpecs) {
                 varType = "real";
-            } else if (variablesSpecs[i] instanceof CustomVariableSpecs) {
+            } else if (getVariablesSpecs()[i] instanceof CustomVariableSpecs) {
                 varType = "custom";
             } else {
                 varType = "unknown";
             }
-            if (variablesSpecs[i] instanceof NumericVariable) {
+            if (getVariablesSpecs()[i] instanceof NumericVariable) {
                 NumericVariable numericVariable
-                        = (NumericVariable) variablesSpecs[i];
+                        = (NumericVariable) getVariablesSpecs()[i];
                 variablesString
                         += String.format(
                                 "%s(%s) %8.3f:%-8.3f",
@@ -290,7 +290,7 @@ public class OptimizationProblem implements Serializable {
                                 numericVariable.getMinValue(),
                                 numericVariable.getMaxValue());
             }
-            if (i < variablesSpecs.length - 1) {
+            if (i < getVariablesSpecs().length - 1) {
                 variablesString += ", ";
             }
         }
@@ -332,7 +332,7 @@ public class OptimizationProblem implements Serializable {
 
     public int getRealVariablesCount() {
         int realVarCount = 0;
-        for (Variable variablesSpec : variablesSpecs) {
+        for (Variable variablesSpec : getVariablesSpecs()) {
             if (variablesSpec instanceof RealVariableSpecs) {
                 realVarCount++;
             }
@@ -342,7 +342,7 @@ public class OptimizationProblem implements Serializable {
 
     public int getBinaryVariablesCount() {
         int binaryVarCount = 0;
-        for (Variable variablesSpec : variablesSpecs) {
+        for (Variable variablesSpec : getVariablesSpecs()) {
             if (variablesSpec instanceof BinaryVariableSpecs) {
                 binaryVarCount++;
             }
@@ -352,12 +352,20 @@ public class OptimizationProblem implements Serializable {
 
     public int getCustomVariablesCount() {
         int customVarCount = 0;
-        for (Variable variablesSpec : variablesSpecs) {
+        for (Variable variablesSpec : getVariablesSpecs()) {
             if (variablesSpec instanceof CustomVariableSpecs) {
                 customVarCount++;
             }
         }
         return customVarCount;
+    }
+
+    public Variable[] getVariablesSpecs() {
+        return variablesSpecs;
+    }
+
+    public void setVariablesSpecs(Variable[] variablesSpecs) {
+        this.variablesSpecs = variablesSpecs;
     }
 
     public static class Objective implements Serializable {
@@ -611,17 +619,17 @@ public class OptimizationProblem implements Serializable {
         } else if (optimizationProblem.getSeed() < 0
                 || optimizationProblem.getSeed() > 1) {
             message = "The seed must be in the range [0,1]";
-        } else if (optimizationProblem.variablesSpecs.length == 0) {
+        } else if (optimizationProblem.getVariablesSpecs().length == 0) {
             message = "There must be at least one variable in the "
                     + "optimization problem";
         } else if (optimizationProblem.objectives.length == 0) {
             message = "There must be at least one objective in the "
                     + "optimization problem";
-        } else if (optimizationProblem.variablesSpecs.length > 0) {
-            for (int i = 0; i < optimizationProblem.variablesSpecs.length; i++) {
-                if (optimizationProblem.variablesSpecs[i] instanceof NumericVariable) {
+        } else if (optimizationProblem.getVariablesSpecs().length > 0) {
+            for (int i = 0; i < optimizationProblem.getVariablesSpecs().length; i++) {
+                if (optimizationProblem.getVariablesSpecs()[i] instanceof NumericVariable) {
                     NumericVariable numericVariable
-                            = (NumericVariable) optimizationProblem.variablesSpecs[i];
+                            = (NumericVariable) optimizationProblem.getVariablesSpecs()[i];
                     if (numericVariable.getMaxValue()
                             < numericVariable.getMinValue()) {
                         message = String.format(
@@ -633,11 +641,11 @@ public class OptimizationProblem implements Serializable {
                         break;
                     }
                 }
-                if (optimizationProblem.variablesSpecs[i] instanceof BinaryVariableSpecs) {
-                    if (((BinaryVariableSpecs) optimizationProblem.variablesSpecs[i])
+                if (optimizationProblem.getVariablesSpecs()[i] instanceof BinaryVariableSpecs) {
+                    if (((BinaryVariableSpecs) optimizationProblem.getVariablesSpecs()[i])
                             .getNumberOfBits() < 1) {
                         BinaryVariableSpecs binVar
-                                = ((BinaryVariableSpecs) optimizationProblem.variablesSpecs[i]);
+                                = ((BinaryVariableSpecs) optimizationProblem.getVariablesSpecs()[i]);
                         message = String.format(
                                 "Variable(%s): number of bits(%d) must be "
                                 + "greater than 0",
