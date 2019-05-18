@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<problem xmlns="http://www.coin-laboratory.com/xml/">
+    <!-- Commands -->
+    <commands>
+        <command>pi = 3.14159265359</command>
+        <command>e = 2.71828182846</command>
+    </commands>
+    <!-- Variables -->
+    <variables>
+        <variable max="-12.005">x1</variable>
+        <variable>x2</variable>
+        <variable min="0" max="100.9">x3</variable>
+        <vector size="3" mins="1,0.2,-33.01" maxs="99,999,9999">y</vector>
+        <vector size="2" mins="-10,10" maxs="100,200">z</vector>
+    </variables>
+    <!-- Objectives -->
+    <objectives>
+        <objective>
+            <function> x1+2*y[2]+3*z[1] </function>
+            <gradient>
+                <derivative var="x1"> 1 </derivative>
+                <derivative var="x2"> 0 </derivative>
+                <derivative var="x3"> 0 </derivative>
+                <derivative var="y[1]"> 0 </derivative>
+                <derivative var="y[2]"> 2 </derivative>
+                <derivative var="y[3]"> 0 </derivative>
+                <derivative var="z[1]"> 3 </derivative>
+                <derivative var="z[2]"> 0 </derivative>
+            </gradient>
+        </objective>
+        <objective>
+            <function> 0.5*z[1]+7*y[1] </function>
+            <gradient>
+                <derivative var="x1"> 0 </derivative>
+                <derivative var="x2"> 0 </derivative>
+                <derivative var="x3"> 0 </derivative>
+                <derivative var="y[1]"> 7 </derivative>
+                <derivative var="y[2]"> 0 </derivative>
+                <derivative var="y[3]"> 0 </derivative>
+                <derivative var="z[1]"> 0.5 </derivative>
+                <derivative var="z[2]"> 0 </derivative>
+            </gradient>
+        </objective>
+    </objectives>
+    <!-- Constraints -->
+    <constraints>
+        <constraint>
+            <function> -x2-2*y[2]-3*z[2] </function>
+            <gradient>
+                <derivative var="x1"> 0 </derivative>
+                <derivative var="x2"> -1 </derivative>
+                <derivative var="x3"> 0 </derivative>
+                <derivative var="y[1]"> 0 </derivative>
+                <derivative var="y[2]"> -2 </derivative>
+                <derivative var="y[3]"> 0 </derivative>
+                <derivative var="z[1]"> 0 </derivative>
+                <derivative var="z[2]"> -3 </derivative>
+            </gradient>
+        </constraint>
+    </constraints>
+</problem>

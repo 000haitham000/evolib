@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<problem xmlns="http://www.coin-laboratory.com/xml/">
+    <!-- Variables -->
+    <variables>
+        <variable>x</variable>
+    </variables>
+    <!-- Objectives -->
+    <objectives>
+        <objective>
+            <function>
+                x^2
+            </function>
+            <gradient>
+                <derivative var="x">
+                    2 * x
+                </derivative>
+            </gradient>
+        </objective>
+    </objectives>
+    <!-- Constraints -->
+    <constraints>
+        <constraint>
+            <function>
+                0.5 - x
+            </function>
+            <gradient>
+                <derivative var="x">
+                    -1
+                </derivative>
+            </gradient>
+        </constraint>
+    </constraints>
+</problem>

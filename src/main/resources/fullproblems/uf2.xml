@@ -1,0 +1,2430 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<problem xmlns="http://www.coin-laboratory.com/xml/">
+    <!-- Variables -->
+    <variables>
+        <vector size="30"
+                mins="0,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1"
+                maxs="1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1">
+            x
+        </vector>
+    </variables>
+    <!-- Objectives -->
+    <objectives>
+        <objective>
+            <function>
+                x[1] + 2 / 1 * sum{j, 3, 3, 2, (x[j] - (0.3 * x[1]^2 * cos(24 * pi * x[1] + 4 * j * pi / 3) + 00.6 * x[1]) * cos(6 * pi * x[1] + j * pi / 3))^2}
+            </function>
+            <gradient>
+                <derivative var="x[1]">1+(2/7*(x[3]-(0.3*x[1]^2*cos(24*pi*x[1]+(2/5)*pi)+0.6*x[1])*cos(6*pi*x[1]+(1/10)*pi)))*(-(0.6*x[1]*cos(24*pi*x[1]+(2/5)*pi)-7.2*x[1]^2*sin(24*pi*x[1]+(2/5)*pi)*pi+0.6)*cos(6*pi*x[1]+(1/10)*pi)+(6*(0.3*x[1]^2*cos(24*pi*x[1]+(2/5)*pi)+0.6*x[1]))*sin(6*pi*x[1]+(1/10)*pi)*pi)+(2/7*(x[5]-(-0.3*x[1]^2*sin(24*pi*x[1]+(1/6)*pi)+0.6*x[1])*cos(6*pi*x[1]+(1/6)*pi)))*(-(-0.6*x[1]*sin(24*pi*x[1]+(1/6)*pi)-7.2*x[1]^2*cos(24*pi*x[1]+(1/6)*pi)*pi+0.6)*cos(6*pi*x[1]+(1/6)*pi)+(6*(-0.3*x[1]^2*sin(24*pi*x[1]+(1/6)*pi)+0.6*x[1]))*sin(6*pi*x[1]+(1/6)*pi)*pi)+(2/7*(x[7]-(-0.3*x[1]^2*sin(24*pi*x[1]+(13/30)*pi)+0.6*x[1])*cos(6*pi*x[1]+(7/30)*pi)))*(-(-0.6*x[1]*sin(24*pi*x[1]+(13/30)*pi)-7.2*x[1]^2*cos(24*pi*x[1]+(13/30)*pi)*pi+0.6)*cos(6*pi*x[1]+(7/30)*pi)+(6*(-0.3*x[1]^2*sin(24*pi*x[1]+(13/30)*pi)+0.6*x[1]))*sin(6*pi*x[1]+(7/30)*pi)*pi)+(2/7*(x[9]-(-0.3*x[1]^2*cos(24*pi*x[1]+(1/5)*pi)+0.6*x[1])*cos(6*pi*x[1]+(3/10)*pi)))*(-(-0.6*x[1]*cos(24*pi*x[1]+(1/5)*pi)+7.2*x[1]^2*sin(24*pi*x[1]+(1/5)*pi)*pi+0.6)*cos(6*pi*x[1]+(3/10)*pi)+(6*(-0.3*x[1]^2*cos(24*pi*x[1]+(1/5)*pi)+0.6*x[1]))*sin(6*pi*x[1]+(3/10)*pi)*pi)+(2/7*(x[11]-(-0.3*x[1]^2*cos(24*pi*x[1]+(7/15)*pi)+0.6*x[1])*cos(6*pi*x[1]+(11/30)*pi)))*(-(-0.6*x[1]*cos(24*pi*x[1]+(7/15)*pi)+7.2*x[1]^2*sin(24*pi*x[1]+(7/15)*pi)*pi+0.6)*cos(6*pi*x[1]+(11/30)*pi)+(6*(-0.3*x[1]^2*cos(24*pi*x[1]+(7/15)*pi)+0.6*x[1]))*sin(6*pi*x[1]+(11/30)*pi)*pi)+(2/7*(x[13]-(0.3*x[1]^2*sin(24*pi*x[1]+(7/30)*pi)+0.6*x[1])*cos(6*pi*x[1]+(13/30)*pi)))*(-(0.6*x[1]*sin(24*pi*x[1]+(7/30)*pi)+7.2*x[1]^2*cos(24*pi*x[1]+(7/30)*pi)*pi+0.6)*cos(6*pi*x[1]+(13/30)*pi)+(6*(0.3*x[1]^2*sin(24*pi*x[1]+(7/30)*pi)+0.6*x[1]))*sin(6*pi*x[1]+(13/30)*pi)*pi)+(2/7*(x[15]+(0.3*x[1]^2*cos(24*pi*x[1])+0.6*x[1])*sin(6*pi*x[1])))*((0.6*x[1]*cos(24*pi*x[1])-7.2*x[1]^2*sin(24*pi*x[1])*pi+0.6)*sin(6*pi*x[1])+(6*(0.3*x[1]^2*cos(24*pi*x[1])+0.6*x[1]))*cos(6*pi*x[1])*pi)+(2/7*(x[17]+(0.3*x[1]^2*cos(24*pi*x[1]+(4/15)*pi)+0.6*x[1])*sin(6*pi*x[1]+(1/15)*pi)))*((0.6*x[1]*cos(24*pi*x[1]+(4/15)*pi)-7.2*x[1]^2*sin(24*pi*x[1]+(4/15)*pi)*pi+0.6)*sin(6*pi*x[1]+(1/15)*pi)+(6*(0.3*x[1]^2*cos(24*pi*x[1]+(4/15)*pi)+0.6*x[1]))*cos(6*pi*x[1]+(1/15)*pi)*pi)+(2/7*(x[19]+(-0.3*x[1]^2*sin(24*pi*x[1]+(1/30)*pi)+0.6*x[1])*sin(6*pi*x[1]+(2/15)*pi)))*((-0.6*x[1]*sin(24*pi*x[1]+(1/30)*pi)-7.2*x[1]^2*cos(24*pi*x[1]+(1/30)*pi)*pi+0.6)*sin(6*pi*x[1]+(2/15)*pi)+(6*(-0.3*x[1]^2*sin(24*pi*x[1]+(1/30)*pi)+0.6*x[1]))*cos(6*pi*x[1]+(2/15)*pi)*pi)+(2/7*(x[21]+(-0.3*x[1]^2*sin(24*pi*x[1]+(3/10)*pi)+0.6*x[1])*sin(6*pi*x[1]+(1/5)*pi)))*((-0.6*x[1]*sin(24*pi*x[1]+(3/10)*pi)-7.2*x[1]^2*cos(24*pi*x[1]+(3/10)*pi)*pi+0.6)*sin(6*pi*x[1]+(1/5)*pi)+(6*(-0.3*x[1]^2*sin(24*pi*x[1]+(3/10)*pi)+0.6*x[1]))*cos(6*pi*x[1]+(1/5)*pi)*pi)+(2/7*(x[23]+(-0.3*x[1]^2*cos(24*pi*x[1]+(1/15)*pi)+0.6*x[1])*sin(6*pi*x[1]+(4/15)*pi)))*((-0.6*x[1]*cos(24*pi*x[1]+(1/15)*pi)+7.2*x[1]^2*sin(24*pi*x[1]+(1/15)*pi)*pi+0.6)*sin(6*pi*x[1]+(4/15)*pi)+(6*(-0.3*x[1]^2*cos(24*pi*x[1]+(1/15)*pi)+0.6*x[1]))*cos(6*pi*x[1]+(4/15)*pi)*pi)+(2/7*(x[25]+(-0.3*x[1]^2*cos(24*pi*x[1]+(1/3)*pi)+0.6*x[1])*sin(6*pi*x[1]+(1/3)*pi)))*((-0.6*x[1]*cos(24*pi*x[1]+(1/3)*pi)+7.2*x[1]^2*sin(24*pi*x[1]+(1/3)*pi)*pi+0.6)*sin(6*pi*x[1]+(1/3)*pi)+(6*(-0.3*x[1]^2*cos(24*pi*x[1]+(1/3)*pi)+0.6*x[1]))*cos(6*pi*x[1]+(1/3)*pi)*pi)+(2/7*(x[27]+(0.3*x[1]^2*sin(24*pi*x[1]+(1/10)*pi)+0.6*x[1])*sin(6*pi*x[1]+(2/5)*pi)))*((0.6*x[1]*sin(24*pi*x[1]+(1/10)*pi)+7.2*x[1]^2*cos(24*pi*x[1]+(1/10)*pi)*pi+0.6)*sin(6*pi*x[1]+(2/5)*pi)+(6*(0.3*x[1]^2*sin(24*pi*x[1]+(1/10)*pi)+0.6*x[1]))*cos(6*pi*x[1]+(2/5)*pi)*pi)+(2/7*(x[29]+(0.3*x[1]^2*sin(24*pi*x[1]+(11/30)*pi)+0.6*x[1])*sin(6*pi*x[1]+(7/15)*pi)))*((0.6*x[1]*sin(24*pi*x[1]+(11/30)*pi)+7.2*x[1]^2*cos(24*pi*x[1]+(11/30)*pi)*pi+0.6)*sin(6*pi*x[1]+(7/15)*pi)+(6*(0.3*x[1]^2*sin(24*pi*x[1]+(11/30)*pi)+0.6*x[1]))*cos(6*pi*x[1]+(7/15)*pi)*pi)</derivative>
+                <derivative var="x[2]">0.0</derivative>
+                <derivative var="x[3]">(2/7)*x[3]-(2/7*(0.3*x[1]^2*cos(24*pi*x[1]+(2/5)*pi)+0.6*x[1]))*cos(6*pi*x[1]+(1/10)*pi)</derivative>
+                <derivative var="x[4]">0.0</derivative>
+                <derivative var="x[5]">(2/7)*x[5]-(2/7*(-0.3*x[1]^2*sin(24*pi*x[1]+(1/6)*pi)+0.6*x[1]))*cos(6*pi*x[1]+(1/6)*pi)</derivative>
+                <derivative var="x[6]">0.0</derivative>
+                <derivative var="x[7]">(2/7)*x[7]-(2/7*(-0.3*x[1]^2*sin(24*pi*x[1]+(13/30)*pi)+0.6*x[1]))*cos(6*pi*x[1]+(7/30)*pi)</derivative>
+                <derivative var="x[8]">0.0</derivative>
+                <derivative var="x[9]">(2/7)*x[9]-(2/7*(-0.3*x[1]^2*cos(24*pi*x[1]+(1/5)*pi)+0.6*x[1]))*cos(6*pi*x[1]+(3/10)*pi)</derivative>
+                <derivative var="x[10]">0.0</derivative>
+                <derivative var="x[11]">(2/7)*x[11]-(2/7*(-0.3*x[1]^2*cos(24*pi*x[1]+(7/15)*pi)+0.6*x[1]))*cos(6*pi*x[1]+(11/30)*pi)</derivative>
+                <derivative var="x[12]">0.0</derivative>
+                <derivative var="x[13]">(2/7)*x[13]-(2/7*(0.3*x[1]^2*sin(24*pi*x[1]+(7/30)*pi)+0.6*x[1]))*cos(6*pi*x[1]+(13/30)*pi)</derivative>
+                <derivative var="x[14]">0.0</derivative>
+                <derivative var="x[15]">(2/7)*x[15]+(2/7*(0.3*x[1]^2*cos(24*pi*x[1])+0.6*x[1]))*sin(6*pi*x[1])</derivative>
+                <derivative var="x[16]">0.0</derivative>
+                <derivative var="x[17]">(2/7)*x[17]+(2/7*(0.3*x[1]^2*cos(24*pi*x[1]+(4/15)*pi)+0.6*x[1]))*sin(6*pi*x[1]+(1/15)*pi)</derivative>
+                <derivative var="x[18]">0.0</derivative>
+                <derivative var="x[19]">(2/7)*x[19]+(2/7*(-0.3*x[1]^2*sin(24*pi*x[1]+(1/30)*pi)+0.6*x[1]))*sin(6*pi*x[1]+(2/15)*pi)</derivative>
+                <derivative var="x[20]">0.0</derivative>
+                <derivative var="x[21]">(2/7)*x[21]+(2/7*(-0.3*x[1]^2*sin(24*pi*x[1]+(3/10)*pi)+0.6*x[1]))*sin(6*pi*x[1]+(1/5)*pi)</derivative>
+                <derivative var="x[22]">0.0</derivative>
+                <derivative var="x[23]">(2/7)*x[23]+(2/7*(-0.3*x[1]^2*cos(24*pi*x[1]+(1/15)*pi)+0.6*x[1]))*sin(6*pi*x[1]+(4/15)*pi)</derivative>
+                <derivative var="x[24]">0.0</derivative>
+                <derivative var="x[25]">(2/7)*x[25]+(2/7*(-0.3*x[1]^2*cos(24*pi*x[1]+(1/3)*pi)+0.6*x[1]))*sin(6*pi*x[1]+(1/3)*pi)</derivative>
+                <derivative var="x[26]">0.0</derivative>
+                <derivative var="x[27]">(2/7)*x[27]+(2/7*(0.3*x[1]^2*sin(24*pi*x[1]+(1/10)*pi)+0.6*x[1]))*sin(6*pi*x[1]+(2/5)*pi)</derivative>
+                <derivative var="x[28]">0.0</derivative>
+                <derivative var="x[29]">(2/7)*x[29]+(2/7*(0.3*x[1]^2*sin(24*pi*x[1]+(11/30)*pi)+0.6*x[1]))*sin(6*pi*x[1]+(7/15)*pi)</derivative>
+                <derivative var="x[30]">0.0</derivative>
+            </gradient>
+        </objective>
+        <objective>
+            <function>
+                1 - sqrt(x[1]) + 2 / 1 * sum{j, 2, 3, 2, (x[j] - (0.3 * x[1]^2 * cos(24 * pi * x[1] + 4 * j * pi / 3) + 00.6 * x[1]) * sin(6 * pi * x[1] + j * pi / 3))^2}
+            </function>
+            <gradient>
+                <derivative var="x[1]">-1/(2*sqrt(x[1]))+(4/15*(x[2]-(0.3*x[1]^2*cos(24*pi*x[1]+(4/15)*pi)+0.6*x[1])*sin(6*pi*x[1]+(1/15)*pi)))*(-(0.6*x[1]*cos(24*pi*x[1]+(4/15)*pi)-7.2*x[1]^2*sin(24*pi*x[1]+(4/15)*pi)*pi+0.6)*sin(6*pi*x[1]+(1/15)*pi)-(6*(0.3*x[1]^2*cos(24*pi*x[1]+(4/15)*pi)+0.6*x[1]))*cos(6*pi*x[1]+(1/15)*pi)*pi)+(4/15*(x[4]-(-0.3*x[1]^2*sin(24*pi*x[1]+(1/30)*pi)+0.6*x[1])*sin(6*pi*x[1]+(2/15)*pi)))*(-(-0.6*x[1]*sin(24*pi*x[1]+(1/30)*pi)-7.2*x[1]^2*cos(24*pi*x[1]+(1/30)*pi)*pi+0.6)*sin(6*pi*x[1]+(2/15)*pi)-(6*(-0.3*x[1]^2*sin(24*pi*x[1]+(1/30)*pi)+0.6*x[1]))*cos(6*pi*x[1]+(2/15)*pi)*pi)+(4/15*(x[6]-(-0.3*x[1]^2*sin(24*pi*x[1]+(3/10)*pi)+0.6*x[1])*sin(6*pi*x[1]+(1/5)*pi)))*(-(-0.6*x[1]*sin(24*pi*x[1]+(3/10)*pi)-7.2*x[1]^2*cos(24*pi*x[1]+(3/10)*pi)*pi+0.6)*sin(6*pi*x[1]+(1/5)*pi)-(6*(-0.3*x[1]^2*sin(24*pi*x[1]+(3/10)*pi)+0.6*x[1]))*cos(6*pi*x[1]+(1/5)*pi)*pi)+(4/15*(x[8]-(-0.3*x[1]^2*cos(24*pi*x[1]+(1/15)*pi)+0.6*x[1])*sin(6*pi*x[1]+(4/15)*pi)))*(-(-0.6*x[1]*cos(24*pi*x[1]+(1/15)*pi)+7.2*x[1]^2*sin(24*pi*x[1]+(1/15)*pi)*pi+0.6)*sin(6*pi*x[1]+(4/15)*pi)-(6*(-0.3*x[1]^2*cos(24*pi*x[1]+(1/15)*pi)+0.6*x[1]))*cos(6*pi*x[1]+(4/15)*pi)*pi)+(4/15*(x[10]-(-0.3*x[1]^2*cos(24*pi*x[1]+(1/3)*pi)+0.6*x[1])*sin(6*pi*x[1]+(1/3)*pi)))*(-(-0.6*x[1]*cos(24*pi*x[1]+(1/3)*pi)+7.2*x[1]^2*sin(24*pi*x[1]+(1/3)*pi)*pi+0.6)*sin(6*pi*x[1]+(1/3)*pi)-(6*(-0.3*x[1]^2*cos(24*pi*x[1]+(1/3)*pi)+0.6*x[1]))*cos(6*pi*x[1]+(1/3)*pi)*pi)+(4/15*(x[12]-(0.3*x[1]^2*sin(24*pi*x[1]+(1/10)*pi)+0.6*x[1])*sin(6*pi*x[1]+(2/5)*pi)))*(-(0.6*x[1]*sin(24*pi*x[1]+(1/10)*pi)+7.2*x[1]^2*cos(24*pi*x[1]+(1/10)*pi)*pi+0.6)*sin(6*pi*x[1]+(2/5)*pi)-(6*(0.3*x[1]^2*sin(24*pi*x[1]+(1/10)*pi)+0.6*x[1]))*cos(6*pi*x[1]+(2/5)*pi)*pi)+(4/15*(x[14]-(0.3*x[1]^2*sin(24*pi*x[1]+(11/30)*pi)+0.6*x[1])*sin(6*pi*x[1]+(7/15)*pi)))*(-(0.6*x[1]*sin(24*pi*x[1]+(11/30)*pi)+7.2*x[1]^2*cos(24*pi*x[1]+(11/30)*pi)*pi+0.6)*sin(6*pi*x[1]+(7/15)*pi)-(6*(0.3*x[1]^2*sin(24*pi*x[1]+(11/30)*pi)+0.6*x[1]))*cos(6*pi*x[1]+(7/15)*pi)*pi)+(4/15*(x[16]-(0.3*x[1]^2*cos(24*pi*x[1]+(2/15)*pi)+0.6*x[1])*cos(6*pi*x[1]+(1/30)*pi)))*(-(0.6*x[1]*cos(24*pi*x[1]+(2/15)*pi)-7.2*x[1]^2*sin(24*pi*x[1]+(2/15)*pi)*pi+0.6)*cos(6*pi*x[1]+(1/30)*pi)+(6*(0.3*x[1]^2*cos(24*pi*x[1]+(2/15)*pi)+0.6*x[1]))*sin(6*pi*x[1]+(1/30)*pi)*pi)+(4/15*(x[18]-(0.3*x[1]^2*cos(24*pi*x[1]+(2/5)*pi)+0.6*x[1])*cos(6*pi*x[1]+(1/10)*pi)))*(-(0.6*x[1]*cos(24*pi*x[1]+(2/5)*pi)-7.2*x[1]^2*sin(24*pi*x[1]+(2/5)*pi)*pi+0.6)*cos(6*pi*x[1]+(1/10)*pi)+(6*(0.3*x[1]^2*cos(24*pi*x[1]+(2/5)*pi)+0.6*x[1]))*sin(6*pi*x[1]+(1/10)*pi)*pi)+(4/15*(x[20]-(-0.3*x[1]^2*sin(24*pi*x[1]+(1/6)*pi)+0.6*x[1])*cos(6*pi*x[1]+(1/6)*pi)))*(-(-0.6*x[1]*sin(24*pi*x[1]+(1/6)*pi)-7.2*x[1]^2*cos(24*pi*x[1]+(1/6)*pi)*pi+0.6)*cos(6*pi*x[1]+(1/6)*pi)+(6*(-0.3*x[1]^2*sin(24*pi*x[1]+(1/6)*pi)+0.6*x[1]))*sin(6*pi*x[1]+(1/6)*pi)*pi)+(4/15*(x[22]-(-0.3*x[1]^2*sin(24*pi*x[1]+(13/30)*pi)+0.6*x[1])*cos(6*pi*x[1]+(7/30)*pi)))*(-(-0.6*x[1]*sin(24*pi*x[1]+(13/30)*pi)-7.2*x[1]^2*cos(24*pi*x[1]+(13/30)*pi)*pi+0.6)*cos(6*pi*x[1]+(7/30)*pi)+(6*(-0.3*x[1]^2*sin(24*pi*x[1]+(13/30)*pi)+0.6*x[1]))*sin(6*pi*x[1]+(7/30)*pi)*pi)+(4/15*(x[24]-(-0.3*x[1]^2*cos(24*pi*x[1]+(1/5)*pi)+0.6*x[1])*cos(6*pi*x[1]+(3/10)*pi)))*(-(-0.6*x[1]*cos(24*pi*x[1]+(1/5)*pi)+7.2*x[1]^2*sin(24*pi*x[1]+(1/5)*pi)*pi+0.6)*cos(6*pi*x[1]+(3/10)*pi)+(6*(-0.3*x[1]^2*cos(24*pi*x[1]+(1/5)*pi)+0.6*x[1]))*sin(6*pi*x[1]+(3/10)*pi)*pi)+(4/15*(x[26]-(-0.3*x[1]^2*cos(24*pi*x[1]+(7/15)*pi)+0.6*x[1])*cos(6*pi*x[1]+(11/30)*pi)))*(-(-0.6*x[1]*cos(24*pi*x[1]+(7/15)*pi)+7.2*x[1]^2*sin(24*pi*x[1]+(7/15)*pi)*pi+0.6)*cos(6*pi*x[1]+(11/30)*pi)+(6*(-0.3*x[1]^2*cos(24*pi*x[1]+(7/15)*pi)+0.6*x[1]))*sin(6*pi*x[1]+(11/30)*pi)*pi)+(4/15*(x[28]-(0.3*x[1]^2*sin(24*pi*x[1]+(7/30)*pi)+0.6*x[1])*cos(6*pi*x[1]+(13/30)*pi)))*(-(0.6*x[1]*sin(24*pi*x[1]+(7/30)*pi)+7.2*x[1]^2*cos(24*pi*x[1]+(7/30)*pi)*pi+0.6)*cos(6*pi*x[1]+(13/30)*pi)+(6*(0.3*x[1]^2*sin(24*pi*x[1]+(7/30)*pi)+0.6*x[1]))*sin(6*pi*x[1]+(13/30)*pi)*pi)+(4/15*(x[30]+(0.3*x[1]^2*cos(24*pi*x[1])+0.6*x[1])*sin(6*pi*x[1])))*((0.6*x[1]*cos(24*pi*x[1])-7.2*x[1]^2*sin(24*pi*x[1])*pi+0.6)*sin(6*pi*x[1])+(6*(0.3*x[1]^2*cos(24*pi*x[1])+0.6*x[1]))*cos(6*pi*x[1])*pi)</derivative>
+                <derivative var="x[2]">(4/15)*x[2]-(4/15*(0.3*x[1]^2*cos(24*pi*x[1]+(4/15)*pi)+0.6*x[1]))*sin(6*pi*x[1]+(1/15)*pi)</derivative>
+                <derivative var="x[3]">0.0</derivative>
+                <derivative var="x[4]">(4/15)*x[4]-(4/15*(-0.3*x[1]^2*sin(24*pi*x[1]+(1/30)*pi)+0.6*x[1]))*sin(6*pi*x[1]+(2/15)*pi)</derivative>
+                <derivative var="x[5]">0.0</derivative>
+                <derivative var="x[6]">(4/15)*x[6]-(4/15*(-0.3*x[1]^2*sin(24*pi*x[1]+(3/10)*pi)+0.6*x[1]))*sin(6*pi*x[1]+(1/5)*pi)</derivative>
+                <derivative var="x[7]">0.0</derivative>
+                <derivative var="x[8]">(4/15)*x[8]-(4/15*(-0.3*x[1]^2*cos(24*pi*x[1]+(1/15)*pi)+0.6*x[1]))*sin(6*pi*x[1]+(4/15)*pi)</derivative>
+                <derivative var="x[9]">0.0</derivative>
+                <derivative var="x[10]">(4/15)*x[10]-(4/15*(-0.3*x[1]^2*cos(24*pi*x[1]+(1/3)*pi)+0.6*x[1]))*sin(6*pi*x[1]+(1/3)*pi)</derivative>
+                <derivative var="x[11]">0.0</derivative>
+                <derivative var="x[12]">(4/15)*x[12]-(4/15*(0.3*x[1]^2*sin(24*pi*x[1]+(1/10)*pi)+0.6*x[1]))*sin(6*pi*x[1]+(2/5)*pi)</derivative>
+                <derivative var="x[13]">0.0</derivative>
+                <derivative var="x[14]">(4/15)*x[14]-(4/15*(0.3*x[1]^2*sin(24*pi*x[1]+(11/30)*pi)+0.6*x[1]))*sin(6*pi*x[1]+(7/15)*pi)</derivative>
+                <derivative var="x[15]">0.0</derivative>
+                <derivative var="x[16]">(4/15)*x[16]-(4/15*(0.3*x[1]^2*cos(24*pi*x[1]+(2/15)*pi)+0.6*x[1]))*cos(6*pi*x[1]+(1/30)*pi)</derivative>
+                <derivative var="x[17]">0.0</derivative>
+                <derivative var="x[18]">(4/15)*x[18]-(4/15*(0.3*x[1]^2*cos(24*pi*x[1]+(2/5)*pi)+0.6*x[1]))*cos(6*pi*x[1]+(1/10)*pi)</derivative>
+                <derivative var="x[19]">0.0</derivative>
+                <derivative var="x[20]">(4/15)*x[20]-(4/15*(-0.3*x[1]^2*sin(24*pi*x[1]+(1/6)*pi)+0.6*x[1]))*cos(6*pi*x[1]+(1/6)*pi)</derivative>
+                <derivative var="x[21]">0.0</derivative>
+                <derivative var="x[22]">(4/15)*x[22]-(4/15*(-0.3*x[1]^2*sin(24*pi*x[1]+(13/30)*pi)+0.6*x[1]))*cos(6*pi*x[1]+(7/30)*pi)</derivative>
+                <derivative var="x[23]">0.0</derivative>
+                <derivative var="x[24]">(4/15)*x[24]-(4/15*(-0.3*x[1]^2*cos(24*pi*x[1]+(1/5)*pi)+0.6*x[1]))*cos(6*pi*x[1]+(3/10)*pi)</derivative>
+                <derivative var="x[25]">0.0</derivative>
+                <derivative var="x[26]">(4/15)*x[26]-(4/15*(-0.3*x[1]^2*cos(24*pi*x[1]+(7/15)*pi)+0.6*x[1]))*cos(6*pi*x[1]+(11/30)*pi)</derivative>
+                <derivative var="x[27]">0.0</derivative>
+                <derivative var="x[28]">(4/15)*x[28]-(4/15*(0.3*x[1]^2*sin(24*pi*x[1]+(7/30)*pi)+0.6*x[1]))*cos(6*pi*x[1]+(13/30)*pi)</derivative>
+                <derivative var="x[29]">0.0</derivative>
+                <derivative var="x[30]">(4/15)*x[30]+(4/15*(0.3*x[1]^2*cos(24*pi*x[1])+0.6*x[1]))*sin(6*pi*x[1])</derivative>
+            </gradient>
+        </objective>
+    </objectives>
+    <!-- Constraints -->
+    <constraints>
+        <!-- x[1] boxing constraints -->
+        <!-- 0 <= x[1] -->
+        <constraint>
+            <function>
+                -x[1]
+            </function>
+            <gradient>
+                <derivative var="x[1]">-1</derivative>
+                <derivative var="x[2]">0</derivative>
+                <derivative var="x[3]">0</derivative>
+                <derivative var="x[4]">0</derivative>
+                <derivative var="x[5]">0</derivative>
+                <derivative var="x[6]">0</derivative>
+                <derivative var="x[7]">0</derivative>
+                <derivative var="x[8]">0</derivative>
+                <derivative var="x[9]">0</derivative>
+                <derivative var="x[10]">0</derivative>
+                <derivative var="x[11]">0</derivative>
+                <derivative var="x[12]">0</derivative>
+                <derivative var="x[13]">0</derivative>
+                <derivative var="x[14]">0</derivative>
+                <derivative var="x[15]">0</derivative>
+                <derivative var="x[16]">0</derivative>
+                <derivative var="x[17]">0</derivative>
+                <derivative var="x[18]">0</derivative>
+                <derivative var="x[19]">0</derivative>
+                <derivative var="x[20]">0</derivative>
+                <derivative var="x[21]">0</derivative>
+                <derivative var="x[22]">0</derivative>
+                <derivative var="x[23]">0</derivative>
+                <derivative var="x[24]">0</derivative>
+                <derivative var="x[25]">0</derivative>
+                <derivative var="x[26]">0</derivative>
+                <derivative var="x[27]">0</derivative>
+                <derivative var="x[28]">0</derivative>
+                <derivative var="x[29]">0</derivative>
+                <derivative var="x[30]">0</derivative>
+            </gradient>
+        </constraint>
+        <!-- x[1] <= 1 -->
+        <constraint>
+            <function>
+                x[1] - 1
+            </function>
+            <gradient>
+                <derivative var="x[1]">1</derivative>
+                <derivative var="x[2]">0</derivative>
+                <derivative var="x[3]">0</derivative>
+                <derivative var="x[4]">0</derivative>
+                <derivative var="x[5]">0</derivative>
+                <derivative var="x[6]">0</derivative>
+                <derivative var="x[7]">0</derivative>
+                <derivative var="x[8]">0</derivative>
+                <derivative var="x[9]">0</derivative>
+                <derivative var="x[10]">0</derivative>
+                <derivative var="x[11]">0</derivative>
+                <derivative var="x[12]">0</derivative>
+                <derivative var="x[13]">0</derivative>
+                <derivative var="x[14]">0</derivative>
+                <derivative var="x[15]">0</derivative>
+                <derivative var="x[16]">0</derivative>
+                <derivative var="x[17]">0</derivative>
+                <derivative var="x[18]">0</derivative>
+                <derivative var="x[19]">0</derivative>
+                <derivative var="x[20]">0</derivative>
+                <derivative var="x[21]">0</derivative>
+                <derivative var="x[22]">0</derivative>
+                <derivative var="x[23]">0</derivative>
+                <derivative var="x[24]">0</derivative>
+                <derivative var="x[25]">0</derivative>
+                <derivative var="x[26]">0</derivative>
+                <derivative var="x[27]">0</derivative>
+                <derivative var="x[28]">0</derivative>
+                <derivative var="x[29]">0</derivative>
+                <derivative var="x[30]">0</derivative>
+            </gradient>
+        </constraint>
+
+        <!-- x[2] boxing constraints -->
+        <!-- -1 <= x[2] -->
+        <constraint>
+            <function>
+                -x[2] - 1
+            </function>
+            <gradient>
+                <derivative var="x[1]">0</derivative>
+                <derivative var="x[2]">-1</derivative>
+                <derivative var="x[3]">0</derivative>
+                <derivative var="x[4]">0</derivative>
+                <derivative var="x[5]">0</derivative>
+                <derivative var="x[6]">0</derivative>
+                <derivative var="x[7]">0</derivative>
+                <derivative var="x[8]">0</derivative>
+                <derivative var="x[9]">0</derivative>
+                <derivative var="x[10]">0</derivative>
+                <derivative var="x[11]">0</derivative>
+                <derivative var="x[12]">0</derivative>
+                <derivative var="x[13]">0</derivative>
+                <derivative var="x[14]">0</derivative>
+                <derivative var="x[15]">0</derivative>
+                <derivative var="x[16]">0</derivative>
+                <derivative var="x[17]">0</derivative>
+                <derivative var="x[18]">0</derivative>
+                <derivative var="x[19]">0</derivative>
+                <derivative var="x[20]">0</derivative>
+                <derivative var="x[21]">0</derivative>
+                <derivative var="x[22]">0</derivative>
+                <derivative var="x[23]">0</derivative>
+                <derivative var="x[24]">0</derivative>
+                <derivative var="x[25]">0</derivative>
+                <derivative var="x[26]">0</derivative>
+                <derivative var="x[27]">0</derivative>
+                <derivative var="x[28]">0</derivative>
+                <derivative var="x[29]">0</derivative>
+                <derivative var="x[30]">0</derivative>
+            </gradient>
+        </constraint>
+        <!-- x[2] <= 1 -->
+        <constraint>
+            <function>
+                x[2] - 1
+            </function>
+            <gradient>
+                <derivative var="x[1]">0</derivative>
+                <derivative var="x[2]">1</derivative>
+                <derivative var="x[3]">0</derivative>
+                <derivative var="x[4]">0</derivative>
+                <derivative var="x[5]">0</derivative>
+                <derivative var="x[6]">0</derivative>
+                <derivative var="x[7]">0</derivative>
+                <derivative var="x[8]">0</derivative>
+                <derivative var="x[9]">0</derivative>
+                <derivative var="x[10]">0</derivative>
+                <derivative var="x[11]">0</derivative>
+                <derivative var="x[12]">0</derivative>
+                <derivative var="x[13]">0</derivative>
+                <derivative var="x[14]">0</derivative>
+                <derivative var="x[15]">0</derivative>
+                <derivative var="x[16]">0</derivative>
+                <derivative var="x[17]">0</derivative>
+                <derivative var="x[18]">0</derivative>
+                <derivative var="x[19]">0</derivative>
+                <derivative var="x[20]">0</derivative>
+                <derivative var="x[21]">0</derivative>
+                <derivative var="x[22]">0</derivative>
+                <derivative var="x[23]">0</derivative>
+                <derivative var="x[24]">0</derivative>
+                <derivative var="x[25]">0</derivative>
+                <derivative var="x[26]">0</derivative>
+                <derivative var="x[27]">0</derivative>
+                <derivative var="x[28]">0</derivative>
+                <derivative var="x[29]">0</derivative>
+                <derivative var="x[30]">0</derivative>
+            </gradient>
+        </constraint>
+
+        <!-- x[3] boxing constraints -->
+        <!-- -1 <= x[3] -->
+        <constraint>
+            <function>
+                -x[3] - 1
+            </function>
+            <gradient>
+                <derivative var="x[1]">0</derivative>
+                <derivative var="x[2]">0</derivative>
+                <derivative var="x[3]">-1</derivative>
+                <derivative var="x[4]">0</derivative>
+                <derivative var="x[5]">0</derivative>
+                <derivative var="x[6]">0</derivative>
+                <derivative var="x[7]">0</derivative>
+                <derivative var="x[8]">0</derivative>
+                <derivative var="x[9]">0</derivative>
+                <derivative var="x[10]">0</derivative>
+                <derivative var="x[11]">0</derivative>
+                <derivative var="x[12]">0</derivative>
+                <derivative var="x[13]">0</derivative>
+                <derivative var="x[14]">0</derivative>
+                <derivative var="x[15]">0</derivative>
+                <derivative var="x[16]">0</derivative>
+                <derivative var="x[17]">0</derivative>
+                <derivative var="x[18]">0</derivative>
+                <derivative var="x[19]">0</derivative>
+                <derivative var="x[20]">0</derivative>
+                <derivative var="x[21]">0</derivative>
+                <derivative var="x[22]">0</derivative>
+                <derivative var="x[23]">0</derivative>
+                <derivative var="x[24]">0</derivative>
+                <derivative var="x[25]">0</derivative>
+                <derivative var="x[26]">0</derivative>
+                <derivative var="x[27]">0</derivative>
+                <derivative var="x[28]">0</derivative>
+                <derivative var="x[29]">0</derivative>
+                <derivative var="x[30]">0</derivative>
+            </gradient>
+        </constraint>
+        <!-- x[3] <= 1 -->
+        <constraint>
+            <function>
+                x[3] - 1
+            </function>
+            <gradient>
+                <derivative var="x[1]">0</derivative>
+                <derivative var="x[2]">0</derivative>
+                <derivative var="x[3]">1</derivative>
+                <derivative var="x[4]">0</derivative>
+                <derivative var="x[5]">0</derivative>
+                <derivative var="x[6]">0</derivative>
+                <derivative var="x[7]">0</derivative>
+                <derivative var="x[8]">0</derivative>
+                <derivative var="x[9]">0</derivative>
+                <derivative var="x[10]">0</derivative>
+                <derivative var="x[11]">0</derivative>
+                <derivative var="x[12]">0</derivative>
+                <derivative var="x[13]">0</derivative>
+                <derivative var="x[14]">0</derivative>
+                <derivative var="x[15]">0</derivative>
+                <derivative var="x[16]">0</derivative>
+                <derivative var="x[17]">0</derivative>
+                <derivative var="x[18]">0</derivative>
+                <derivative var="x[19]">0</derivative>
+                <derivative var="x[20]">0</derivative>
+                <derivative var="x[21]">0</derivative>
+                <derivative var="x[22]">0</derivative>
+                <derivative var="x[23]">0</derivative>
+                <derivative var="x[24]">0</derivative>
+                <derivative var="x[25]">0</derivative>
+                <derivative var="x[26]">0</derivative>
+                <derivative var="x[27]">0</derivative>
+                <derivative var="x[28]">0</derivative>
+                <derivative var="x[29]">0</derivative>
+                <derivative var="x[30]">0</derivative>
+            </gradient>
+        </constraint>
+
+        <!-- x[4] boxing constraints -->
+        <!-- -1 <= x[4] -->
+        <constraint>
+            <function>
+                -x[4] - 1
+            </function>
+            <gradient>
+                <derivative var="x[1]">0</derivative>
+                <derivative var="x[2]">0</derivative>
+                <derivative var="x[3]">0</derivative>
+                <derivative var="x[4]">-1</derivative>
+                <derivative var="x[5]">0</derivative>
+                <derivative var="x[6]">0</derivative>
+                <derivative var="x[7]">0</derivative>
+                <derivative var="x[8]">0</derivative>
+                <derivative var="x[9]">0</derivative>
+                <derivative var="x[10]">0</derivative>
+                <derivative var="x[11]">0</derivative>
+                <derivative var="x[12]">0</derivative>
+                <derivative var="x[13]">0</derivative>
+                <derivative var="x[14]">0</derivative>
+                <derivative var="x[15]">0</derivative>
+                <derivative var="x[16]">0</derivative>
+                <derivative var="x[17]">0</derivative>
+                <derivative var="x[18]">0</derivative>
+                <derivative var="x[19]">0</derivative>
+                <derivative var="x[20]">0</derivative>
+                <derivative var="x[21]">0</derivative>
+                <derivative var="x[22]">0</derivative>
+                <derivative var="x[23]">0</derivative>
+                <derivative var="x[24]">0</derivative>
+                <derivative var="x[25]">0</derivative>
+                <derivative var="x[26]">0</derivative>
+                <derivative var="x[27]">0</derivative>
+                <derivative var="x[28]">0</derivative>
+                <derivative var="x[29]">0</derivative>
+                <derivative var="x[30]">0</derivative>
+            </gradient>
+        </constraint>
+        <!-- x[4] <= 1 -->
+        <constraint>
+            <function>
+                x[4] - 1
+            </function>
+            <gradient>
+                <derivative var="x[1]">0</derivative>
+                <derivative var="x[2]">0</derivative>
+                <derivative var="x[3]">0</derivative>
+                <derivative var="x[4]">1</derivative>
+                <derivative var="x[5]">0</derivative>
+                <derivative var="x[6]">0</derivative>
+                <derivative var="x[7]">0</derivative>
+                <derivative var="x[8]">0</derivative>
+                <derivative var="x[9]">0</derivative>
+                <derivative var="x[10]">0</derivative>
+                <derivative var="x[11]">0</derivative>
+                <derivative var="x[12]">0</derivative>
+                <derivative var="x[13]">0</derivative>
+                <derivative var="x[14]">0</derivative>
+                <derivative var="x[15]">0</derivative>
+                <derivative var="x[16]">0</derivative>
+                <derivative var="x[17]">0</derivative>
+                <derivative var="x[18]">0</derivative>
+                <derivative var="x[19]">0</derivative>
+                <derivative var="x[20]">0</derivative>
+                <derivative var="x[21]">0</derivative>
+                <derivative var="x[22]">0</derivative>
+                <derivative var="x[23]">0</derivative>
+                <derivative var="x[24]">0</derivative>
+                <derivative var="x[25]">0</derivative>
+                <derivative var="x[26]">0</derivative>
+                <derivative var="x[27]">0</derivative>
+                <derivative var="x[28]">0</derivative>
+                <derivative var="x[29]">0</derivative>
+                <derivative var="x[30]">0</derivative>
+            </gradient>
+        </constraint>
+
+        <!-- x[5] boxing constraints -->
+        <!-- -1 <= x[5] -->
+        <constraint>
+            <function>
+                -x[5] - 1
+            </function>
+            <gradient>
+                <derivative var="x[1]">0</derivative>
+                <derivative var="x[2]">0</derivative>
+                <derivative var="x[3]">0</derivative>
+                <derivative var="x[4]">0</derivative>
+                <derivative var="x[5]">-1</derivative>
+                <derivative var="x[6]">0</derivative>
+                <derivative var="x[7]">0</derivative>
+                <derivative var="x[8]">0</derivative>
+                <derivative var="x[9]">0</derivative>
+                <derivative var="x[10]">0</derivative>
+                <derivative var="x[11]">0</derivative>
+                <derivative var="x[12]">0</derivative>
+                <derivative var="x[13]">0</derivative>
+                <derivative var="x[14]">0</derivative>
+                <derivative var="x[15]">0</derivative>
+                <derivative var="x[16]">0</derivative>
+                <derivative var="x[17]">0</derivative>
+                <derivative var="x[18]">0</derivative>
+                <derivative var="x[19]">0</derivative>
+                <derivative var="x[20]">0</derivative>
+                <derivative var="x[21]">0</derivative>
+                <derivative var="x[22]">0</derivative>
+                <derivative var="x[23]">0</derivative>
+                <derivative var="x[24]">0</derivative>
+                <derivative var="x[25]">0</derivative>
+                <derivative var="x[26]">0</derivative>
+                <derivative var="x[27]">0</derivative>
+                <derivative var="x[28]">0</derivative>
+                <derivative var="x[29]">0</derivative>
+                <derivative var="x[30]">0</derivative>
+            </gradient>
+        </constraint>
+        <!-- x[5] <= 1 -->
+        <constraint>
+            <function>
+                x[5] - 1
+            </function>
+            <gradient>
+                <derivative var="x[1]">0</derivative>
+                <derivative var="x[2]">0</derivative>
+                <derivative var="x[3]">0</derivative>
+                <derivative var="x[4]">0</derivative>
+                <derivative var="x[5]">1</derivative>
+                <derivative var="x[6]">0</derivative>
+                <derivative var="x[7]">0</derivative>
+                <derivative var="x[8]">0</derivative>
+                <derivative var="x[9]">0</derivative>
+                <derivative var="x[10]">0</derivative>
+                <derivative var="x[11]">0</derivative>
+                <derivative var="x[12]">0</derivative>
+                <derivative var="x[13]">0</derivative>
+                <derivative var="x[14]">0</derivative>
+                <derivative var="x[15]">0</derivative>
+                <derivative var="x[16]">0</derivative>
+                <derivative var="x[17]">0</derivative>
+                <derivative var="x[18]">0</derivative>
+                <derivative var="x[19]">0</derivative>
+                <derivative var="x[20]">0</derivative>
+                <derivative var="x[21]">0</derivative>
+                <derivative var="x[22]">0</derivative>
+                <derivative var="x[23]">0</derivative>
+                <derivative var="x[24]">0</derivative>
+                <derivative var="x[25]">0</derivative>
+                <derivative var="x[26]">0</derivative>
+                <derivative var="x[27]">0</derivative>
+                <derivative var="x[28]">0</derivative>
+                <derivative var="x[29]">0</derivative>
+                <derivative var="x[30]">0</derivative>
+            </gradient>
+        </constraint>
+
+        <!-- x[6] boxing constraints -->
+        <!-- -1 <= x[6] -->
+        <constraint>
+            <function>
+                -x[6] - 1
+            </function>
+            <gradient>
+                <derivative var="x[1]">0</derivative>
+                <derivative var="x[2]">0</derivative>
+                <derivative var="x[3]">0</derivative>
+                <derivative var="x[4]">0</derivative>
+                <derivative var="x[5]">0</derivative>
+                <derivative var="x[6]">-1</derivative>
+                <derivative var="x[7]">0</derivative>
+                <derivative var="x[8]">0</derivative>
+                <derivative var="x[9]">0</derivative>
+                <derivative var="x[10]">0</derivative>
+                <derivative var="x[11]">0</derivative>
+                <derivative var="x[12]">0</derivative>
+                <derivative var="x[13]">0</derivative>
+                <derivative var="x[14]">0</derivative>
+                <derivative var="x[15]">0</derivative>
+                <derivative var="x[16]">0</derivative>
+                <derivative var="x[17]">0</derivative>
+                <derivative var="x[18]">0</derivative>
+                <derivative var="x[19]">0</derivative>
+                <derivative var="x[20]">0</derivative>
+                <derivative var="x[21]">0</derivative>
+                <derivative var="x[22]">0</derivative>
+                <derivative var="x[23]">0</derivative>
+                <derivative var="x[24]">0</derivative>
+                <derivative var="x[25]">0</derivative>
+                <derivative var="x[26]">0</derivative>
+                <derivative var="x[27]">0</derivative>
+                <derivative var="x[28]">0</derivative>
+                <derivative var="x[29]">0</derivative>
+                <derivative var="x[30]">0</derivative>
+            </gradient>
+        </constraint>
+        <!-- x[6] <= 1 -->
+        <constraint>
+            <function>
+                x[6] - 1
+            </function>
+            <gradient>
+                <derivative var="x[1]">0</derivative>
+                <derivative var="x[2]">0</derivative>
+                <derivative var="x[3]">0</derivative>
+                <derivative var="x[4]">0</derivative>
+                <derivative var="x[5]">0</derivative>
+                <derivative var="x[6]">1</derivative>
+                <derivative var="x[7]">0</derivative>
+                <derivative var="x[8]">0</derivative>
+                <derivative var="x[9]">0</derivative>
+                <derivative var="x[10]">0</derivative>
+                <derivative var="x[11]">0</derivative>
+                <derivative var="x[12]">0</derivative>
+                <derivative var="x[13]">0</derivative>
+                <derivative var="x[14]">0</derivative>
+                <derivative var="x[15]">0</derivative>
+                <derivative var="x[16]">0</derivative>
+                <derivative var="x[17]">0</derivative>
+                <derivative var="x[18]">0</derivative>
+                <derivative var="x[19]">0</derivative>
+                <derivative var="x[20]">0</derivative>
+                <derivative var="x[21]">0</derivative>
+                <derivative var="x[22]">0</derivative>
+                <derivative var="x[23]">0</derivative>
+                <derivative var="x[24]">0</derivative>
+                <derivative var="x[25]">0</derivative>
+                <derivative var="x[26]">0</derivative>
+                <derivative var="x[27]">0</derivative>
+                <derivative var="x[28]">0</derivative>
+                <derivative var="x[29]">0</derivative>
+                <derivative var="x[30]">0</derivative>
+            </gradient>
+        </constraint>
+
+        <!-- x[7] boxing constraints -->
+        <!-- -1 <= x[7] -->
+        <constraint>
+            <function>
+                -x[7] - 1
+            </function>
+            <gradient>
+                <derivative var="x[1]">0</derivative>
+                <derivative var="x[2]">0</derivative>
+                <derivative var="x[3]">0</derivative>
+                <derivative var="x[4]">0</derivative>
+                <derivative var="x[5]">0</derivative>
+                <derivative var="x[6]">0</derivative>
+                <derivative var="x[7]">-1</derivative>
+                <derivative var="x[8]">0</derivative>
+                <derivative var="x[9]">0</derivative>
+                <derivative var="x[10]">0</derivative>
+                <derivative var="x[11]">0</derivative>
+                <derivative var="x[12]">0</derivative>
+                <derivative var="x[13]">0</derivative>
+                <derivative var="x[14]">0</derivative>
+                <derivative var="x[15]">0</derivative>
+                <derivative var="x[16]">0</derivative>
+                <derivative var="x[17]">0</derivative>
+                <derivative var="x[18]">0</derivative>
+                <derivative var="x[19]">0</derivative>
+                <derivative var="x[20]">0</derivative>
+                <derivative var="x[21]">0</derivative>
+                <derivative var="x[22]">0</derivative>
+                <derivative var="x[23]">0</derivative>
+                <derivative var="x[24]">0</derivative>
+                <derivative var="x[25]">0</derivative>
+                <derivative var="x[26]">0</derivative>
+                <derivative var="x[27]">0</derivative>
+                <derivative var="x[28]">0</derivative>
+                <derivative var="x[29]">0</derivative>
+                <derivative var="x[30]">0</derivative>
+            </gradient>
+        </constraint>
+        <!-- x[7] <= 1 -->
+        <constraint>
+            <function>
+                x[7] - 1
+            </function>
+            <gradient>
+                <derivative var="x[1]">0</derivative>
+                <derivative var="x[2]">0</derivative>
+                <derivative var="x[3]">0</derivative>
+                <derivative var="x[4]">0</derivative>
+                <derivative var="x[5]">0</derivative>
+                <derivative var="x[6]">0</derivative>
+                <derivative var="x[7]">1</derivative>
+                <derivative var="x[8]">0</derivative>
+                <derivative var="x[9]">0</derivative>
+                <derivative var="x[10]">0</derivative>
+                <derivative var="x[11]">0</derivative>
+                <derivative var="x[12]">0</derivative>
+                <derivative var="x[13]">0</derivative>
+                <derivative var="x[14]">0</derivative>
+                <derivative var="x[15]">0</derivative>
+                <derivative var="x[16]">0</derivative>
+                <derivative var="x[17]">0</derivative>
+                <derivative var="x[18]">0</derivative>
+                <derivative var="x[19]">0</derivative>
+                <derivative var="x[20]">0</derivative>
+                <derivative var="x[21]">0</derivative>
+                <derivative var="x[22]">0</derivative>
+                <derivative var="x[23]">0</derivative>
+                <derivative var="x[24]">0</derivative>
+                <derivative var="x[25]">0</derivative>
+                <derivative var="x[26]">0</derivative>
+                <derivative var="x[27]">0</derivative>
+                <derivative var="x[28]">0</derivative>
+                <derivative var="x[29]">0</derivative>
+                <derivative var="x[30]">0</derivative>
+            </gradient>
+        </constraint>
+
+        <!-- x[8] boxing constraints -->
+        <!-- -1 <= x[8] -->
+        <constraint>
+            <function>
+                -x[8] - 1
+            </function>
+            <gradient>
+                <derivative var="x[1]">0</derivative>
+                <derivative var="x[2]">0</derivative>
+                <derivative var="x[3]">0</derivative>
+                <derivative var="x[4]">0</derivative>
+                <derivative var="x[5]">0</derivative>
+                <derivative var="x[6]">0</derivative>
+                <derivative var="x[7]">0</derivative>
+                <derivative var="x[8]">-1</derivative>
+                <derivative var="x[9]">0</derivative>
+                <derivative var="x[10]">0</derivative>
+                <derivative var="x[11]">0</derivative>
+                <derivative var="x[12]">0</derivative>
+                <derivative var="x[13]">0</derivative>
+                <derivative var="x[14]">0</derivative>
+                <derivative var="x[15]">0</derivative>
+                <derivative var="x[16]">0</derivative>
+                <derivative var="x[17]">0</derivative>
+                <derivative var="x[18]">0</derivative>
+                <derivative var="x[19]">0</derivative>
+                <derivative var="x[20]">0</derivative>
+                <derivative var="x[21]">0</derivative>
+                <derivative var="x[22]">0</derivative>
+                <derivative var="x[23]">0</derivative>
+                <derivative var="x[24]">0</derivative>
+                <derivative var="x[25]">0</derivative>
+                <derivative var="x[26]">0</derivative>
+                <derivative var="x[27]">0</derivative>
+                <derivative var="x[28]">0</derivative>
+                <derivative var="x[29]">0</derivative>
+                <derivative var="x[30]">0</derivative>
+            </gradient>
+        </constraint>
+        <!-- x[8] <= 1 -->
+        <constraint>
+            <function>
+                x[8] - 1
+            </function>
+            <gradient>
+                <derivative var="x[1]">0</derivative>
+                <derivative var="x[2]">0</derivative>
+                <derivative var="x[3]">0</derivative>
+                <derivative var="x[4]">0</derivative>
+                <derivative var="x[5]">0</derivative>
+                <derivative var="x[6]">0</derivative>
+                <derivative var="x[7]">0</derivative>
+                <derivative var="x[8]">1</derivative>
+                <derivative var="x[9]">0</derivative>
+                <derivative var="x[10]">0</derivative>
+                <derivative var="x[11]">0</derivative>
+                <derivative var="x[12]">0</derivative>
+                <derivative var="x[13]">0</derivative>
+                <derivative var="x[14]">0</derivative>
+                <derivative var="x[15]">0</derivative>
+                <derivative var="x[16]">0</derivative>
+                <derivative var="x[17]">0</derivative>
+                <derivative var="x[18]">0</derivative>
+                <derivative var="x[19]">0</derivative>
+                <derivative var="x[20]">0</derivative>
+                <derivative var="x[21]">0</derivative>
+                <derivative var="x[22]">0</derivative>
+                <derivative var="x[23]">0</derivative>
+                <derivative var="x[24]">0</derivative>
+                <derivative var="x[25]">0</derivative>
+                <derivative var="x[26]">0</derivative>
+                <derivative var="x[27]">0</derivative>
+                <derivative var="x[28]">0</derivative>
+                <derivative var="x[29]">0</derivative>
+                <derivative var="x[30]">0</derivative>
+            </gradient>
+        </constraint>
+
+        <!-- x[9] boxing constraints -->
+        <!-- -1 <= x[9] -->
+        <constraint>
+            <function>
+                -x[9] - 1
+            </function>
+            <gradient>
+                <derivative var="x[1]">0</derivative>
+                <derivative var="x[2]">0</derivative>
+                <derivative var="x[3]">0</derivative>
+                <derivative var="x[4]">0</derivative>
+                <derivative var="x[5]">0</derivative>
+                <derivative var="x[6]">0</derivative>
+                <derivative var="x[7]">0</derivative>
+                <derivative var="x[8]">0</derivative>
+                <derivative var="x[9]">-1</derivative>
+                <derivative var="x[10]">0</derivative>
+                <derivative var="x[11]">0</derivative>
+                <derivative var="x[12]">0</derivative>
+                <derivative var="x[13]">0</derivative>
+                <derivative var="x[14]">0</derivative>
+                <derivative var="x[15]">0</derivative>
+                <derivative var="x[16]">0</derivative>
+                <derivative var="x[17]">0</derivative>
+                <derivative var="x[18]">0</derivative>
+                <derivative var="x[19]">0</derivative>
+                <derivative var="x[20]">0</derivative>
+                <derivative var="x[21]">0</derivative>
+                <derivative var="x[22]">0</derivative>
+                <derivative var="x[23]">0</derivative>
+                <derivative var="x[24]">0</derivative>
+                <derivative var="x[25]">0</derivative>
+                <derivative var="x[26]">0</derivative>
+                <derivative var="x[27]">0</derivative>
+                <derivative var="x[28]">0</derivative>
+                <derivative var="x[29]">0</derivative>
+                <derivative var="x[30]">0</derivative>
+            </gradient>
+        </constraint>
+        <!-- x[9] <= 1 -->
+        <constraint>
+            <function>
+                x[9] - 1
+            </function>
+            <gradient>
+                <derivative var="x[1]">0</derivative>
+                <derivative var="x[2]">0</derivative>
+                <derivative var="x[3]">0</derivative>
+                <derivative var="x[4]">0</derivative>
+                <derivative var="x[5]">0</derivative>
+                <derivative var="x[6]">0</derivative>
+                <derivative var="x[7]">0</derivative>
+                <derivative var="x[8]">0</derivative>
+                <derivative var="x[9]">1</derivative>
+                <derivative var="x[10]">0</derivative>
+                <derivative var="x[11]">0</derivative>
+                <derivative var="x[12]">0</derivative>
+                <derivative var="x[13]">0</derivative>
+                <derivative var="x[14]">0</derivative>
+                <derivative var="x[15]">0</derivative>
+                <derivative var="x[16]">0</derivative>
+                <derivative var="x[17]">0</derivative>
+                <derivative var="x[18]">0</derivative>
+                <derivative var="x[19]">0</derivative>
+                <derivative var="x[20]">0</derivative>
+                <derivative var="x[21]">0</derivative>
+                <derivative var="x[22]">0</derivative>
+                <derivative var="x[23]">0</derivative>
+                <derivative var="x[24]">0</derivative>
+                <derivative var="x[25]">0</derivative>
+                <derivative var="x[26]">0</derivative>
+                <derivative var="x[27]">0</derivative>
+                <derivative var="x[28]">0</derivative>
+                <derivative var="x[29]">0</derivative>
+                <derivative var="x[30]">0</derivative>
+            </gradient>
+        </constraint>
+
+        <!-- x[10] boxing constraints -->
+        <!-- -1 <= x[10] -->
+        <constraint>
+            <function>
+                -x[10] - 1
+            </function>
+            <gradient>
+                <derivative var="x[1]">0</derivative>
+                <derivative var="x[2]">0</derivative>
+                <derivative var="x[3]">0</derivative>
+                <derivative var="x[4]">0</derivative>
+                <derivative var="x[5]">0</derivative>
+                <derivative var="x[6]">0</derivative>
+                <derivative var="x[7]">0</derivative>
+                <derivative var="x[8]">0</derivative>
+                <derivative var="x[9]">0</derivative>
+                <derivative var="x[10]">-1</derivative>
+                <derivative var="x[11]">0</derivative>
+                <derivative var="x[12]">0</derivative>
+                <derivative var="x[13]">0</derivative>
+                <derivative var="x[14]">0</derivative>
+                <derivative var="x[15]">0</derivative>
+                <derivative var="x[16]">0</derivative>
+                <derivative var="x[17]">0</derivative>
+                <derivative var="x[18]">0</derivative>
+                <derivative var="x[19]">0</derivative>
+                <derivative var="x[20]">0</derivative>
+                <derivative var="x[21]">0</derivative>
+                <derivative var="x[22]">0</derivative>
+                <derivative var="x[23]">0</derivative>
+                <derivative var="x[24]">0</derivative>
+                <derivative var="x[25]">0</derivative>
+                <derivative var="x[26]">0</derivative>
+                <derivative var="x[27]">0</derivative>
+                <derivative var="x[28]">0</derivative>
+                <derivative var="x[29]">0</derivative>
+                <derivative var="x[30]">0</derivative>
+            </gradient>
+        </constraint>
+        <!-- x[10] <= 1 -->
+        <constraint>
+            <function>
+                x[10] - 1
+            </function>
+            <gradient>
+                <derivative var="x[1]">0</derivative>
+                <derivative var="x[2]">0</derivative>
+                <derivative var="x[3]">0</derivative>
+                <derivative var="x[4]">0</derivative>
+                <derivative var="x[5]">0</derivative>
+                <derivative var="x[6]">0</derivative>
+                <derivative var="x[7]">0</derivative>
+                <derivative var="x[8]">0</derivative>
+                <derivative var="x[9]">0</derivative>
+                <derivative var="x[10]">1</derivative>
+                <derivative var="x[11]">0</derivative>
+                <derivative var="x[12]">0</derivative>
+                <derivative var="x[13]">0</derivative>
+                <derivative var="x[14]">0</derivative>
+                <derivative var="x[15]">0</derivative>
+                <derivative var="x[16]">0</derivative>
+                <derivative var="x[17]">0</derivative>
+                <derivative var="x[18]">0</derivative>
+                <derivative var="x[19]">0</derivative>
+                <derivative var="x[20]">0</derivative>
+                <derivative var="x[21]">0</derivative>
+                <derivative var="x[22]">0</derivative>
+                <derivative var="x[23]">0</derivative>
+                <derivative var="x[24]">0</derivative>
+                <derivative var="x[25]">0</derivative>
+                <derivative var="x[26]">0</derivative>
+                <derivative var="x[27]">0</derivative>
+                <derivative var="x[28]">0</derivative>
+                <derivative var="x[29]">0</derivative>
+                <derivative var="x[30]">0</derivative>
+            </gradient>
+        </constraint>
+
+        <!-- x[11] boxing constraints -->
+        <!-- -1 <= x[11] -->
+        <constraint>
+            <function>
+                -x[11] - 1
+            </function>
+            <gradient>
+                <derivative var="x[1]">0</derivative>
+                <derivative var="x[2]">0</derivative>
+                <derivative var="x[3]">0</derivative>
+                <derivative var="x[4]">0</derivative>
+                <derivative var="x[5]">0</derivative>
+                <derivative var="x[6]">0</derivative>
+                <derivative var="x[7]">0</derivative>
+                <derivative var="x[8]">0</derivative>
+                <derivative var="x[9]">0</derivative>
+                <derivative var="x[10]">0</derivative>
+                <derivative var="x[11]">-1</derivative>
+                <derivative var="x[12]">0</derivative>
+                <derivative var="x[13]">0</derivative>
+                <derivative var="x[14]">0</derivative>
+                <derivative var="x[15]">0</derivative>
+                <derivative var="x[16]">0</derivative>
+                <derivative var="x[17]">0</derivative>
+                <derivative var="x[18]">0</derivative>
+                <derivative var="x[19]">0</derivative>
+                <derivative var="x[20]">0</derivative>
+                <derivative var="x[21]">0</derivative>
+                <derivative var="x[22]">0</derivative>
+                <derivative var="x[23]">0</derivative>
+                <derivative var="x[24]">0</derivative>
+                <derivative var="x[25]">0</derivative>
+                <derivative var="x[26]">0</derivative>
+                <derivative var="x[27]">0</derivative>
+                <derivative var="x[28]">0</derivative>
+                <derivative var="x[29]">0</derivative>
+                <derivative var="x[30]">0</derivative>
+            </gradient>
+        </constraint>
+        <!-- x[11] <= 1 -->
+        <constraint>
+            <function>
+                x[11] - 1
+            </function>
+            <gradient>
+                <derivative var="x[1]">0</derivative>
+                <derivative var="x[2]">0</derivative>
+                <derivative var="x[3]">0</derivative>
+                <derivative var="x[4]">0</derivative>
+                <derivative var="x[5]">0</derivative>
+                <derivative var="x[6]">0</derivative>
+                <derivative var="x[7]">0</derivative>
+                <derivative var="x[8]">0</derivative>
+                <derivative var="x[9]">0</derivative>
+                <derivative var="x[10]">0</derivative>
+                <derivative var="x[11]">1</derivative>
+                <derivative var="x[12]">0</derivative>
+                <derivative var="x[13]">0</derivative>
+                <derivative var="x[14]">0</derivative>
+                <derivative var="x[15]">0</derivative>
+                <derivative var="x[16]">0</derivative>
+                <derivative var="x[17]">0</derivative>
+                <derivative var="x[18]">0</derivative>
+                <derivative var="x[19]">0</derivative>
+                <derivative var="x[20]">0</derivative>
+                <derivative var="x[21]">0</derivative>
+                <derivative var="x[22]">0</derivative>
+                <derivative var="x[23]">0</derivative>
+                <derivative var="x[24]">0</derivative>
+                <derivative var="x[25]">0</derivative>
+                <derivative var="x[26]">0</derivative>
+                <derivative var="x[27]">0</derivative>
+                <derivative var="x[28]">0</derivative>
+                <derivative var="x[29]">0</derivative>
+                <derivative var="x[30]">0</derivative>
+            </gradient>
+        </constraint>
+
+        <!-- x[12] boxing constraints -->
+        <!-- -1 <= x[12] -->
+        <constraint>
+            <function>
+                -x[12] - 1
+            </function>
+            <gradient>
+                <derivative var="x[1]">0</derivative>
+                <derivative var="x[2]">0</derivative>
+                <derivative var="x[3]">0</derivative>
+                <derivative var="x[4]">0</derivative>
+                <derivative var="x[5]">0</derivative>
+                <derivative var="x[6]">0</derivative>
+                <derivative var="x[7]">0</derivative>
+                <derivative var="x[8]">0</derivative>
+                <derivative var="x[9]">0</derivative>
+                <derivative var="x[10]">0</derivative>
+                <derivative var="x[11]">0</derivative>
+                <derivative var="x[12]">-1</derivative>
+                <derivative var="x[13]">0</derivative>
+                <derivative var="x[14]">0</derivative>
+                <derivative var="x[15]">0</derivative>
+                <derivative var="x[16]">0</derivative>
+                <derivative var="x[17]">0</derivative>
+                <derivative var="x[18]">0</derivative>
+                <derivative var="x[19]">0</derivative>
+                <derivative var="x[20]">0</derivative>
+                <derivative var="x[21]">0</derivative>
+                <derivative var="x[22]">0</derivative>
+                <derivative var="x[23]">0</derivative>
+                <derivative var="x[24]">0</derivative>
+                <derivative var="x[25]">0</derivative>
+                <derivative var="x[26]">0</derivative>
+                <derivative var="x[27]">0</derivative>
+                <derivative var="x[28]">0</derivative>
+                <derivative var="x[29]">0</derivative>
+                <derivative var="x[30]">0</derivative>
+            </gradient>
+        </constraint>
+        <!-- x[12] <= 1 -->
+        <constraint>
+            <function>
+                x[12] - 1
+            </function>
+            <gradient>
+                <derivative var="x[1]">0</derivative>
+                <derivative var="x[2]">0</derivative>
+                <derivative var="x[3]">0</derivative>
+                <derivative var="x[4]">0</derivative>
+                <derivative var="x[5]">0</derivative>
+                <derivative var="x[6]">0</derivative>
+                <derivative var="x[7]">0</derivative>
+                <derivative var="x[8]">0</derivative>
+                <derivative var="x[9]">0</derivative>
+                <derivative var="x[10]">0</derivative>
+                <derivative var="x[11]">0</derivative>
+                <derivative var="x[12]">1</derivative>
+                <derivative var="x[13]">0</derivative>
+                <derivative var="x[14]">0</derivative>
+                <derivative var="x[15]">0</derivative>
+                <derivative var="x[16]">0</derivative>
+                <derivative var="x[17]">0</derivative>
+                <derivative var="x[18]">0</derivative>
+                <derivative var="x[19]">0</derivative>
+                <derivative var="x[20]">0</derivative>
+                <derivative var="x[21]">0</derivative>
+                <derivative var="x[22]">0</derivative>
+                <derivative var="x[23]">0</derivative>
+                <derivative var="x[24]">0</derivative>
+                <derivative var="x[25]">0</derivative>
+                <derivative var="x[26]">0</derivative>
+                <derivative var="x[27]">0</derivative>
+                <derivative var="x[28]">0</derivative>
+                <derivative var="x[29]">0</derivative>
+                <derivative var="x[30]">0</derivative>
+            </gradient>
+        </constraint>
+
+        <!-- x[13] boxing constraints -->
+        <!-- -1 <= x[13] -->
+        <constraint>
+            <function>
+                -x[13] - 1
+            </function>
+            <gradient>
+                <derivative var="x[1]">0</derivative>
+                <derivative var="x[2]">0</derivative>
+                <derivative var="x[3]">0</derivative>
+                <derivative var="x[4]">0</derivative>
+                <derivative var="x[5]">0</derivative>
+                <derivative var="x[6]">0</derivative>
+                <derivative var="x[7]">0</derivative>
+                <derivative var="x[8]">0</derivative>
+                <derivative var="x[9]">0</derivative>
+                <derivative var="x[10]">0</derivative>
+                <derivative var="x[11]">0</derivative>
+                <derivative var="x[12]">0</derivative>
+                <derivative var="x[13]">-1</derivative>
+                <derivative var="x[14]">0</derivative>
+                <derivative var="x[15]">0</derivative>
+                <derivative var="x[16]">0</derivative>
+                <derivative var="x[17]">0</derivative>
+                <derivative var="x[18]">0</derivative>
+                <derivative var="x[19]">0</derivative>
+                <derivative var="x[20]">0</derivative>
+                <derivative var="x[21]">0</derivative>
+                <derivative var="x[22]">0</derivative>
+                <derivative var="x[23]">0</derivative>
+                <derivative var="x[24]">0</derivative>
+                <derivative var="x[25]">0</derivative>
+                <derivative var="x[26]">0</derivative>
+                <derivative var="x[27]">0</derivative>
+                <derivative var="x[28]">0</derivative>
+                <derivative var="x[29]">0</derivative>
+                <derivative var="x[30]">0</derivative>
+            </gradient>
+        </constraint>
+        <!-- x[13] <= 1 -->
+        <constraint>
+            <function>
+                x[13] - 1
+            </function>
+            <gradient>
+                <derivative var="x[1]">0</derivative>
+                <derivative var="x[2]">0</derivative>
+                <derivative var="x[3]">0</derivative>
+                <derivative var="x[4]">0</derivative>
+                <derivative var="x[5]">0</derivative>
+                <derivative var="x[6]">0</derivative>
+                <derivative var="x[7]">0</derivative>
+                <derivative var="x[8]">0</derivative>
+                <derivative var="x[9]">0</derivative>
+                <derivative var="x[10]">0</derivative>
+                <derivative var="x[11]">0</derivative>
+                <derivative var="x[12]">0</derivative>
+                <derivative var="x[13]">1</derivative>
+                <derivative var="x[14]">0</derivative>
+                <derivative var="x[15]">0</derivative>
+                <derivative var="x[16]">0</derivative>
+                <derivative var="x[17]">0</derivative>
+                <derivative var="x[18]">0</derivative>
+                <derivative var="x[19]">0</derivative>
+                <derivative var="x[20]">0</derivative>
+                <derivative var="x[21]">0</derivative>
+                <derivative var="x[22]">0</derivative>
+                <derivative var="x[23]">0</derivative>
+                <derivative var="x[24]">0</derivative>
+                <derivative var="x[25]">0</derivative>
+                <derivative var="x[26]">0</derivative>
+                <derivative var="x[27]">0</derivative>
+                <derivative var="x[28]">0</derivative>
+                <derivative var="x[29]">0</derivative>
+                <derivative var="x[30]">0</derivative>
+            </gradient>
+        </constraint>
+
+        <!-- x[14] boxing constraints -->
+        <!-- -1 <= x[14] -->
+        <constraint>
+            <function>
+                -x[14] - 1
+            </function>
+            <gradient>
+                <derivative var="x[1]">0</derivative>
+                <derivative var="x[2]">0</derivative>
+                <derivative var="x[3]">0</derivative>
+                <derivative var="x[4]">0</derivative>
+                <derivative var="x[5]">0</derivative>
+                <derivative var="x[6]">0</derivative>
+                <derivative var="x[7]">0</derivative>
+                <derivative var="x[8]">0</derivative>
+                <derivative var="x[9]">0</derivative>
+                <derivative var="x[10]">0</derivative>
+                <derivative var="x[11]">0</derivative>
+                <derivative var="x[12]">0</derivative>
+                <derivative var="x[13]">0</derivative>
+                <derivative var="x[14]">-1</derivative>
+                <derivative var="x[15]">0</derivative>
+                <derivative var="x[16]">0</derivative>
+                <derivative var="x[17]">0</derivative>
+                <derivative var="x[18]">0</derivative>
+                <derivative var="x[19]">0</derivative>
+                <derivative var="x[20]">0</derivative>
+                <derivative var="x[21]">0</derivative>
+                <derivative var="x[22]">0</derivative>
+                <derivative var="x[23]">0</derivative>
+                <derivative var="x[24]">0</derivative>
+                <derivative var="x[25]">0</derivative>
+                <derivative var="x[26]">0</derivative>
+                <derivative var="x[27]">0</derivative>
+                <derivative var="x[28]">0</derivative>
+                <derivative var="x[29]">0</derivative>
+                <derivative var="x[30]">0</derivative>
+            </gradient>
+        </constraint>
+        <!-- x[14] <= 1 -->
+        <constraint>
+            <function>
+                x[14] - 1
+            </function>
+            <gradient>
+                <derivative var="x[1]">0</derivative>
+                <derivative var="x[2]">0</derivative>
+                <derivative var="x[3]">0</derivative>
+                <derivative var="x[4]">0</derivative>
+                <derivative var="x[5]">0</derivative>
+                <derivative var="x[6]">0</derivative>
+                <derivative var="x[7]">0</derivative>
+                <derivative var="x[8]">0</derivative>
+                <derivative var="x[9]">0</derivative>
+                <derivative var="x[10]">0</derivative>
+                <derivative var="x[11]">0</derivative>
+                <derivative var="x[12]">0</derivative>
+                <derivative var="x[13]">0</derivative>
+                <derivative var="x[14]">1</derivative>
+                <derivative var="x[15]">0</derivative>
+                <derivative var="x[16]">0</derivative>
+                <derivative var="x[17]">0</derivative>
+                <derivative var="x[18]">0</derivative>
+                <derivative var="x[19]">0</derivative>
+                <derivative var="x[20]">0</derivative>
+                <derivative var="x[21]">0</derivative>
+                <derivative var="x[22]">0</derivative>
+                <derivative var="x[23]">0</derivative>
+                <derivative var="x[24]">0</derivative>
+                <derivative var="x[25]">0</derivative>
+                <derivative var="x[26]">0</derivative>
+                <derivative var="x[27]">0</derivative>
+                <derivative var="x[28]">0</derivative>
+                <derivative var="x[29]">0</derivative>
+                <derivative var="x[30]">0</derivative>
+            </gradient>
+        </constraint>
+
+        <!-- x[15] boxing constraints -->
+        <!-- -1 <= x[15] -->
+        <constraint>
+            <function>
+                -x[15] - 1
+            </function>
+            <gradient>
+                <derivative var="x[1]">0</derivative>
+                <derivative var="x[2]">0</derivative>
+                <derivative var="x[3]">0</derivative>
+                <derivative var="x[4]">0</derivative>
+                <derivative var="x[5]">0</derivative>
+                <derivative var="x[6]">0</derivative>
+                <derivative var="x[7]">0</derivative>
+                <derivative var="x[8]">0</derivative>
+                <derivative var="x[9]">0</derivative>
+                <derivative var="x[10]">0</derivative>
+                <derivative var="x[11]">0</derivative>
+                <derivative var="x[12]">0</derivative>
+                <derivative var="x[13]">0</derivative>
+                <derivative var="x[14]">0</derivative>
+                <derivative var="x[15]">-1</derivative>
+                <derivative var="x[16]">0</derivative>
+                <derivative var="x[17]">0</derivative>
+                <derivative var="x[18]">0</derivative>
+                <derivative var="x[19]">0</derivative>
+                <derivative var="x[20]">0</derivative>
+                <derivative var="x[21]">0</derivative>
+                <derivative var="x[22]">0</derivative>
+                <derivative var="x[23]">0</derivative>
+                <derivative var="x[24]">0</derivative>
+                <derivative var="x[25]">0</derivative>
+                <derivative var="x[26]">0</derivative>
+                <derivative var="x[27]">0</derivative>
+                <derivative var="x[28]">0</derivative>
+                <derivative var="x[29]">0</derivative>
+                <derivative var="x[30]">0</derivative>
+            </gradient>
+        </constraint>
+        <!-- x[15] <= 1 -->
+        <constraint>
+            <function>
+                x[15] - 1
+            </function>
+            <gradient>
+                <derivative var="x[1]">0</derivative>
+                <derivative var="x[2]">0</derivative>
+                <derivative var="x[3]">0</derivative>
+                <derivative var="x[4]">0</derivative>
+                <derivative var="x[5]">0</derivative>
+                <derivative var="x[6]">0</derivative>
+                <derivative var="x[7]">0</derivative>
+                <derivative var="x[8]">0</derivative>
+                <derivative var="x[9]">0</derivative>
+                <derivative var="x[10]">0</derivative>
+                <derivative var="x[11]">0</derivative>
+                <derivative var="x[12]">0</derivative>
+                <derivative var="x[13]">0</derivative>
+                <derivative var="x[14]">0</derivative>
+                <derivative var="x[15]">1</derivative>
+                <derivative var="x[16]">0</derivative>
+                <derivative var="x[17]">0</derivative>
+                <derivative var="x[18]">0</derivative>
+                <derivative var="x[19]">0</derivative>
+                <derivative var="x[20]">0</derivative>
+                <derivative var="x[21]">0</derivative>
+                <derivative var="x[22]">0</derivative>
+                <derivative var="x[23]">0</derivative>
+                <derivative var="x[24]">0</derivative>
+                <derivative var="x[25]">0</derivative>
+                <derivative var="x[26]">0</derivative>
+                <derivative var="x[27]">0</derivative>
+                <derivative var="x[28]">0</derivative>
+                <derivative var="x[29]">0</derivative>
+                <derivative var="x[30]">0</derivative>
+            </gradient>
+        </constraint>
+
+        <!-- x[16] boxing constraints -->
+        <!-- -1 <= x[16] -->
+        <constraint>
+            <function>
+                -x[16] - 1
+            </function>
+            <gradient>
+                <derivative var="x[1]">0</derivative>
+                <derivative var="x[2]">0</derivative>
+                <derivative var="x[3]">0</derivative>
+                <derivative var="x[4]">0</derivative>
+                <derivative var="x[5]">0</derivative>
+                <derivative var="x[6]">0</derivative>
+                <derivative var="x[7]">0</derivative>
+                <derivative var="x[8]">0</derivative>
+                <derivative var="x[9]">0</derivative>
+                <derivative var="x[10]">0</derivative>
+                <derivative var="x[11]">0</derivative>
+                <derivative var="x[12]">0</derivative>
+                <derivative var="x[13]">0</derivative>
+                <derivative var="x[14]">0</derivative>
+                <derivative var="x[15]">0</derivative>
+                <derivative var="x[16]">-1</derivative>
+                <derivative var="x[17]">0</derivative>
+                <derivative var="x[18]">0</derivative>
+                <derivative var="x[19]">0</derivative>
+                <derivative var="x[20]">0</derivative>
+                <derivative var="x[21]">0</derivative>
+                <derivative var="x[22]">0</derivative>
+                <derivative var="x[23]">0</derivative>
+                <derivative var="x[24]">0</derivative>
+                <derivative var="x[25]">0</derivative>
+                <derivative var="x[26]">0</derivative>
+                <derivative var="x[27]">0</derivative>
+                <derivative var="x[28]">0</derivative>
+                <derivative var="x[29]">0</derivative>
+                <derivative var="x[30]">0</derivative>
+            </gradient>
+        </constraint>
+        <!-- x[16] <= 1 -->
+        <constraint>
+            <function>
+                x[16] - 1
+            </function>
+            <gradient>
+                <derivative var="x[1]">0</derivative>
+                <derivative var="x[2]">0</derivative>
+                <derivative var="x[3]">0</derivative>
+                <derivative var="x[4]">0</derivative>
+                <derivative var="x[5]">0</derivative>
+                <derivative var="x[6]">0</derivative>
+                <derivative var="x[7]">0</derivative>
+                <derivative var="x[8]">0</derivative>
+                <derivative var="x[9]">0</derivative>
+                <derivative var="x[10]">0</derivative>
+                <derivative var="x[11]">0</derivative>
+                <derivative var="x[12]">0</derivative>
+                <derivative var="x[13]">0</derivative>
+                <derivative var="x[14]">0</derivative>
+                <derivative var="x[15]">0</derivative>
+                <derivative var="x[16]">1</derivative>
+                <derivative var="x[17]">0</derivative>
+                <derivative var="x[18]">0</derivative>
+                <derivative var="x[19]">0</derivative>
+                <derivative var="x[20]">0</derivative>
+                <derivative var="x[21]">0</derivative>
+                <derivative var="x[22]">0</derivative>
+                <derivative var="x[23]">0</derivative>
+                <derivative var="x[24]">0</derivative>
+                <derivative var="x[25]">0</derivative>
+                <derivative var="x[26]">0</derivative>
+                <derivative var="x[27]">0</derivative>
+                <derivative var="x[28]">0</derivative>
+                <derivative var="x[29]">0</derivative>
+                <derivative var="x[30]">0</derivative>
+            </gradient>
+        </constraint>
+
+        <!-- x[17] boxing constraints -->
+        <!-- -1 <= x[17] -->
+        <constraint>
+            <function>
+                -x[17] - 1
+            </function>
+            <gradient>
+                <derivative var="x[1]">0</derivative>
+                <derivative var="x[2]">0</derivative>
+                <derivative var="x[3]">0</derivative>
+                <derivative var="x[4]">0</derivative>
+                <derivative var="x[5]">0</derivative>
+                <derivative var="x[6]">0</derivative>
+                <derivative var="x[7]">0</derivative>
+                <derivative var="x[8]">0</derivative>
+                <derivative var="x[9]">0</derivative>
+                <derivative var="x[10]">0</derivative>
+                <derivative var="x[11]">0</derivative>
+                <derivative var="x[12]">0</derivative>
+                <derivative var="x[13]">0</derivative>
+                <derivative var="x[14]">0</derivative>
+                <derivative var="x[15]">0</derivative>
+                <derivative var="x[16]">0</derivative>
+                <derivative var="x[17]">-1</derivative>
+                <derivative var="x[18]">0</derivative>
+                <derivative var="x[19]">0</derivative>
+                <derivative var="x[20]">0</derivative>
+                <derivative var="x[21]">0</derivative>
+                <derivative var="x[22]">0</derivative>
+                <derivative var="x[23]">0</derivative>
+                <derivative var="x[24]">0</derivative>
+                <derivative var="x[25]">0</derivative>
+                <derivative var="x[26]">0</derivative>
+                <derivative var="x[27]">0</derivative>
+                <derivative var="x[28]">0</derivative>
+                <derivative var="x[29]">0</derivative>
+                <derivative var="x[30]">0</derivative>
+            </gradient>
+        </constraint>
+        <!-- x[17] <= 1 -->
+        <constraint>
+            <function>
+                x[17] - 1
+            </function>
+            <gradient>
+                <derivative var="x[1]">0</derivative>
+                <derivative var="x[2]">0</derivative>
+                <derivative var="x[3]">0</derivative>
+                <derivative var="x[4]">0</derivative>
+                <derivative var="x[5]">0</derivative>
+                <derivative var="x[6]">0</derivative>
+                <derivative var="x[7]">0</derivative>
+                <derivative var="x[8]">0</derivative>
+                <derivative var="x[9]">0</derivative>
+                <derivative var="x[10]">0</derivative>
+                <derivative var="x[11]">0</derivative>
+                <derivative var="x[12]">0</derivative>
+                <derivative var="x[13]">0</derivative>
+                <derivative var="x[14]">0</derivative>
+                <derivative var="x[15]">0</derivative>
+                <derivative var="x[16]">0</derivative>
+                <derivative var="x[17]">1</derivative>
+                <derivative var="x[18]">0</derivative>
+                <derivative var="x[19]">0</derivative>
+                <derivative var="x[20]">0</derivative>
+                <derivative var="x[21]">0</derivative>
+                <derivative var="x[22]">0</derivative>
+                <derivative var="x[23]">0</derivative>
+                <derivative var="x[24]">0</derivative>
+                <derivative var="x[25]">0</derivative>
+                <derivative var="x[26]">0</derivative>
+                <derivative var="x[27]">0</derivative>
+                <derivative var="x[28]">0</derivative>
+                <derivative var="x[29]">0</derivative>
+                <derivative var="x[30]">0</derivative>
+            </gradient>
+        </constraint>
+
+        <!-- x[18] boxing constraints -->
+        <!-- -1 <= x[18] -->
+        <constraint>
+            <function>
+                -x[18] - 1
+            </function>
+            <gradient>
+                <derivative var="x[1]">0</derivative>
+                <derivative var="x[2]">0</derivative>
+                <derivative var="x[3]">0</derivative>
+                <derivative var="x[4]">0</derivative>
+                <derivative var="x[5]">0</derivative>
+                <derivative var="x[6]">0</derivative>
+                <derivative var="x[7]">0</derivative>
+                <derivative var="x[8]">0</derivative>
+                <derivative var="x[9]">0</derivative>
+                <derivative var="x[10]">0</derivative>
+                <derivative var="x[11]">0</derivative>
+                <derivative var="x[12]">0</derivative>
+                <derivative var="x[13]">0</derivative>
+                <derivative var="x[14]">0</derivative>
+                <derivative var="x[15]">0</derivative>
+                <derivative var="x[16]">0</derivative>
+                <derivative var="x[17]">0</derivative>
+                <derivative var="x[18]">-1</derivative>
+                <derivative var="x[19]">0</derivative>
+                <derivative var="x[20]">0</derivative>
+                <derivative var="x[21]">0</derivative>
+                <derivative var="x[22]">0</derivative>
+                <derivative var="x[23]">0</derivative>
+                <derivative var="x[24]">0</derivative>
+                <derivative var="x[25]">0</derivative>
+                <derivative var="x[26]">0</derivative>
+                <derivative var="x[27]">0</derivative>
+                <derivative var="x[28]">0</derivative>
+                <derivative var="x[29]">0</derivative>
+                <derivative var="x[30]">0</derivative>
+            </gradient>
+        </constraint>
+        <!-- x[18] <= 1 -->
+        <constraint>
+            <function>
+                x[18] - 1
+            </function>
+            <gradient>
+                <derivative var="x[1]">0</derivative>
+                <derivative var="x[2]">0</derivative>
+                <derivative var="x[3]">0</derivative>
+                <derivative var="x[4]">0</derivative>
+                <derivative var="x[5]">0</derivative>
+                <derivative var="x[6]">0</derivative>
+                <derivative var="x[7]">0</derivative>
+                <derivative var="x[8]">0</derivative>
+                <derivative var="x[9]">0</derivative>
+                <derivative var="x[10]">0</derivative>
+                <derivative var="x[11]">0</derivative>
+                <derivative var="x[12]">0</derivative>
+                <derivative var="x[13]">0</derivative>
+                <derivative var="x[14]">0</derivative>
+                <derivative var="x[15]">0</derivative>
+                <derivative var="x[16]">0</derivative>
+                <derivative var="x[17]">0</derivative>
+                <derivative var="x[18]">1</derivative>
+                <derivative var="x[19]">0</derivative>
+                <derivative var="x[20]">0</derivative>
+                <derivative var="x[21]">0</derivative>
+                <derivative var="x[22]">0</derivative>
+                <derivative var="x[23]">0</derivative>
+                <derivative var="x[24]">0</derivative>
+                <derivative var="x[25]">0</derivative>
+                <derivative var="x[26]">0</derivative>
+                <derivative var="x[27]">0</derivative>
+                <derivative var="x[28]">0</derivative>
+                <derivative var="x[29]">0</derivative>
+                <derivative var="x[30]">0</derivative>
+            </gradient>
+        </constraint>
+
+        <!-- x[19] boxing constraints -->
+        <!-- -1 <= x[19] -->
+        <constraint>
+            <function>
+                -x[19] - 1
+            </function>
+            <gradient>
+                <derivative var="x[1]">0</derivative>
+                <derivative var="x[2]">0</derivative>
+                <derivative var="x[3]">0</derivative>
+                <derivative var="x[4]">0</derivative>
+                <derivative var="x[5]">0</derivative>
+                <derivative var="x[6]">0</derivative>
+                <derivative var="x[7]">0</derivative>
+                <derivative var="x[8]">0</derivative>
+                <derivative var="x[9]">0</derivative>
+                <derivative var="x[10]">0</derivative>
+                <derivative var="x[11]">0</derivative>
+                <derivative var="x[12]">0</derivative>
+                <derivative var="x[13]">0</derivative>
+                <derivative var="x[14]">0</derivative>
+                <derivative var="x[15]">0</derivative>
+                <derivative var="x[16]">0</derivative>
+                <derivative var="x[17]">0</derivative>
+                <derivative var="x[18]">0</derivative>
+                <derivative var="x[19]">-1</derivative>
+                <derivative var="x[20]">0</derivative>
+                <derivative var="x[21]">0</derivative>
+                <derivative var="x[22]">0</derivative>
+                <derivative var="x[23]">0</derivative>
+                <derivative var="x[24]">0</derivative>
+                <derivative var="x[25]">0</derivative>
+                <derivative var="x[26]">0</derivative>
+                <derivative var="x[27]">0</derivative>
+                <derivative var="x[28]">0</derivative>
+                <derivative var="x[29]">0</derivative>
+                <derivative var="x[30]">0</derivative>
+            </gradient>
+        </constraint>
+        <!-- x[19] <= 1 -->
+        <constraint>
+            <function>
+                x[19] - 1
+            </function>
+            <gradient>
+                <derivative var="x[1]">0</derivative>
+                <derivative var="x[2]">0</derivative>
+                <derivative var="x[3]">0</derivative>
+                <derivative var="x[4]">0</derivative>
+                <derivative var="x[5]">0</derivative>
+                <derivative var="x[6]">0</derivative>
+                <derivative var="x[7]">0</derivative>
+                <derivative var="x[8]">0</derivative>
+                <derivative var="x[9]">0</derivative>
+                <derivative var="x[10]">0</derivative>
+                <derivative var="x[11]">0</derivative>
+                <derivative var="x[12]">0</derivative>
+                <derivative var="x[13]">0</derivative>
+                <derivative var="x[14]">0</derivative>
+                <derivative var="x[15]">0</derivative>
+                <derivative var="x[16]">0</derivative>
+                <derivative var="x[17]">0</derivative>
+                <derivative var="x[18]">0</derivative>
+                <derivative var="x[19]">1</derivative>
+                <derivative var="x[20]">0</derivative>
+                <derivative var="x[21]">0</derivative>
+                <derivative var="x[22]">0</derivative>
+                <derivative var="x[23]">0</derivative>
+                <derivative var="x[24]">0</derivative>
+                <derivative var="x[25]">0</derivative>
+                <derivative var="x[26]">0</derivative>
+                <derivative var="x[27]">0</derivative>
+                <derivative var="x[28]">0</derivative>
+                <derivative var="x[29]">0</derivative>
+                <derivative var="x[30]">0</derivative>
+            </gradient>
+        </constraint>
+
+        <!-- x[20] boxing constraints -->
+        <!-- -1 <= x[20] -->
+        <constraint>
+            <function>
+                -x[20] - 1
+            </function>
+            <gradient>
+                <derivative var="x[1]">0</derivative>
+                <derivative var="x[2]">0</derivative>
+                <derivative var="x[3]">0</derivative>
+                <derivative var="x[4]">0</derivative>
+                <derivative var="x[5]">0</derivative>
+                <derivative var="x[6]">0</derivative>
+                <derivative var="x[7]">0</derivative>
+                <derivative var="x[8]">0</derivative>
+                <derivative var="x[9]">0</derivative>
+                <derivative var="x[10]">0</derivative>
+                <derivative var="x[11]">0</derivative>
+                <derivative var="x[12]">0</derivative>
+                <derivative var="x[13]">0</derivative>
+                <derivative var="x[14]">0</derivative>
+                <derivative var="x[15]">0</derivative>
+                <derivative var="x[16]">0</derivative>
+                <derivative var="x[17]">0</derivative>
+                <derivative var="x[18]">0</derivative>
+                <derivative var="x[19]">0</derivative>
+                <derivative var="x[20]">-1</derivative>
+                <derivative var="x[21]">0</derivative>
+                <derivative var="x[22]">0</derivative>
+                <derivative var="x[23]">0</derivative>
+                <derivative var="x[24]">0</derivative>
+                <derivative var="x[25]">0</derivative>
+                <derivative var="x[26]">0</derivative>
+                <derivative var="x[27]">0</derivative>
+                <derivative var="x[28]">0</derivative>
+                <derivative var="x[29]">0</derivative>
+                <derivative var="x[30]">0</derivative>
+            </gradient>
+        </constraint>
+        <!-- x[20] <= 1 -->
+        <constraint>
+            <function>
+                x[20] - 1
+            </function>
+            <gradient>
+                <derivative var="x[1]">0</derivative>
+                <derivative var="x[2]">0</derivative>
+                <derivative var="x[3]">0</derivative>
+                <derivative var="x[4]">0</derivative>
+                <derivative var="x[5]">0</derivative>
+                <derivative var="x[6]">0</derivative>
+                <derivative var="x[7]">0</derivative>
+                <derivative var="x[8]">0</derivative>
+                <derivative var="x[9]">0</derivative>
+                <derivative var="x[10]">0</derivative>
+                <derivative var="x[11]">0</derivative>
+                <derivative var="x[12]">0</derivative>
+                <derivative var="x[13]">0</derivative>
+                <derivative var="x[14]">0</derivative>
+                <derivative var="x[15]">0</derivative>
+                <derivative var="x[16]">0</derivative>
+                <derivative var="x[17]">0</derivative>
+                <derivative var="x[18]">0</derivative>
+                <derivative var="x[19]">0</derivative>
+                <derivative var="x[20]">1</derivative>
+                <derivative var="x[21]">0</derivative>
+                <derivative var="x[22]">0</derivative>
+                <derivative var="x[23]">0</derivative>
+                <derivative var="x[24]">0</derivative>
+                <derivative var="x[25]">0</derivative>
+                <derivative var="x[26]">0</derivative>
+                <derivative var="x[27]">0</derivative>
+                <derivative var="x[28]">0</derivative>
+                <derivative var="x[29]">0</derivative>
+                <derivative var="x[30]">0</derivative>
+            </gradient>
+        </constraint>
+
+        <!-- x[21] boxing constraints -->
+        <!-- -1 <= x[21] -->
+        <constraint>
+            <function>
+                -x[21] - 1
+            </function>
+            <gradient>
+                <derivative var="x[1]">0</derivative>
+                <derivative var="x[2]">0</derivative>
+                <derivative var="x[3]">0</derivative>
+                <derivative var="x[4]">0</derivative>
+                <derivative var="x[5]">0</derivative>
+                <derivative var="x[6]">0</derivative>
+                <derivative var="x[7]">0</derivative>
+                <derivative var="x[8]">0</derivative>
+                <derivative var="x[9]">0</derivative>
+                <derivative var="x[10]">0</derivative>
+                <derivative var="x[11]">0</derivative>
+                <derivative var="x[12]">0</derivative>
+                <derivative var="x[13]">0</derivative>
+                <derivative var="x[14]">0</derivative>
+                <derivative var="x[15]">0</derivative>
+                <derivative var="x[16]">0</derivative>
+                <derivative var="x[17]">0</derivative>
+                <derivative var="x[18]">0</derivative>
+                <derivative var="x[19]">0</derivative>
+                <derivative var="x[20]">0</derivative>
+                <derivative var="x[21]">-1</derivative>
+                <derivative var="x[22]">0</derivative>
+                <derivative var="x[23]">0</derivative>
+                <derivative var="x[24]">0</derivative>
+                <derivative var="x[25]">0</derivative>
+                <derivative var="x[26]">0</derivative>
+                <derivative var="x[27]">0</derivative>
+                <derivative var="x[28]">0</derivative>
+                <derivative var="x[29]">0</derivative>
+                <derivative var="x[30]">0</derivative>
+            </gradient>
+        </constraint>
+        <!-- x[21] <= 1 -->
+        <constraint>
+            <function>
+                x[21] - 1
+            </function>
+            <gradient>
+                <derivative var="x[1]">0</derivative>
+                <derivative var="x[2]">0</derivative>
+                <derivative var="x[3]">0</derivative>
+                <derivative var="x[4]">0</derivative>
+                <derivative var="x[5]">0</derivative>
+                <derivative var="x[6]">0</derivative>
+                <derivative var="x[7]">0</derivative>
+                <derivative var="x[8]">0</derivative>
+                <derivative var="x[9]">0</derivative>
+                <derivative var="x[10]">0</derivative>
+                <derivative var="x[11]">0</derivative>
+                <derivative var="x[12]">0</derivative>
+                <derivative var="x[13]">0</derivative>
+                <derivative var="x[14]">0</derivative>
+                <derivative var="x[15]">0</derivative>
+                <derivative var="x[16]">0</derivative>
+                <derivative var="x[17]">0</derivative>
+                <derivative var="x[18]">0</derivative>
+                <derivative var="x[19]">0</derivative>
+                <derivative var="x[20]">0</derivative>
+                <derivative var="x[21]">1</derivative>
+                <derivative var="x[22]">0</derivative>
+                <derivative var="x[23]">0</derivative>
+                <derivative var="x[24]">0</derivative>
+                <derivative var="x[25]">0</derivative>
+                <derivative var="x[26]">0</derivative>
+                <derivative var="x[27]">0</derivative>
+                <derivative var="x[28]">0</derivative>
+                <derivative var="x[29]">0</derivative>
+                <derivative var="x[30]">0</derivative>
+            </gradient>
+        </constraint>
+
+        <!-- x[22] boxing constraints -->
+        <!-- -1 <= x[22] -->
+        <constraint>
+            <function>
+                -x[22] - 1
+            </function>
+            <gradient>
+                <derivative var="x[1]">0</derivative>
+                <derivative var="x[2]">0</derivative>
+                <derivative var="x[3]">0</derivative>
+                <derivative var="x[4]">0</derivative>
+                <derivative var="x[5]">0</derivative>
+                <derivative var="x[6]">0</derivative>
+                <derivative var="x[7]">0</derivative>
+                <derivative var="x[8]">0</derivative>
+                <derivative var="x[9]">0</derivative>
+                <derivative var="x[10]">0</derivative>
+                <derivative var="x[11]">0</derivative>
+                <derivative var="x[12]">0</derivative>
+                <derivative var="x[13]">0</derivative>
+                <derivative var="x[14]">0</derivative>
+                <derivative var="x[15]">0</derivative>
+                <derivative var="x[16]">0</derivative>
+                <derivative var="x[17]">0</derivative>
+                <derivative var="x[18]">0</derivative>
+                <derivative var="x[19]">0</derivative>
+                <derivative var="x[20]">0</derivative>
+                <derivative var="x[21]">0</derivative>
+                <derivative var="x[22]">-1</derivative>
+                <derivative var="x[23]">0</derivative>
+                <derivative var="x[24]">0</derivative>
+                <derivative var="x[25]">0</derivative>
+                <derivative var="x[26]">0</derivative>
+                <derivative var="x[27]">0</derivative>
+                <derivative var="x[28]">0</derivative>
+                <derivative var="x[29]">0</derivative>
+                <derivative var="x[30]">0</derivative>
+            </gradient>
+        </constraint>
+        <!-- x[22] <= 1 -->
+        <constraint>
+            <function>
+                x[22] - 1
+            </function>
+            <gradient>
+                <derivative var="x[1]">0</derivative>
+                <derivative var="x[2]">0</derivative>
+                <derivative var="x[3]">0</derivative>
+                <derivative var="x[4]">0</derivative>
+                <derivative var="x[5]">0</derivative>
+                <derivative var="x[6]">0</derivative>
+                <derivative var="x[7]">0</derivative>
+                <derivative var="x[8]">0</derivative>
+                <derivative var="x[9]">0</derivative>
+                <derivative var="x[10]">0</derivative>
+                <derivative var="x[11]">0</derivative>
+                <derivative var="x[12]">0</derivative>
+                <derivative var="x[13]">0</derivative>
+                <derivative var="x[14]">0</derivative>
+                <derivative var="x[15]">0</derivative>
+                <derivative var="x[16]">0</derivative>
+                <derivative var="x[17]">0</derivative>
+                <derivative var="x[18]">0</derivative>
+                <derivative var="x[19]">0</derivative>
+                <derivative var="x[20]">0</derivative>
+                <derivative var="x[21]">0</derivative>
+                <derivative var="x[22]">1</derivative>
+                <derivative var="x[23]">0</derivative>
+                <derivative var="x[24]">0</derivative>
+                <derivative var="x[25]">0</derivative>
+                <derivative var="x[26]">0</derivative>
+                <derivative var="x[27]">0</derivative>
+                <derivative var="x[28]">0</derivative>
+                <derivative var="x[29]">0</derivative>
+                <derivative var="x[30]">0</derivative>
+            </gradient>
+        </constraint>
+
+        <!-- x[23] boxing constraints -->
+        <!-- -1 <= x[23] -->
+        <constraint>
+            <function>
+                -x[23] - 1
+            </function>
+            <gradient>
+                <derivative var="x[1]">0</derivative>
+                <derivative var="x[2]">0</derivative>
+                <derivative var="x[3]">0</derivative>
+                <derivative var="x[4]">0</derivative>
+                <derivative var="x[5]">0</derivative>
+                <derivative var="x[6]">0</derivative>
+                <derivative var="x[7]">0</derivative>
+                <derivative var="x[8]">0</derivative>
+                <derivative var="x[9]">0</derivative>
+                <derivative var="x[10]">0</derivative>
+                <derivative var="x[11]">0</derivative>
+                <derivative var="x[12]">0</derivative>
+                <derivative var="x[13]">0</derivative>
+                <derivative var="x[14]">0</derivative>
+                <derivative var="x[15]">0</derivative>
+                <derivative var="x[16]">0</derivative>
+                <derivative var="x[17]">0</derivative>
+                <derivative var="x[18]">0</derivative>
+                <derivative var="x[19]">0</derivative>
+                <derivative var="x[20]">0</derivative>
+                <derivative var="x[21]">0</derivative>
+                <derivative var="x[22]">0</derivative>
+                <derivative var="x[23]">-1</derivative>
+                <derivative var="x[24]">0</derivative>
+                <derivative var="x[25]">0</derivative>
+                <derivative var="x[26]">0</derivative>
+                <derivative var="x[27]">0</derivative>
+                <derivative var="x[28]">0</derivative>
+                <derivative var="x[29]">0</derivative>
+                <derivative var="x[30]">0</derivative>
+            </gradient>
+        </constraint>
+        <!-- x[23] <= 1 -->
+        <constraint>
+            <function>
+                x[23] - 1
+            </function>
+            <gradient>
+                <derivative var="x[1]">0</derivative>
+                <derivative var="x[2]">0</derivative>
+                <derivative var="x[3]">0</derivative>
+                <derivative var="x[4]">0</derivative>
+                <derivative var="x[5]">0</derivative>
+                <derivative var="x[6]">0</derivative>
+                <derivative var="x[7]">0</derivative>
+                <derivative var="x[8]">0</derivative>
+                <derivative var="x[9]">0</derivative>
+                <derivative var="x[10]">0</derivative>
+                <derivative var="x[11]">0</derivative>
+                <derivative var="x[12]">0</derivative>
+                <derivative var="x[13]">0</derivative>
+                <derivative var="x[14]">0</derivative>
+                <derivative var="x[15]">0</derivative>
+                <derivative var="x[16]">0</derivative>
+                <derivative var="x[17]">0</derivative>
+                <derivative var="x[18]">0</derivative>
+                <derivative var="x[19]">0</derivative>
+                <derivative var="x[20]">0</derivative>
+                <derivative var="x[21]">0</derivative>
+                <derivative var="x[22]">0</derivative>
+                <derivative var="x[23]">1</derivative>
+                <derivative var="x[24]">0</derivative>
+                <derivative var="x[25]">0</derivative>
+                <derivative var="x[26]">0</derivative>
+                <derivative var="x[27]">0</derivative>
+                <derivative var="x[28]">0</derivative>
+                <derivative var="x[29]">0</derivative>
+                <derivative var="x[30]">0</derivative>
+            </gradient>
+        </constraint>
+
+        <!-- x[24] boxing constraints -->
+        <!-- -1 <= x[24] -->
+        <constraint>
+            <function>
+                -x[24] - 1
+            </function>
+            <gradient>
+                <derivative var="x[1]">0</derivative>
+                <derivative var="x[2]">0</derivative>
+                <derivative var="x[3]">0</derivative>
+                <derivative var="x[4]">0</derivative>
+                <derivative var="x[5]">0</derivative>
+                <derivative var="x[6]">0</derivative>
+                <derivative var="x[7]">0</derivative>
+                <derivative var="x[8]">0</derivative>
+                <derivative var="x[9]">0</derivative>
+                <derivative var="x[10]">0</derivative>
+                <derivative var="x[11]">0</derivative>
+                <derivative var="x[12]">0</derivative>
+                <derivative var="x[13]">0</derivative>
+                <derivative var="x[14]">0</derivative>
+                <derivative var="x[15]">0</derivative>
+                <derivative var="x[16]">0</derivative>
+                <derivative var="x[17]">0</derivative>
+                <derivative var="x[18]">0</derivative>
+                <derivative var="x[19]">0</derivative>
+                <derivative var="x[20]">0</derivative>
+                <derivative var="x[21]">0</derivative>
+                <derivative var="x[22]">0</derivative>
+                <derivative var="x[23]">0</derivative>
+                <derivative var="x[24]">-1</derivative>
+                <derivative var="x[25]">0</derivative>
+                <derivative var="x[26]">0</derivative>
+                <derivative var="x[27]">0</derivative>
+                <derivative var="x[28]">0</derivative>
+                <derivative var="x[29]">0</derivative>
+                <derivative var="x[30]">0</derivative>
+            </gradient>
+        </constraint>
+        <!-- x[24] <= 1 -->
+        <constraint>
+            <function>
+                x[24] - 1
+            </function>
+            <gradient>
+                <derivative var="x[1]">0</derivative>
+                <derivative var="x[2]">0</derivative>
+                <derivative var="x[3]">0</derivative>
+                <derivative var="x[4]">0</derivative>
+                <derivative var="x[5]">0</derivative>
+                <derivative var="x[6]">0</derivative>
+                <derivative var="x[7]">0</derivative>
+                <derivative var="x[8]">0</derivative>
+                <derivative var="x[9]">0</derivative>
+                <derivative var="x[10]">0</derivative>
+                <derivative var="x[11]">0</derivative>
+                <derivative var="x[12]">0</derivative>
+                <derivative var="x[13]">0</derivative>
+                <derivative var="x[14]">0</derivative>
+                <derivative var="x[15]">0</derivative>
+                <derivative var="x[16]">0</derivative>
+                <derivative var="x[17]">0</derivative>
+                <derivative var="x[18]">0</derivative>
+                <derivative var="x[19]">0</derivative>
+                <derivative var="x[20]">0</derivative>
+                <derivative var="x[21]">0</derivative>
+                <derivative var="x[22]">0</derivative>
+                <derivative var="x[23]">0</derivative>
+                <derivative var="x[24]">1</derivative>
+                <derivative var="x[25]">0</derivative>
+                <derivative var="x[26]">0</derivative>
+                <derivative var="x[27]">0</derivative>
+                <derivative var="x[28]">0</derivative>
+                <derivative var="x[29]">0</derivative>
+                <derivative var="x[30]">0</derivative>
+            </gradient>
+        </constraint>
+
+        <!-- x[25] boxing constraints -->
+        <!-- -1 <= x[25] -->
+        <constraint>
+            <function>
+                -x[25] - 1
+            </function>
+            <gradient>
+                <derivative var="x[1]">0</derivative>
+                <derivative var="x[2]">0</derivative>
+                <derivative var="x[3]">0</derivative>
+                <derivative var="x[4]">0</derivative>
+                <derivative var="x[5]">0</derivative>
+                <derivative var="x[6]">0</derivative>
+                <derivative var="x[7]">0</derivative>
+                <derivative var="x[8]">0</derivative>
+                <derivative var="x[9]">0</derivative>
+                <derivative var="x[10]">0</derivative>
+                <derivative var="x[11]">0</derivative>
+                <derivative var="x[12]">0</derivative>
+                <derivative var="x[13]">0</derivative>
+                <derivative var="x[14]">0</derivative>
+                <derivative var="x[15]">0</derivative>
+                <derivative var="x[16]">0</derivative>
+                <derivative var="x[17]">0</derivative>
+                <derivative var="x[18]">0</derivative>
+                <derivative var="x[19]">0</derivative>
+                <derivative var="x[20]">0</derivative>
+                <derivative var="x[21]">0</derivative>
+                <derivative var="x[22]">0</derivative>
+                <derivative var="x[23]">0</derivative>
+                <derivative var="x[24]">0</derivative>
+                <derivative var="x[25]">-1</derivative>
+                <derivative var="x[26]">0</derivative>
+                <derivative var="x[27]">0</derivative>
+                <derivative var="x[28]">0</derivative>
+                <derivative var="x[29]">0</derivative>
+                <derivative var="x[30]">0</derivative>
+            </gradient>
+        </constraint>
+        <!-- x[25] <= 1 -->
+        <constraint>
+            <function>
+                x[25] - 1
+            </function>
+            <gradient>
+                <derivative var="x[1]">0</derivative>
+                <derivative var="x[2]">0</derivative>
+                <derivative var="x[3]">0</derivative>
+                <derivative var="x[4]">0</derivative>
+                <derivative var="x[5]">0</derivative>
+                <derivative var="x[6]">0</derivative>
+                <derivative var="x[7]">0</derivative>
+                <derivative var="x[8]">0</derivative>
+                <derivative var="x[9]">0</derivative>
+                <derivative var="x[10]">0</derivative>
+                <derivative var="x[11]">0</derivative>
+                <derivative var="x[12]">0</derivative>
+                <derivative var="x[13]">0</derivative>
+                <derivative var="x[14]">0</derivative>
+                <derivative var="x[15]">0</derivative>
+                <derivative var="x[16]">0</derivative>
+                <derivative var="x[17]">0</derivative>
+                <derivative var="x[18]">0</derivative>
+                <derivative var="x[19]">0</derivative>
+                <derivative var="x[20]">0</derivative>
+                <derivative var="x[21]">0</derivative>
+                <derivative var="x[22]">0</derivative>
+                <derivative var="x[23]">0</derivative>
+                <derivative var="x[24]">0</derivative>
+                <derivative var="x[25]">1</derivative>
+                <derivative var="x[26]">0</derivative>
+                <derivative var="x[27]">0</derivative>
+                <derivative var="x[28]">0</derivative>
+                <derivative var="x[29]">0</derivative>
+                <derivative var="x[30]">0</derivative>
+            </gradient>
+        </constraint>
+
+        <!-- x[26] boxing constraints -->
+        <!-- -1 <= x[26] -->
+        <constraint>
+            <function>
+                -x[26] - 1
+            </function>
+            <gradient>
+                <derivative var="x[1]">0</derivative>
+                <derivative var="x[2]">0</derivative>
+                <derivative var="x[3]">0</derivative>
+                <derivative var="x[4]">0</derivative>
+                <derivative var="x[5]">0</derivative>
+                <derivative var="x[6]">0</derivative>
+                <derivative var="x[7]">0</derivative>
+                <derivative var="x[8]">0</derivative>
+                <derivative var="x[9]">0</derivative>
+                <derivative var="x[10]">0</derivative>
+                <derivative var="x[11]">0</derivative>
+                <derivative var="x[12]">0</derivative>
+                <derivative var="x[13]">0</derivative>
+                <derivative var="x[14]">0</derivative>
+                <derivative var="x[15]">0</derivative>
+                <derivative var="x[16]">0</derivative>
+                <derivative var="x[17]">0</derivative>
+                <derivative var="x[18]">0</derivative>
+                <derivative var="x[19]">0</derivative>
+                <derivative var="x[20]">0</derivative>
+                <derivative var="x[21]">0</derivative>
+                <derivative var="x[22]">0</derivative>
+                <derivative var="x[23]">0</derivative>
+                <derivative var="x[24]">0</derivative>
+                <derivative var="x[25]">0</derivative>
+                <derivative var="x[26]">-1</derivative>
+                <derivative var="x[27]">0</derivative>
+                <derivative var="x[28]">0</derivative>
+                <derivative var="x[29]">0</derivative>
+                <derivative var="x[30]">0</derivative>
+            </gradient>
+        </constraint>
+        <!-- x[26] <= 1 -->
+        <constraint>
+            <function>
+                x[26] - 1
+            </function>
+            <gradient>
+                <derivative var="x[1]">0</derivative>
+                <derivative var="x[2]">0</derivative>
+                <derivative var="x[3]">0</derivative>
+                <derivative var="x[4]">0</derivative>
+                <derivative var="x[5]">0</derivative>
+                <derivative var="x[6]">0</derivative>
+                <derivative var="x[7]">0</derivative>
+                <derivative var="x[8]">0</derivative>
+                <derivative var="x[9]">0</derivative>
+                <derivative var="x[10]">0</derivative>
+                <derivative var="x[11]">0</derivative>
+                <derivative var="x[12]">0</derivative>
+                <derivative var="x[13]">0</derivative>
+                <derivative var="x[14]">0</derivative>
+                <derivative var="x[15]">0</derivative>
+                <derivative var="x[16]">0</derivative>
+                <derivative var="x[17]">0</derivative>
+                <derivative var="x[18]">0</derivative>
+                <derivative var="x[19]">0</derivative>
+                <derivative var="x[20]">0</derivative>
+                <derivative var="x[21]">0</derivative>
+                <derivative var="x[22]">0</derivative>
+                <derivative var="x[23]">0</derivative>
+                <derivative var="x[24]">0</derivative>
+                <derivative var="x[25]">0</derivative>
+                <derivative var="x[26]">1</derivative>
+                <derivative var="x[27]">0</derivative>
+                <derivative var="x[28]">0</derivative>
+                <derivative var="x[29]">0</derivative>
+                <derivative var="x[30]">0</derivative>
+            </gradient>
+        </constraint>
+
+        <!-- x[27] boxing constraints -->
+        <!-- -1 <= x[27] -->
+        <constraint>
+            <function>
+                -x[27] - 1
+            </function>
+            <gradient>
+                <derivative var="x[1]">0</derivative>
+                <derivative var="x[2]">0</derivative>
+                <derivative var="x[3]">0</derivative>
+                <derivative var="x[4]">0</derivative>
+                <derivative var="x[5]">0</derivative>
+                <derivative var="x[6]">0</derivative>
+                <derivative var="x[7]">0</derivative>
+                <derivative var="x[8]">0</derivative>
+                <derivative var="x[9]">0</derivative>
+                <derivative var="x[10]">0</derivative>
+                <derivative var="x[11]">0</derivative>
+                <derivative var="x[12]">0</derivative>
+                <derivative var="x[13]">0</derivative>
+                <derivative var="x[14]">0</derivative>
+                <derivative var="x[15]">0</derivative>
+                <derivative var="x[16]">0</derivative>
+                <derivative var="x[17]">0</derivative>
+                <derivative var="x[18]">0</derivative>
+                <derivative var="x[19]">0</derivative>
+                <derivative var="x[20]">0</derivative>
+                <derivative var="x[21]">0</derivative>
+                <derivative var="x[22]">0</derivative>
+                <derivative var="x[23]">0</derivative>
+                <derivative var="x[24]">0</derivative>
+                <derivative var="x[25]">0</derivative>
+                <derivative var="x[26]">0</derivative>
+                <derivative var="x[27]">-1</derivative>
+                <derivative var="x[28]">0</derivative>
+                <derivative var="x[29]">0</derivative>
+                <derivative var="x[30]">0</derivative>
+            </gradient>
+        </constraint>
+        <!-- x[27] <= 1 -->
+        <constraint>
+            <function>
+                x[27] - 1
+            </function>
+            <gradient>
+                <derivative var="x[1]">0</derivative>
+                <derivative var="x[2]">0</derivative>
+                <derivative var="x[3]">0</derivative>
+                <derivative var="x[4]">0</derivative>
+                <derivative var="x[5]">0</derivative>
+                <derivative var="x[6]">0</derivative>
+                <derivative var="x[7]">0</derivative>
+                <derivative var="x[8]">0</derivative>
+                <derivative var="x[9]">0</derivative>
+                <derivative var="x[10]">0</derivative>
+                <derivative var="x[11]">0</derivative>
+                <derivative var="x[12]">0</derivative>
+                <derivative var="x[13]">0</derivative>
+                <derivative var="x[14]">0</derivative>
+                <derivative var="x[15]">0</derivative>
+                <derivative var="x[16]">0</derivative>
+                <derivative var="x[17]">0</derivative>
+                <derivative var="x[18]">0</derivative>
+                <derivative var="x[19]">0</derivative>
+                <derivative var="x[20]">0</derivative>
+                <derivative var="x[21]">0</derivative>
+                <derivative var="x[22]">0</derivative>
+                <derivative var="x[23]">0</derivative>
+                <derivative var="x[24]">0</derivative>
+                <derivative var="x[25]">0</derivative>
+                <derivative var="x[26]">0</derivative>
+                <derivative var="x[27]">1</derivative>
+                <derivative var="x[28]">0</derivative>
+                <derivative var="x[29]">0</derivative>
+                <derivative var="x[30]">0</derivative>
+            </gradient>
+        </constraint>
+
+        <!-- x[28] boxing constraints -->
+        <!-- -1 <= x[28] -->
+        <constraint>
+            <function>
+                -x[28] - 1
+            </function>
+            <gradient>
+                <derivative var="x[1]">0</derivative>
+                <derivative var="x[2]">0</derivative>
+                <derivative var="x[3]">0</derivative>
+                <derivative var="x[4]">0</derivative>
+                <derivative var="x[5]">0</derivative>
+                <derivative var="x[6]">0</derivative>
+                <derivative var="x[7]">0</derivative>
+                <derivative var="x[8]">0</derivative>
+                <derivative var="x[9]">0</derivative>
+                <derivative var="x[10]">0</derivative>
+                <derivative var="x[11]">0</derivative>
+                <derivative var="x[12]">0</derivative>
+                <derivative var="x[13]">0</derivative>
+                <derivative var="x[14]">0</derivative>
+                <derivative var="x[15]">0</derivative>
+                <derivative var="x[16]">0</derivative>
+                <derivative var="x[17]">0</derivative>
+                <derivative var="x[18]">0</derivative>
+                <derivative var="x[19]">0</derivative>
+                <derivative var="x[20]">0</derivative>
+                <derivative var="x[21]">0</derivative>
+                <derivative var="x[22]">0</derivative>
+                <derivative var="x[23]">0</derivative>
+                <derivative var="x[24]">0</derivative>
+                <derivative var="x[25]">0</derivative>
+                <derivative var="x[26]">0</derivative>
+                <derivative var="x[27]">0</derivative>
+                <derivative var="x[28]">-1</derivative>
+                <derivative var="x[29]">0</derivative>
+                <derivative var="x[30]">0</derivative>
+            </gradient>
+        </constraint>
+        <!-- x[28] <= 1 -->
+        <constraint>
+            <function>
+                x[28] - 1
+            </function>
+            <gradient>
+                <derivative var="x[1]">0</derivative>
+                <derivative var="x[2]">0</derivative>
+                <derivative var="x[3]">0</derivative>
+                <derivative var="x[4]">0</derivative>
+                <derivative var="x[5]">0</derivative>
+                <derivative var="x[6]">0</derivative>
+                <derivative var="x[7]">0</derivative>
+                <derivative var="x[8]">0</derivative>
+                <derivative var="x[9]">0</derivative>
+                <derivative var="x[10]">0</derivative>
+                <derivative var="x[11]">0</derivative>
+                <derivative var="x[12]">0</derivative>
+                <derivative var="x[13]">0</derivative>
+                <derivative var="x[14]">0</derivative>
+                <derivative var="x[15]">0</derivative>
+                <derivative var="x[16]">0</derivative>
+                <derivative var="x[17]">0</derivative>
+                <derivative var="x[18]">0</derivative>
+                <derivative var="x[19]">0</derivative>
+                <derivative var="x[20]">0</derivative>
+                <derivative var="x[21]">0</derivative>
+                <derivative var="x[22]">0</derivative>
+                <derivative var="x[23]">0</derivative>
+                <derivative var="x[24]">0</derivative>
+                <derivative var="x[25]">0</derivative>
+                <derivative var="x[26]">0</derivative>
+                <derivative var="x[27]">0</derivative>
+                <derivative var="x[28]">1</derivative>
+                <derivative var="x[29]">0</derivative>
+                <derivative var="x[30]">0</derivative>
+            </gradient>
+        </constraint>
+
+        <!-- x[29] boxing constraints -->
+        <!-- -1 <= x[29] -->
+        <constraint>
+            <function>
+                -x[29] - 1
+            </function>
+            <gradient>
+                <derivative var="x[1]">0</derivative>
+                <derivative var="x[2]">0</derivative>
+                <derivative var="x[3]">0</derivative>
+                <derivative var="x[4]">0</derivative>
+                <derivative var="x[5]">0</derivative>
+                <derivative var="x[6]">0</derivative>
+                <derivative var="x[7]">0</derivative>
+                <derivative var="x[8]">0</derivative>
+                <derivative var="x[9]">0</derivative>
+                <derivative var="x[10]">0</derivative>
+                <derivative var="x[11]">0</derivative>
+                <derivative var="x[12]">0</derivative>
+                <derivative var="x[13]">0</derivative>
+                <derivative var="x[14]">0</derivative>
+                <derivative var="x[15]">0</derivative>
+                <derivative var="x[16]">0</derivative>
+                <derivative var="x[17]">0</derivative>
+                <derivative var="x[18]">0</derivative>
+                <derivative var="x[19]">0</derivative>
+                <derivative var="x[20]">0</derivative>
+                <derivative var="x[21]">0</derivative>
+                <derivative var="x[22]">0</derivative>
+                <derivative var="x[23]">0</derivative>
+                <derivative var="x[24]">0</derivative>
+                <derivative var="x[25]">0</derivative>
+                <derivative var="x[26]">0</derivative>
+                <derivative var="x[27]">0</derivative>
+                <derivative var="x[28]">0</derivative>
+                <derivative var="x[29]">-1</derivative>
+                <derivative var="x[30]">0</derivative>
+            </gradient>
+        </constraint>
+        <!-- x[29] <= 1 -->
+        <constraint>
+            <function>
+                x[29] - 1
+            </function>
+            <gradient>
+                <derivative var="x[1]">0</derivative>
+                <derivative var="x[2]">0</derivative>
+                <derivative var="x[3]">0</derivative>
+                <derivative var="x[4]">0</derivative>
+                <derivative var="x[5]">0</derivative>
+                <derivative var="x[6]">0</derivative>
+                <derivative var="x[7]">0</derivative>
+                <derivative var="x[8]">0</derivative>
+                <derivative var="x[9]">0</derivative>
+                <derivative var="x[10]">0</derivative>
+                <derivative var="x[11]">0</derivative>
+                <derivative var="x[12]">0</derivative>
+                <derivative var="x[13]">0</derivative>
+                <derivative var="x[14]">0</derivative>
+                <derivative var="x[15]">0</derivative>
+                <derivative var="x[16]">0</derivative>
+                <derivative var="x[17]">0</derivative>
+                <derivative var="x[18]">0</derivative>
+                <derivative var="x[19]">0</derivative>
+                <derivative var="x[20]">0</derivative>
+                <derivative var="x[21]">0</derivative>
+                <derivative var="x[22]">0</derivative>
+                <derivative var="x[23]">0</derivative>
+                <derivative var="x[24]">0</derivative>
+                <derivative var="x[25]">0</derivative>
+                <derivative var="x[26]">0</derivative>
+                <derivative var="x[27]">0</derivative>
+                <derivative var="x[28]">0</derivative>
+                <derivative var="x[29]">1</derivative>
+                <derivative var="x[30]">0</derivative>
+            </gradient>
+        </constraint>
+
+        <!-- x[30] boxing constraints -->
+        <!-- -1 <= x[30] -->
+        <constraint>
+            <function>
+                -x[30] - 1
+            </function>
+            <gradient>
+                <derivative var="x[1]">0</derivative>
+                <derivative var="x[2]">0</derivative>
+                <derivative var="x[3]">0</derivative>
+                <derivative var="x[4]">0</derivative>
+                <derivative var="x[5]">0</derivative>
+                <derivative var="x[6]">0</derivative>
+                <derivative var="x[7]">0</derivative>
+                <derivative var="x[8]">0</derivative>
+                <derivative var="x[9]">0</derivative>
+                <derivative var="x[10]">0</derivative>
+                <derivative var="x[11]">0</derivative>
+                <derivative var="x[12]">0</derivative>
+                <derivative var="x[13]">0</derivative>
+                <derivative var="x[14]">0</derivative>
+                <derivative var="x[15]">0</derivative>
+                <derivative var="x[16]">0</derivative>
+                <derivative var="x[17]">0</derivative>
+                <derivative var="x[18]">0</derivative>
+                <derivative var="x[19]">0</derivative>
+                <derivative var="x[20]">0</derivative>
+                <derivative var="x[21]">0</derivative>
+                <derivative var="x[22]">0</derivative>
+                <derivative var="x[23]">0</derivative>
+                <derivative var="x[24]">0</derivative>
+                <derivative var="x[25]">0</derivative>
+                <derivative var="x[26]">0</derivative>
+                <derivative var="x[27]">0</derivative>
+                <derivative var="x[28]">0</derivative>
+                <derivative var="x[29]">0</derivative>
+                <derivative var="x[30]">-1</derivative>
+            </gradient>
+        </constraint>
+        <!-- x[30] <= 1 -->
+        <constraint>
+            <function>
+                x[30] - 1
+            </function>
+            <gradient>
+                <derivative var="x[1]">0</derivative>
+                <derivative var="x[2]">0</derivative>
+                <derivative var="x[3]">0</derivative>
+                <derivative var="x[4]">0</derivative>
+                <derivative var="x[5]">0</derivative>
+                <derivative var="x[6]">0</derivative>
+                <derivative var="x[7]">0</derivative>
+                <derivative var="x[8]">0</derivative>
+                <derivative var="x[9]">0</derivative>
+                <derivative var="x[10]">0</derivative>
+                <derivative var="x[11]">0</derivative>
+                <derivative var="x[12]">0</derivative>
+                <derivative var="x[13]">0</derivative>
+                <derivative var="x[14]">0</derivative>
+                <derivative var="x[15]">0</derivative>
+                <derivative var="x[16]">0</derivative>
+                <derivative var="x[17]">0</derivative>
+                <derivative var="x[18]">0</derivative>
+                <derivative var="x[19]">0</derivative>
+                <derivative var="x[20]">0</derivative>
+                <derivative var="x[21]">0</derivative>
+                <derivative var="x[22]">0</derivative>
+                <derivative var="x[23]">0</derivative>
+                <derivative var="x[24]">0</derivative>
+                <derivative var="x[25]">0</derivative>
+                <derivative var="x[26]">0</derivative>
+                <derivative var="x[27]">0</derivative>
+                <derivative var="x[28]">0</derivative>
+                <derivative var="x[29]">0</derivative>
+                <derivative var="x[30]">1</derivative>
+            </gradient>
+        </constraint>
+    </constraints>
+</problem>

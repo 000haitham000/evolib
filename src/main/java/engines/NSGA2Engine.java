@@ -4,6 +4,7 @@
  */
 package engines;
 
+import distancemetrics.DistanceMetric;
 import utils.PerformanceMetrics;
 import emo.DoubleAssignmentException;
 import emo.Individual;

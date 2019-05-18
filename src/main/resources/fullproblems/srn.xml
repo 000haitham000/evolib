@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<problem xmlns="http://www.coin-laboratory.com/xml/">
+    <!-- Variables -->
+    <variables>
+        <variable>x1</variable>
+        <variable>x2</variable>
+    </variables>
+    <!-- Objectives -->
+    <objectives>
+        <objective>
+            <function>2.0+(x1-2.0)^2+(x2-1.0)^2</function>
+            <gradient>
+                <derivative var="x1">2.0*(x1-2.0)</derivative>
+                <derivative var="x2">2.0*(x2-1.0)</derivative>
+            </gradient>
+        </objective>
+        <objective>
+            <function>9.0*x1-(x2-1)^2</function>
+            <gradient>
+                <derivative var="x1">9.0</derivative>
+                <derivative var="x2">-2.0*(x2-1.0)</derivative>
+            </gradient>
+        </objective>
+    </objectives>
+    <!-- Constraints -->
+    <constraints>
+        <constraint>
+            <function>(x1^2+x2^2-225.0)/225.0</function>
+            <gradient>
+                <derivative var="x1"> 2*x1/225.0 </derivative>
+                <derivative var="x2"> 2*x2/225.0 </derivative>
+            </gradient>
+        </constraint>
+        <constraint>
+            <function>(x1-3.0*x2+10.0)/10.0</function>
+            <gradient>
+                <derivative var="x1"> 1.0/10.0 </derivative>
+                <derivative var="x2"> -3.0/10.0 </derivative>
+            </gradient>
+        </constraint>
+        <constraint>
+            <function> -x1-20.0 </function>
+            <gradient>
+                <derivative var="x1"> -1 </derivative>
+                <derivative var="x2"> 0 </derivative>
+            </gradient>
+        </constraint>
+        <constraint>
+            <function> x1-20.0 </function>
+            <gradient>
+                <derivative var="x1"> 1 </derivative>
+                <derivative var="x2"> 0 </derivative>
+            </gradient>
+        </constraint>
+        <constraint>
+            <function> -x2-20.0 </function>
+            <gradient>
+                <derivative var="x1"> 0 </derivative>
+                <derivative var="x2"> -1 </derivative>
+            </gradient>
+        </constraint>
+        <constraint>
+            <function> x2-20.0 </function>
+            <gradient>
+                <derivative var="x1"> 0 </derivative>
+                <derivative var="x2"> 1 </derivative>
+            </gradient>
+        </constraint>
+    </constraints>
+</problem>

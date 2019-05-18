@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<problem xmlns="http://www.coin-laboratory.com/xml/">
+    <!-- Variables -->
+    <variables>
+        <variable>x1</variable>
+        <variable>x2</variable>
+        <variable>x3</variable>
+        <variable>x4</variable>
+    </variables>
+    <!-- Objectives -->
+    <objectives>
+        <objective>
+            <function>
+                2*x1^3-x2*x4
+            </function>
+            <gradient>
+                <derivative var="x1">
+                    6*x1^2
+                </derivative>
+                <derivative var="x2">
+                    0-1*x4
+                </derivative>
+                <derivative var="x3">
+                    0
+                </derivative>
+                <derivative var="x4">
+                    0-1*x2
+                </derivative>
+            </gradient>
+        </objective>
+        <objective>
+            <function>
+                x1*(x3+4)^2<!--sum(i,1,4,x[i]*i)-->
+            </function>
+            <gradient>
+                <derivative var="x1">
+                    0-2
+                </derivative>
+                <derivative var="x2">
+                    0-4
+                </derivative>
+            </gradient>
+        </objective>
+    </objectives>
+    <!-- Constraints -->
+    <constraints>
+        <constraint>
+            <function>
+                x1 + 2*x2
+            </function>
+            <gradient>
+                <derivative var="x1">
+                    1
+                </derivative>
+                <derivative var="x2">
+                    2
+                </derivative>
+                <derivative var="x3">
+                    0
+                </derivative>
+                <derivative var="x4">
+                    0
+                </derivative>
+            </gradient>
+        </constraint>
+        <constraint>
+            <function>
+                (x1 + 2*x4)^2
+            </function>
+            <gradient>
+                <derivative var="x4">
+                    4*(x1 + 2*x4)
+                </derivative>
+            </gradient>
+        </constraint>
+    </constraints>
+</problem>

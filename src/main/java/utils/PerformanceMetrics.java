@@ -631,7 +631,7 @@ public class PerformanceMetrics {
             XMLStreamException {
         // Load problem
         OptimizationProblem optimizationProblem
-                = InputOutput.getProblem("../samples/osy.xml");
+                = InputOutput.getProblem("../samples/osy_full.xml");
         // Create a random population
         Individual[] paretoFront = new Individual[n1 + n2 + n3 + n4 + n5];
         for (int i = 0; i < paretoFront.length; i++) {

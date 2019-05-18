@@ -5,21 +5,22 @@
  */
 package optimization;
 
-import emo.DoubleAssignmentException;
+import distancemetrics.DistanceMetric;
+import distancemetrics.KKTPM2DistanceMetric;
+import distancemetrics.PerpendicularDistanceMetric;
 import emo.Individual;
 import emo.OptimizationProblem;
 import engines.AbstractGeneticEngine;
-import engines.NSGA2Engine;
+import engines.NSGA3Engine;
 import evaluators.OSYEvaluator;
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
-import javax.xml.stream.XMLStreamException;
+
+import evaluators.ZDT1Evaluator;
 import parsing.IndividualEvaluator;
-import parsing.InvalidOptimizationProblemException;
 import parsing.StaXParser;
+import parsing.XMLParser;
 
 /**
  * This is a sample class showing the simplest way to use EvoLib
@@ -29,25 +30,33 @@ import parsing.StaXParser;
 public class SampleScript extends TestScript {
 
     public static void main(String[] args)
-            throws XMLStreamException,
-            InvalidOptimizationProblemException,
-            IOException,
-            FileNotFoundException,
-            DoubleAssignmentException {
-        // Read problem
-        URL url = SampleScript.class.getClassLoader().getResource(
-                "samples/osy.xml");
-        InputStream in = url.openStream();
-
-        OptimizationProblem optimizationProblem = StaXParser.readProblem(in);
+            throws Throwable {
+        // -------------------------------------------------------------------------------------------------------------
+        String parametersFilePath = "samples/zdt1-02-30.xml";
+        String problemDefinitionFilePath = "fullproblems/zdt1.xml";
         // Create Evaluator
-        IndividualEvaluator individualEvaluator = new OSYEvaluator();
+        IndividualEvaluator individualEvaluator = new ZDT1Evaluator();
+        // Create the distance metric
+        URL url2 = SampleScript.class.getClassLoader().getResource(problemDefinitionFilePath);
+        DistanceMetric distanceMetric = new KKTPM2DistanceMetric(XMLParser.readXML(new File(url2.getFile())));
+//        DistanceMetric distanceMetric = new PerpendicularDistanceMetric();
+        // -------------------------------------------------------------------------------------------------------------
+        // Read problem
+        URL url = SampleScript.class.getClassLoader().getResource(parametersFilePath);
+        InputStream in = url.openStream();
+        OptimizationProblem optimizationProblem = StaXParser.readProblem(in);
         // Create Engine
-        AbstractGeneticEngine geneticEngine = new NSGA2Engine(
+        AbstractGeneticEngine geneticEngine = new NSGA3Engine(
                 optimizationProblem,
-                individualEvaluator);
+                individualEvaluator,
+                distanceMetric);
         // Specify output directory
-        File outDir = new File(System.getProperty("user.home") + "/evolib");
+        File outDir = new File(String.format("%s%s%s%s%s",
+                System.getProperty("user.home"),
+                File.separator,
+                "evolib",
+                File.separator ,
+                optimizationProblem.getProblemID()));
         outDir.mkdirs();
         // Optimize
         Individual[] finalPopulation

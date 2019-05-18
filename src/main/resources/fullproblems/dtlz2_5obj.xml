@@ -1,0 +1,770 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<problem xmlns="http://www.coin-laboratory.com/xml/">
+    <!-- Variables -->
+    <variables>
+        <vector size="14"
+                mins="0,0,0,0,0,0,0,0,0,0,0,0,0,0"
+                maxs="1,1,1,1,1,1,1,1,1,1,1,1,1,1">
+            x
+        </vector>
+    </variables>
+    <!-- Objectives -->
+    <objectives>
+        <!-- 1st objective -->
+        <objective> <!-- g = sum{i,5,14, (x[i] - 0.5)^2} -->
+            <function>
+                cos(x[1] * pi / 2) * cos(x[2] * pi / 2) * cos(x[3] * pi / 2) * cos(x[4] * pi / 2) * (1 + sum{i,5,14, (x[i] - 0.5)^2})
+            </function>
+            <gradient> <!-- 2 * (x[i] - 0.5) -->
+                <derivative var="x[1]"> -pi/2 * sin(x[1] * pi / 2) * cos(x[2] * pi / 2) * cos(x[3] * pi / 2) * cos(x[4] * pi / 2) * (1 + sum{i,5,14, (x[i] - 0.5)^2}) </derivative>
+                <derivative var="x[2]"> -pi/2 * cos(x[1] * pi / 2) * sin(x[2] * pi / 2) * cos(x[3] * pi / 2) * cos(x[4] * pi / 2) * (1 + sum{i,5,14, (x[i] - 0.5)^2}) </derivative>
+                <derivative var="x[3]"> -pi/2 * cos(x[1] * pi / 2) * cos(x[2] * pi / 2) * sin(x[3] * pi / 2) * cos(x[4] * pi / 2) * (1 + sum{i,5,14, (x[i] - 0.5)^2}) </derivative>
+                <derivative var="x[4]"> -pi/2 * cos(x[1] * pi / 2) * cos(x[2] * pi / 2) * cos(x[3] * pi / 2) * sin(x[4] * pi / 2) * (1 + sum{i,5,14, (x[i] - 0.5)^2}) </derivative>
+                <derivative var="x[5]"> cos(x[1] * pi / 2) * cos(x[2] * pi / 2) * cos(x[3] * pi / 2) * cos(x[4] * pi / 2) * 2 * (x[5] - 0.5) </derivative>
+                <derivative var="x[6]"> cos(x[1] * pi / 2) * cos(x[2] * pi / 2) * cos(x[3] * pi / 2) * cos(x[4] * pi / 2) * 2 * (x[6] - 0.5) </derivative>
+                <derivative var="x[7]"> cos(x[1] * pi / 2) * cos(x[2] * pi / 2) * cos(x[3] * pi / 2) * cos(x[4] * pi / 2) * 2 * (x[7] - 0.5) </derivative>
+                <derivative var="x[8]"> cos(x[1] * pi / 2) * cos(x[2] * pi / 2) * cos(x[3] * pi / 2) * cos(x[4] * pi / 2) * 2 * (x[8] - 0.5) </derivative>
+                <derivative var="x[9]"> cos(x[1] * pi / 2) * cos(x[2] * pi / 2) * cos(x[3] * pi / 2) * cos(x[4] * pi / 2) * 2 * (x[9] - 0.5) </derivative>
+                <derivative var="x[10]"> cos(x[1] * pi / 2) * cos(x[2] * pi / 2) * cos(x[3] * pi / 2) * cos(x[4] * pi / 2) * 2 * (x[10] - 0.5) </derivative>
+                <derivative var="x[11]"> cos(x[1] * pi / 2) * cos(x[2] * pi / 2) * cos(x[3] * pi / 2) * cos(x[4] * pi / 2) * 2 * (x[11] - 0.5) </derivative>
+                <derivative var="x[12]"> cos(x[1] * pi / 2) * cos(x[2] * pi / 2) * cos(x[3] * pi / 2) * cos(x[4] * pi / 2) * 2 * (x[12] - 0.5) </derivative>
+                <derivative var="x[13]"> cos(x[1] * pi / 2) * cos(x[2] * pi / 2) * cos(x[3] * pi / 2) * cos(x[4] * pi / 2) * 2 * (x[13] - 0.5) </derivative>
+                <derivative var="x[14]"> cos(x[1] * pi / 2) * cos(x[2] * pi / 2) * cos(x[3] * pi / 2) * cos(x[4] * pi / 2) * 2 * (x[14] - 0.5) </derivative>
+            </gradient>
+        </objective>
+        <!-- 2nd objective -->
+        <objective> <!-- g = sum{i,5,14, (x[i] - 0.5)^2} -->
+            <function>
+                cos(x[1] * pi / 2) * cos(x[2] * pi / 2) * cos(x[3] * pi / 2) * sin(x[4] * pi / 2) * (1 + sum{i,5,14, (x[i] - 0.5)^2})
+            </function>
+            <gradient> <!-- 2 * (x[i] - 0.5) -->
+                <derivative var="x[1]"> -pi/2 * sin(x[1] * pi / 2) * cos(x[2] * pi / 2) * cos(x[3] * pi / 2) * sin(x[4] * pi / 2) * (1 + sum{i,5,14, (x[i] - 0.5)^2}) </derivative>
+                <derivative var="x[2]"> -pi/2 * cos(x[1] * pi / 2) * sin(x[2] * pi / 2) * cos(x[3] * pi / 2) * sin(x[4] * pi / 2) * (1 + sum{i,5,14, (x[i] - 0.5)^2}) </derivative>
+                <derivative var="x[3]"> -pi/2 * cos(x[1] * pi / 2) * cos(x[2] * pi / 2) * sin(x[3] * pi / 2) * sin(x[4] * pi / 2) * (1 + sum{i,5,14, (x[i] - 0.5)^2}) </derivative>
+                <derivative var="x[4]"> +pi/2 * cos(x[1] * pi / 2) * cos(x[2] * pi / 2) * cos(x[3] * pi / 2) * cos(x[4] * pi / 2) * (1 + sum{i,5,14, (x[i] - 0.5)^2}) </derivative>
+                <derivative var="x[5]"> cos(x[1] * pi / 2) * cos(x[2] * pi / 2) * cos(x[3] * pi / 2) * sin(x[4] * pi / 2) * 2 * (x[5] - 0.5) </derivative>
+                <derivative var="x[6]"> cos(x[1] * pi / 2) * cos(x[2] * pi / 2) * cos(x[3] * pi / 2) * sin(x[4] * pi / 2) * 2 * (x[6] - 0.5) </derivative>
+                <derivative var="x[7]"> cos(x[1] * pi / 2) * cos(x[2] * pi / 2) * cos(x[3] * pi / 2) * sin(x[4] * pi / 2) * 2 * (x[7] - 0.5) </derivative>
+                <derivative var="x[8]"> cos(x[1] * pi / 2) * cos(x[2] * pi / 2) * cos(x[3] * pi / 2) * sin(x[4] * pi / 2) * 2 * (x[8] - 0.5) </derivative>
+                <derivative var="x[9]"> cos(x[1] * pi / 2) * cos(x[2] * pi / 2) * cos(x[3] * pi / 2) * sin(x[4] * pi / 2) * 2 * (x[9] - 0.5) </derivative>
+                <derivative var="x[10]"> cos(x[1] * pi / 2) * cos(x[2] * pi / 2) * cos(x[3] * pi / 2) * sin(x[4] * pi / 2) * 2 * (x[10] - 0.5) </derivative>
+                <derivative var="x[11]"> cos(x[1] * pi / 2) * cos(x[2] * pi / 2) * cos(x[3] * pi / 2) * sin(x[4] * pi / 2) * 2 * (x[11] - 0.5) </derivative>
+                <derivative var="x[12]"> cos(x[1] * pi / 2) * cos(x[2] * pi / 2) * cos(x[3] * pi / 2) * sin(x[4] * pi / 2) * 2 * (x[12] - 0.5) </derivative>
+                <derivative var="x[13]"> cos(x[1] * pi / 2) * cos(x[2] * pi / 2) * cos(x[3] * pi / 2) * sin(x[4] * pi / 2) * 2 * (x[13] - 0.5) </derivative>
+                <derivative var="x[14]"> cos(x[1] * pi / 2) * cos(x[2] * pi / 2) * cos(x[3] * pi / 2) * sin(x[4] * pi / 2) * 2 * (x[14] - 0.5) </derivative>
+            </gradient>
+        </objective>
+        <!-- 3rd objective -->
+        <objective> <!-- g = sum{i,5,14, (x[i] - 0.5)^2} -->
+            <function>
+                cos(x[1] * pi / 2) * cos(x[2] * pi / 2) * sin(x[3] * pi / 2) * (1 + sum{i,5,14, (x[i] - 0.5)^2})
+            </function>
+            <gradient> <!-- 2 * (x[i] - 0.5) -->
+                <derivative var="x[1]"> -pi/2 * sin(x[1] * pi / 2) * cos(x[2] * pi / 2) * sin(x[3] * pi / 2) * (1 + sum{i,5,14, (x[i] - 0.5)^2}) </derivative>
+                <derivative var="x[2]"> -pi/2 * cos(x[1] * pi / 2) * sin(x[2] * pi / 2) * sin(x[3] * pi / 2) * (1 + sum{i,5,14, (x[i] - 0.5)^2}) </derivative>
+                <derivative var="x[3]"> +pi/2 * cos(x[1] * pi / 2) * cos(x[2] * pi / 2) * cos(x[3] * pi / 2) * (1 + sum{i,5,14, (x[i] - 0.5)^2}) </derivative>
+                <derivative var="x[4]"> 0 </derivative>
+                <derivative var="x[5]"> cos(x[1] * pi / 2) * cos(x[2] * pi / 2) * sin(x[3] * pi / 2) * 2 * (x[5] - 0.5) </derivative>
+                <derivative var="x[6]"> cos(x[1] * pi / 2) * cos(x[2] * pi / 2) * sin(x[3] * pi / 2) * 2 * (x[6] - 0.5) </derivative>
+                <derivative var="x[7]"> cos(x[1] * pi / 2) * cos(x[2] * pi / 2) * sin(x[3] * pi / 2) * 2 * (x[7] - 0.5) </derivative>
+                <derivative var="x[8]"> cos(x[1] * pi / 2) * cos(x[2] * pi / 2) * sin(x[3] * pi / 2) * 2 * (x[8] - 0.5) </derivative>
+                <derivative var="x[9]"> cos(x[1] * pi / 2) * cos(x[2] * pi / 2) * sin(x[3] * pi / 2) * 2 * (x[9] - 0.5) </derivative>
+                <derivative var="x[10]"> cos(x[1] * pi / 2) * cos(x[2] * pi / 2) * sin(x[3] * pi / 2) * 2 * (x[10] - 0.5) </derivative>
+                <derivative var="x[11]"> cos(x[1] * pi / 2) * cos(x[2] * pi / 2) * sin(x[3] * pi / 2) * 2 * (x[11] - 0.5) </derivative>
+                <derivative var="x[12]"> cos(x[1] * pi / 2) * cos(x[2] * pi / 2) * sin(x[3] * pi / 2) * 2 * (x[12] - 0.5) </derivative>
+                <derivative var="x[13]"> cos(x[1] * pi / 2) * cos(x[2] * pi / 2) * sin(x[3] * pi / 2) * 2 * (x[13] - 0.5) </derivative>
+                <derivative var="x[14]"> cos(x[1] * pi / 2) * cos(x[2] * pi / 2) * sin(x[3] * pi / 2) * 2 * (x[14] - 0.5) </derivative>
+            </gradient>
+        </objective>
+        <!-- 4th objective -->
+        <objective> <!-- g = sum{i,5,14, (x[i] - 0.5)^2} -->
+            <function>
+                cos(x[1] * pi / 2) * sin(x[2] * pi / 2) * (1 + sum{i,5,14, (x[i] - 0.5)^2})
+            </function>
+            <gradient> <!-- 2 * (x[i] - 0.5) -->
+                <derivative var="x[1]"> -pi/2 * sin(x[1] * pi / 2) * sin(x[2] * pi / 2) * (1 + sum{i,5,14, (x[i] - 0.5)^2}) </derivative>
+                <derivative var="x[2]"> +pi/2 * cos(x[1] * pi / 2) * cos(x[2] * pi / 2) * (1 + sum{i,5,14, (x[i] - 0.5)^2}) </derivative>
+                <derivative var="x[3]"> 0 </derivative>
+                <derivative var="x[4]"> 0 </derivative>
+                <derivative var="x[5]"> cos(x[1] * pi / 2) * sin(x[2] * pi / 2) * 2 * (x[5] - 0.5) </derivative>
+                <derivative var="x[6]"> cos(x[1] * pi / 2) * sin(x[2] * pi / 2) * 2 * (x[6] - 0.5) </derivative>
+                <derivative var="x[7]"> cos(x[1] * pi / 2) * sin(x[2] * pi / 2) * 2 * (x[7] - 0.5) </derivative>
+                <derivative var="x[8]"> cos(x[1] * pi / 2) * sin(x[2] * pi / 2) * 2 * (x[8] - 0.5) </derivative>
+                <derivative var="x[9]"> cos(x[1] * pi / 2) * sin(x[2] * pi / 2) * 2 * (x[9] - 0.5) </derivative>
+                <derivative var="x[10]"> cos(x[1] * pi / 2) * sin(x[2] * pi / 2) * 2 * (x[10] - 0.5) </derivative>
+                <derivative var="x[11]"> cos(x[1] * pi / 2) * sin(x[2] * pi / 2) * 2 * (x[11] - 0.5) </derivative>
+                <derivative var="x[12]"> cos(x[1] * pi / 2) * sin(x[2] * pi / 2) * 2 * (x[12] - 0.5) </derivative>
+                <derivative var="x[13]"> cos(x[1] * pi / 2) * sin(x[2] * pi / 2) * 2 * (x[13] - 0.5) </derivative>
+                <derivative var="x[14]"> cos(x[1] * pi / 2) * sin(x[2] * pi / 2) * 2 * (x[14] - 0.5) </derivative>
+            </gradient>
+        </objective>
+        <!-- 5th objective -->
+        <objective> <!-- g = sum{i,5,14, (x[i] - 0.5)^2} -->
+            <function>
+                sin(x[1] * pi / 2) * (1 + sum{i,5,14, (x[i] - 0.5)^2})
+            </function>
+            <gradient> <!-- 2 * (x[i] - 0.5) -->
+                <derivative var="x[1]"> +pi/2 * cos(x[1] * pi / 2) * (1 + sum{i,5,14, (x[i] - 0.5)^2}) </derivative>
+                <derivative var="x[2]"> 0 </derivative>
+                <derivative var="x[3]"> 0 </derivative>
+                <derivative var="x[4]"> 0 </derivative>
+                <derivative var="x[5]"> sin(x[1] * pi / 2) * 2 * (x[5] - 0.5) </derivative>
+                <derivative var="x[6]"> sin(x[1] * pi / 2) * 2 * (x[6] - 0.5) </derivative>
+                <derivative var="x[7]"> sin(x[1] * pi / 2) * 2 * (x[7] - 0.5) </derivative>
+                <derivative var="x[8]"> sin(x[1] * pi / 2) * 2 * (x[8] - 0.5) </derivative>
+                <derivative var="x[9]"> sin(x[1] * pi / 2) * 2 * (x[9] - 0.5) </derivative>
+                <derivative var="x[10]"> sin(x[1] * pi / 2) * 2 * (x[10] - 0.5) </derivative>
+                <derivative var="x[11]"> sin(x[1] * pi / 2) * 2 * (x[11] - 0.5) </derivative>
+                <derivative var="x[12]"> sin(x[1] * pi / 2) * 2 * (x[12] - 0.5) </derivative>
+                <derivative var="x[13]"> sin(x[1] * pi / 2) * 2 * (x[13] - 0.5) </derivative>
+                <derivative var="x[14]"> sin(x[1] * pi / 2) * 2 * (x[14] - 0.5) </derivative>
+            </gradient>
+        </objective>
+    </objectives>
+    <!-- Constraints -->
+    <constraints>
+        <!-- x[1] boxing constraints -->
+        <!-- 0 <= x[1] -->
+        <constraint>
+            <function>
+                -x[1]
+            </function>
+            <gradient>
+                <derivative var="x[1]">-1</derivative>
+                <derivative var="x[2]">0</derivative>
+                <derivative var="x[3]">0</derivative>
+                <derivative var="x[4]">0</derivative>
+                <derivative var="x[5]">0</derivative>
+                <derivative var="x[6]">0</derivative>
+                <derivative var="x[7]">0</derivative>
+                <derivative var="x[8]">0</derivative>
+                <derivative var="x[9]">0</derivative>
+                <derivative var="x[10]">0</derivative>
+                <derivative var="x[11]">0</derivative>
+                <derivative var="x[12]">0</derivative>
+                <derivative var="x[13]">0</derivative>
+                <derivative var="x[14]">0</derivative>
+            </gradient>
+        </constraint>
+        <!-- x[1] <= 1 -->
+        <constraint>
+            <function>
+                x[1] - 1
+            </function>
+            <gradient>
+                <derivative var="x[1]">1</derivative>
+                <derivative var="x[2]">0</derivative>
+                <derivative var="x[3]">0</derivative>
+                <derivative var="x[4]">0</derivative>
+                <derivative var="x[5]">0</derivative>
+                <derivative var="x[6]">0</derivative>
+                <derivative var="x[7]">0</derivative>
+                <derivative var="x[8]">0</derivative>
+                <derivative var="x[9]">0</derivative>
+                <derivative var="x[10]">0</derivative>
+                <derivative var="x[11]">0</derivative>
+                <derivative var="x[12]">0</derivative>
+                <derivative var="x[13]">0</derivative>
+                <derivative var="x[14]">0</derivative>
+            </gradient>
+        </constraint>
+
+        <!-- x[2] boxing constraints -->
+        <!-- 0 <= x[2] -->
+        <constraint>
+            <function>
+                -x[2]
+            </function>
+            <gradient>
+                <derivative var="x[1]">0</derivative>
+                <derivative var="x[2]">-1</derivative>
+                <derivative var="x[3]">0</derivative>
+                <derivative var="x[4]">0</derivative>
+                <derivative var="x[5]">0</derivative>
+                <derivative var="x[6]">0</derivative>
+                <derivative var="x[7]">0</derivative>
+                <derivative var="x[8]">0</derivative>
+                <derivative var="x[9]">0</derivative>
+                <derivative var="x[10]">0</derivative>
+                <derivative var="x[11]">0</derivative>
+                <derivative var="x[12]">0</derivative>
+                <derivative var="x[13]">0</derivative>
+                <derivative var="x[14]">0</derivative>
+            </gradient>
+        </constraint>
+        <!-- x[2] <= 1 -->
+        <constraint>
+            <function>
+                x[2] - 1
+            </function>
+            <gradient>
+                <derivative var="x[1]">0</derivative>
+                <derivative var="x[2]">1</derivative>
+                <derivative var="x[3]">0</derivative>
+                <derivative var="x[4]">0</derivative>
+                <derivative var="x[5]">0</derivative>
+                <derivative var="x[6]">0</derivative>
+                <derivative var="x[7]">0</derivative>
+                <derivative var="x[8]">0</derivative>
+                <derivative var="x[9]">0</derivative>
+                <derivative var="x[10]">0</derivative>
+                <derivative var="x[11]">0</derivative>
+                <derivative var="x[12]">0</derivative>
+                <derivative var="x[13]">0</derivative>
+                <derivative var="x[14]">0</derivative>
+            </gradient>
+        </constraint>
+
+        <!-- x[3] boxing constraints -->
+        <!-- 0 <= x[3] -->
+        <constraint>
+            <function>
+                -x[3]
+            </function>
+            <gradient>
+                <derivative var="x[1]">0</derivative>
+                <derivative var="x[2]">0</derivative>
+                <derivative var="x[3]">-1</derivative>
+                <derivative var="x[4]">0</derivative>
+                <derivative var="x[5]">0</derivative>
+                <derivative var="x[6]">0</derivative>
+                <derivative var="x[7]">0</derivative>
+                <derivative var="x[8]">0</derivative>
+                <derivative var="x[9]">0</derivative>
+                <derivative var="x[10]">0</derivative>
+                <derivative var="x[11]">0</derivative>
+                <derivative var="x[12]">0</derivative>
+                <derivative var="x[13]">0</derivative>
+                <derivative var="x[14]">0</derivative>
+            </gradient>
+        </constraint>
+        <!-- x[3] <= 1 -->
+        <constraint>
+            <function>
+                x[3] - 1
+            </function>
+            <gradient>
+                <derivative var="x[1]">0</derivative>
+                <derivative var="x[2]">0</derivative>
+                <derivative var="x[3]">1</derivative>
+                <derivative var="x[4]">0</derivative>
+                <derivative var="x[5]">0</derivative>
+                <derivative var="x[6]">0</derivative>
+                <derivative var="x[7]">0</derivative>
+                <derivative var="x[8]">0</derivative>
+                <derivative var="x[9]">0</derivative>
+                <derivative var="x[10]">0</derivative>
+                <derivative var="x[11]">0</derivative>
+                <derivative var="x[12]">0</derivative>
+                <derivative var="x[13]">0</derivative>
+                <derivative var="x[14]">0</derivative>
+            </gradient>
+        </constraint>
+
+        <!-- x[4] boxing constraints -->
+        <!-- 0 <= x[4] -->
+        <constraint>
+            <function>
+                -x[4]
+            </function>
+            <gradient>
+                <derivative var="x[1]">0</derivative>
+                <derivative var="x[2]">0</derivative>
+                <derivative var="x[3]">0</derivative>
+                <derivative var="x[4]">-1</derivative>
+                <derivative var="x[5]">0</derivative>
+                <derivative var="x[6]">0</derivative>
+                <derivative var="x[7]">0</derivative>
+                <derivative var="x[8]">0</derivative>
+                <derivative var="x[9]">0</derivative>
+                <derivative var="x[10]">0</derivative>
+                <derivative var="x[11]">0</derivative>
+                <derivative var="x[12]">0</derivative>
+                <derivative var="x[13]">0</derivative>
+                <derivative var="x[14]">0</derivative>
+            </gradient>
+        </constraint>
+        <!-- x[4] <= 1 -->
+        <constraint>
+            <function>
+                x[4] - 1
+            </function>
+            <gradient>
+                <derivative var="x[1]">0</derivative>
+                <derivative var="x[2]">0</derivative>
+                <derivative var="x[3]">0</derivative>
+                <derivative var="x[4]">1</derivative>
+                <derivative var="x[5]">0</derivative>
+                <derivative var="x[6]">0</derivative>
+                <derivative var="x[7]">0</derivative>
+                <derivative var="x[8]">0</derivative>
+                <derivative var="x[9]">0</derivative>
+                <derivative var="x[10]">0</derivative>
+                <derivative var="x[11]">0</derivative>
+                <derivative var="x[12]">0</derivative>
+                <derivative var="x[13]">0</derivative>
+                <derivative var="x[14]">0</derivative>
+            </gradient>
+        </constraint>
+
+        <!-- x[5] boxing constraints -->
+        <!-- 0 <= x[5] -->
+        <constraint>
+            <function>
+                -x[5]
+            </function>
+            <gradient>
+                <derivative var="x[1]">0</derivative>
+                <derivative var="x[2]">0</derivative>
+                <derivative var="x[3]">0</derivative>
+                <derivative var="x[4]">0</derivative>
+                <derivative var="x[5]">-1</derivative>
+                <derivative var="x[6]">0</derivative>
+                <derivative var="x[7]">0</derivative>
+                <derivative var="x[8]">0</derivative>
+                <derivative var="x[9]">0</derivative>
+                <derivative var="x[10]">0</derivative>
+                <derivative var="x[11]">0</derivative>
+                <derivative var="x[12]">0</derivative>
+                <derivative var="x[13]">0</derivative>
+                <derivative var="x[14]">0</derivative>
+            </gradient>
+        </constraint>
+        <!-- x[5] <= 1 -->
+        <constraint>
+            <function>
+                x[5] - 1
+            </function>
+            <gradient>
+                <derivative var="x[1]">0</derivative>
+                <derivative var="x[2]">0</derivative>
+                <derivative var="x[3]">0</derivative>
+                <derivative var="x[4]">0</derivative>
+                <derivative var="x[5]">1</derivative>
+                <derivative var="x[6]">0</derivative>
+                <derivative var="x[7]">0</derivative>
+                <derivative var="x[8]">0</derivative>
+                <derivative var="x[9]">0</derivative>
+                <derivative var="x[10]">0</derivative>
+                <derivative var="x[11]">0</derivative>
+                <derivative var="x[12]">0</derivative>
+                <derivative var="x[13]">0</derivative>
+                <derivative var="x[14]">0</derivative>
+            </gradient>
+        </constraint>
+
+        <!-- x[6] boxing constraints -->
+        <!-- 0 <= x[6] -->
+        <constraint>
+            <function>
+                -x[6]
+            </function>
+            <gradient>
+                <derivative var="x[1]">0</derivative>
+                <derivative var="x[2]">0</derivative>
+                <derivative var="x[3]">0</derivative>
+                <derivative var="x[4]">0</derivative>
+                <derivative var="x[5]">0</derivative>
+                <derivative var="x[6]">-1</derivative>
+                <derivative var="x[7]">0</derivative>
+                <derivative var="x[8]">0</derivative>
+                <derivative var="x[9]">0</derivative>
+                <derivative var="x[10]">0</derivative>
+                <derivative var="x[11]">0</derivative>
+                <derivative var="x[12]">0</derivative>
+                <derivative var="x[13]">0</derivative>
+                <derivative var="x[14]">0</derivative>
+            </gradient>
+        </constraint>
+        <!-- x[6] <= 1 -->
+        <constraint>
+            <function>
+                x[6] - 1
+            </function>
+            <gradient>
+                <derivative var="x[1]">0</derivative>
+                <derivative var="x[2]">0</derivative>
+                <derivative var="x[3]">0</derivative>
+                <derivative var="x[4]">0</derivative>
+                <derivative var="x[5]">0</derivative>
+                <derivative var="x[6]">1</derivative>
+                <derivative var="x[7]">0</derivative>
+                <derivative var="x[8]">0</derivative>
+                <derivative var="x[9]">0</derivative>
+                <derivative var="x[10]">0</derivative>
+                <derivative var="x[11]">0</derivative>
+                <derivative var="x[12]">0</derivative>
+                <derivative var="x[13]">0</derivative>
+                <derivative var="x[14]">0</derivative>
+            </gradient>
+        </constraint>
+
+        <!-- x[7] boxing constraints -->
+        <!-- 0 <= x[7] -->
+        <constraint>
+            <function>
+                -x[7]
+            </function>
+            <gradient>
+                <derivative var="x[1]">0</derivative>
+                <derivative var="x[2]">0</derivative>
+                <derivative var="x[3]">0</derivative>
+                <derivative var="x[4]">0</derivative>
+                <derivative var="x[5]">0</derivative>
+                <derivative var="x[6]">0</derivative>
+                <derivative var="x[7]">-1</derivative>
+                <derivative var="x[8]">0</derivative>
+                <derivative var="x[9]">0</derivative>
+                <derivative var="x[10]">0</derivative>
+                <derivative var="x[11]">0</derivative>
+                <derivative var="x[12]">0</derivative>
+                <derivative var="x[13]">0</derivative>
+                <derivative var="x[14]">0</derivative>
+            </gradient>
+        </constraint>
+        <!-- x[7] <= 1 -->
+        <constraint>
+            <function>
+                x[7] - 1
+            </function>
+            <gradient>
+                <derivative var="x[1]">0</derivative>
+                <derivative var="x[2]">0</derivative>
+                <derivative var="x[3]">0</derivative>
+                <derivative var="x[4]">0</derivative>
+                <derivative var="x[5]">0</derivative>
+                <derivative var="x[6]">0</derivative>
+                <derivative var="x[7]">1</derivative>
+                <derivative var="x[8]">0</derivative>
+                <derivative var="x[9]">0</derivative>
+                <derivative var="x[10]">0</derivative>
+                <derivative var="x[11]">0</derivative>
+                <derivative var="x[12]">0</derivative>
+                <derivative var="x[13]">0</derivative>
+                <derivative var="x[14]">0</derivative>
+            </gradient>
+        </constraint>
+
+        <!-- x[8] boxing constraints -->
+        <!-- 0 <= x[8] -->
+        <constraint>
+            <function>
+                -x[8]
+            </function>
+            <gradient>
+                <derivative var="x[1]">0</derivative>
+                <derivative var="x[2]">0</derivative>
+                <derivative var="x[3]">0</derivative>
+                <derivative var="x[4]">0</derivative>
+                <derivative var="x[5]">0</derivative>
+                <derivative var="x[6]">0</derivative>
+                <derivative var="x[7]">0</derivative>
+                <derivative var="x[8]">-1</derivative>
+                <derivative var="x[9]">0</derivative>
+                <derivative var="x[10]">0</derivative>
+                <derivative var="x[11]">0</derivative>
+                <derivative var="x[12]">0</derivative>
+                <derivative var="x[13]">0</derivative>
+                <derivative var="x[14]">0</derivative>
+            </gradient>
+        </constraint>
+        <!-- x[8] <= 1 -->
+        <constraint>
+            <function>
+                x[8] - 1
+            </function>
+            <gradient>
+                <derivative var="x[1]">0</derivative>
+                <derivative var="x[2]">0</derivative>
+                <derivative var="x[3]">0</derivative>
+                <derivative var="x[4]">0</derivative>
+                <derivative var="x[5]">0</derivative>
+                <derivative var="x[6]">0</derivative>
+                <derivative var="x[7]">0</derivative>
+                <derivative var="x[8]">1</derivative>
+                <derivative var="x[9]">0</derivative>
+                <derivative var="x[10]">0</derivative>
+                <derivative var="x[11]">0</derivative>
+                <derivative var="x[12]">0</derivative>
+                <derivative var="x[13]">0</derivative>
+                <derivative var="x[14]">0</derivative>
+            </gradient>
+        </constraint>
+
+        <!-- x[9] boxing constraints -->
+        <!-- 0 <= x[9] -->
+        <constraint>
+            <function>
+                -x[9]
+            </function>
+            <gradient>
+                <derivative var="x[1]">0</derivative>
+                <derivative var="x[2]">0</derivative>
+                <derivative var="x[3]">0</derivative>
+                <derivative var="x[4]">0</derivative>
+                <derivative var="x[5]">0</derivative>
+                <derivative var="x[6]">0</derivative>
+                <derivative var="x[7]">0</derivative>
+                <derivative var="x[8]">0</derivative>
+                <derivative var="x[9]">-1</derivative>
+                <derivative var="x[10]">0</derivative>
+                <derivative var="x[11]">0</derivative>
+                <derivative var="x[12]">0</derivative>
+                <derivative var="x[13]">0</derivative>
+                <derivative var="x[14]">0</derivative>
+            </gradient>
+        </constraint>
+        <!-- x[9] <= 1 -->
+        <constraint>
+            <function>
+                x[9] - 1
+            </function>
+            <gradient>
+                <derivative var="x[1]">0</derivative>
+                <derivative var="x[2]">0</derivative>
+                <derivative var="x[3]">0</derivative>
+                <derivative var="x[4]">0</derivative>
+                <derivative var="x[5]">0</derivative>
+                <derivative var="x[6]">0</derivative>
+                <derivative var="x[7]">0</derivative>
+                <derivative var="x[8]">0</derivative>
+                <derivative var="x[9]">1</derivative>
+                <derivative var="x[10]">0</derivative>
+                <derivative var="x[11]">0</derivative>
+                <derivative var="x[12]">0</derivative>
+                <derivative var="x[13]">0</derivative>
+                <derivative var="x[14]">0</derivative>
+            </gradient>
+        </constraint>
+
+        <!-- x[10] boxing constraints -->
+        <!-- 0 <= x[10] -->
+        <constraint>
+            <function>
+                -x[10]
+            </function>
+            <gradient>
+                <derivative var="x[1]">0</derivative>
+                <derivative var="x[2]">0</derivative>
+                <derivative var="x[3]">0</derivative>
+                <derivative var="x[4]">0</derivative>
+                <derivative var="x[5]">0</derivative>
+                <derivative var="x[6]">0</derivative>
+                <derivative var="x[7]">0</derivative>
+                <derivative var="x[8]">0</derivative>
+                <derivative var="x[9]">0</derivative>
+                <derivative var="x[10]">-1</derivative>
+                <derivative var="x[11]">0</derivative>
+                <derivative var="x[12]">0</derivative>
+                <derivative var="x[13]">0</derivative>
+                <derivative var="x[14]">0</derivative>
+            </gradient>
+        </constraint>
+        <!-- x[10] <= 1 -->
+        <constraint>
+            <function>
+                x[10] - 1
+            </function>
+            <gradient>
+                <derivative var="x[1]">0</derivative>
+                <derivative var="x[2]">0</derivative>
+                <derivative var="x[3]">0</derivative>
+                <derivative var="x[4]">0</derivative>
+                <derivative var="x[5]">0</derivative>
+                <derivative var="x[6]">0</derivative>
+                <derivative var="x[7]">0</derivative>
+                <derivative var="x[8]">0</derivative>
+                <derivative var="x[9]">0</derivative>
+                <derivative var="x[10]">1</derivative>
+                <derivative var="x[11]">0</derivative>
+                <derivative var="x[12]">0</derivative>
+                <derivative var="x[13]">0</derivative>
+                <derivative var="x[14]">0</derivative>
+            </gradient>
+        </constraint>
+
+        <!-- x[11] boxing constraints -->
+        <!-- 0 <= x[11] -->
+        <constraint>
+            <function>
+                -x[11]
+            </function>
+            <gradient>
+                <derivative var="x[1]">0</derivative>
+                <derivative var="x[2]">0</derivative>
+                <derivative var="x[3]">0</derivative>
+                <derivative var="x[4]">0</derivative>
+                <derivative var="x[5]">0</derivative>
+                <derivative var="x[6]">0</derivative>
+                <derivative var="x[7]">0</derivative>
+                <derivative var="x[8]">0</derivative>
+                <derivative var="x[9]">0</derivative>
+                <derivative var="x[10]">0</derivative>
+                <derivative var="x[11]">-1</derivative>
+                <derivative var="x[12]">0</derivative>
+                <derivative var="x[13]">0</derivative>
+                <derivative var="x[14]">0</derivative>
+            </gradient>
+        </constraint>
+        <!-- x[11] <= 1 -->
+        <constraint>
+            <function>
+                x[11] - 1
+            </function>
+            <gradient>
+                <derivative var="x[1]">0</derivative>
+                <derivative var="x[2]">0</derivative>
+                <derivative var="x[3]">0</derivative>
+                <derivative var="x[4]">0</derivative>
+                <derivative var="x[5]">0</derivative>
+                <derivative var="x[6]">0</derivative>
+                <derivative var="x[7]">0</derivative>
+                <derivative var="x[8]">0</derivative>
+                <derivative var="x[9]">0</derivative>
+                <derivative var="x[10]">0</derivative>
+                <derivative var="x[11]">1</derivative>
+                <derivative var="x[12]">0</derivative>
+                <derivative var="x[13]">0</derivative>
+                <derivative var="x[14]">0</derivative>
+            </gradient>
+        </constraint>
+
+        <!-- x[12] boxing constraints -->
+        <!-- 0 <= x[12] -->
+        <constraint>
+            <function>
+                -x[12]
+            </function>
+            <gradient>
+                <derivative var="x[1]">0</derivative>
+                <derivative var="x[2]">0</derivative>
+                <derivative var="x[3]">0</derivative>
+                <derivative var="x[4]">0</derivative>
+                <derivative var="x[5]">0</derivative>
+                <derivative var="x[6]">0</derivative>
+                <derivative var="x[7]">0</derivative>
+                <derivative var="x[8]">0</derivative>
+                <derivative var="x[9]">0</derivative>
+                <derivative var="x[10]">0</derivative>
+                <derivative var="x[11]">0</derivative>
+                <derivative var="x[12]">-1</derivative>
+                <derivative var="x[13]">0</derivative>
+                <derivative var="x[14]">0</derivative>
+            </gradient>
+        </constraint>
+        <!-- x[12] <= 1 -->
+        <constraint>
+            <function>
+                x[12] - 1
+            </function>
+            <gradient>
+                <derivative var="x[1]">0</derivative>
+                <derivative var="x[2]">0</derivative>
+                <derivative var="x[3]">0</derivative>
+                <derivative var="x[4]">0</derivative>
+                <derivative var="x[5]">0</derivative>
+                <derivative var="x[6]">0</derivative>
+                <derivative var="x[7]">0</derivative>
+                <derivative var="x[8]">0</derivative>
+                <derivative var="x[9]">0</derivative>
+                <derivative var="x[10]">0</derivative>
+                <derivative var="x[11]">0</derivative>
+                <derivative var="x[12]">1</derivative>
+                <derivative var="x[13]">0</derivative>
+                <derivative var="x[14]">0</derivative>
+            </gradient>
+        </constraint>
+
+        <!-- x[13] boxing constraints -->
+        <!-- 0 <= x[13] -->
+        <constraint>
+            <function>
+                -x[13]
+            </function>
+            <gradient>
+                <derivative var="x[1]">0</derivative>
+                <derivative var="x[2]">0</derivative>
+                <derivative var="x[3]">0</derivative>
+                <derivative var="x[4]">0</derivative>
+                <derivative var="x[5]">0</derivative>
+                <derivative var="x[6]">0</derivative>
+                <derivative var="x[7]">0</derivative>
+                <derivative var="x[8]">0</derivative>
+                <derivative var="x[9]">0</derivative>
+                <derivative var="x[10]">0</derivative>
+                <derivative var="x[11]">0</derivative>
+                <derivative var="x[12]">0</derivative>
+                <derivative var="x[13]">-1</derivative>
+                <derivative var="x[14]">0</derivative>
+            </gradient>
+        </constraint>
+        <!-- x[13] <= 1 -->
+        <constraint>
+            <function>
+                x[13] - 1
+            </function>
+            <gradient>
+                <derivative var="x[1]">0</derivative>
+                <derivative var="x[2]">0</derivative>
+                <derivative var="x[3]">0</derivative>
+                <derivative var="x[4]">0</derivative>
+                <derivative var="x[5]">0</derivative>
+                <derivative var="x[6]">0</derivative>
+                <derivative var="x[7]">0</derivative>
+                <derivative var="x[8]">0</derivative>
+                <derivative var="x[9]">0</derivative>
+                <derivative var="x[10]">0</derivative>
+                <derivative var="x[11]">0</derivative>
+                <derivative var="x[12]">0</derivative>
+                <derivative var="x[13]">1</derivative>
+                <derivative var="x[14]">0</derivative>
+            </gradient>
+        </constraint>
+
+        <!-- x[14] boxing constraints -->
+        <!-- 0 <= x[14] -->
+        <constraint>
+            <function>
+                -x[14]
+            </function>
+            <gradient>
+                <derivative var="x[1]">0</derivative>
+                <derivative var="x[2]">0</derivative>
+                <derivative var="x[3]">0</derivative>
+                <derivative var="x[4]">0</derivative>
+                <derivative var="x[5]">0</derivative>
+                <derivative var="x[6]">0</derivative>
+                <derivative var="x[7]">0</derivative>
+                <derivative var="x[8]">0</derivative>
+                <derivative var="x[9]">0</derivative>
+                <derivative var="x[10]">0</derivative>
+                <derivative var="x[11]">0</derivative>
+                <derivative var="x[12]">0</derivative>
+                <derivative var="x[13]">0</derivative>
+                <derivative var="x[14]">-1</derivative>
+            </gradient>
+        </constraint>
+        <!-- x[14] <= 1 -->
+        <constraint>
+            <function>
+                x[14] - 1
+            </function>
+            <gradient>
+                <derivative var="x[1]">0</derivative>
+                <derivative var="x[2]">0</derivative>
+                <derivative var="x[3]">0</derivative>
+                <derivative var="x[4]">0</derivative>
+                <derivative var="x[5]">0</derivative>
+                <derivative var="x[6]">0</derivative>
+                <derivative var="x[7]">0</derivative>
+                <derivative var="x[8]">0</derivative>
+                <derivative var="x[9]">0</derivative>
+                <derivative var="x[10]">0</derivative>
+                <derivative var="x[11]">0</derivative>
+                <derivative var="x[12]">0</derivative>
+                <derivative var="x[13]">0</derivative>
+                <derivative var="x[14]">1</derivative>
+            </gradient>
+        </constraint>
+    </constraints>
+</problem>

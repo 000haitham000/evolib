@@ -4,6 +4,7 @@
  */
 package engines;
 
+import distancemetrics.DistanceMetric;
 import utils.InputOutput;
 import utils.Mathematics;
 import utils.RandomNumberGenerator;

@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<problem xmlns="http://www.coin-laboratory.com/xml/">
+    <!-- Variables -->
+    <variables>
+        <variable>x1</variable>
+        <variable>x2</variable>
+        <variable>x3</variable>
+        <variable>x4</variable>
+        <variable>x5</variable>
+        <variable>x6</variable>
+    </variables>
+
+    <!-- Objectives -->
+    <objectives>
+        <objective>
+            <function> -(25*(x1-2)^2+(x2-2)^2+(x3-1)^2+(x4-4)^2+(x5-1)^2) </function>
+            <gradient>
+                <derivative var="x1"> -50*(x1-2) </derivative>
+                <derivative var="x2"> -2*(x2-2) </derivative>
+                <derivative var="x3"> -2*(x3-1) </derivative>
+                <derivative var="x4"> -2*(x4-4) </derivative>
+                <derivative var="x5"> -2*(x5-1) </derivative>
+                <derivative var="x6"> 0 </derivative>
+            </gradient>
+        </objective>
+        <objective>
+            <function> x1^2+x2^2+x3^2+x4^2+x5^2+x6^2 </function>
+            <gradient>
+                <derivative var="x1"> 2*x1 </derivative>
+                <derivative var="x2"> 2*x2 </derivative>
+                <derivative var="x3"> 2*x3 </derivative>
+                <derivative var="x4"> 2*x4 </derivative>
+                <derivative var="x5"> 2*x5 </derivative>
+                <derivative var="x6"> 2*x6 </derivative>
+            </gradient>
+        </objective>
+    </objectives>
+    <!-- Constraints -->
+    <constraints>
+        <constraint>
+            <function> (-x1-x2+2)/2 </function>
+            <gradient>
+                <derivative var="x1"> -1/2 </derivative>
+                <derivative var="x2"> -1/2 </derivative>
+                <derivative var="x3"> 0 </derivative>
+                <derivative var="x4"> 0 </derivative>
+                <derivative var="x5"> 0 </derivative>
+                <derivative var="x6"> 0 </derivative>
+            </gradient>
+        </constraint>
+        <constraint>
+            <function> (x1+x2-6)/6 </function>
+            <gradient>
+                <derivative var="x1"> 1/6 </derivative>
+                <derivative var="x2"> 1/6 </derivative>
+                <derivative var="x3"> 0 </derivative>
+                <derivative var="x4"> 0 </derivative>
+                <derivative var="x5"> 0 </derivative>
+                <derivative var="x6"> 0 </derivative>
+            </gradient>
+        </constraint>
+        <constraint>
+            <function> (x2-x1-2)/2 </function>
+            <gradient>
+                <derivative var="x1"> -1/2 </derivative>
+                <derivative var="x2"> 1/2 </derivative>
+                <derivative var="x3"> 0 </derivative>
+                <derivative var="x4"> 0 </derivative>
+                <derivative var="x5"> 0 </derivative>
+                <derivative var="x6"> 0 </derivative>
+            </gradient>
+        </constraint>
+        <constraint>
+            <function> (x1-3*x2-2)/2 </function>
+            <gradient>
+                <derivative var="x1"> 1/2 </derivative>
+                <derivative var="x2"> -3/2 </derivative>
+                <derivative var="x3"> 0 </derivative>
+                <derivative var="x4"> 0 </derivative>
+                <derivative var="x5"> 0 </derivative>
+                <derivative var="x6"> 0 </derivative>
+            </gradient>
+        </constraint>
+        <constraint>
+            <function> ((x3-3)^2+x4-4)/4 </function>
+            <gradient>
+                <derivative var="x1"> 0 </derivative>
+                <derivative var="x2"> 0 </derivative>
+                <derivative var="x3"> 2*(x3-3)/4 </derivative>
+                <derivative var="x4"> 1/4 </derivative>
+                <derivative var="x5"> 0 </derivative>
+                <derivative var="x6"> 0 </derivative>
+            </gradient>
+        </constraint>
+        <constraint>
+            <function> (4-(x5-3)^2-x6)/4 </function>
+            <gradient>
+                <derivative var="x1"> 0.0 </derivative>
+                <derivative var="x2"> 0.0 </derivative>
+                <derivative var="x3"> 0.0 </derivative>
+                <derivative var="x4"> 0.0 </derivative>
+                <derivative var="x5"> -2*(x5-3)/4 </derivative>
+                <derivative var="x6"> -1/4 </derivative>
+            </gradient>
+        </constraint>
+        <constraint>
+            <function> -x1 </function>
+            <gradient>
+                <derivative var="x1"> -1 </derivative>
+                <derivative var="x2"> 0 </derivative>
+                <derivative var="x3"> 0 </derivative>
+                <derivative var="x4"> 0 </derivative>
+                <derivative var="x5"> 0 </derivative>
+                <derivative var="x6"> 0 </derivative>
+            </gradient>
+        </constraint>
+        <constraint>
+            <function> -x2 </function>
+            <gradient>
+                <derivative var="x1"> 0 </derivative>
+                <derivative var="x2"> -1 </derivative>
+                <derivative var="x3"> 0 </derivative>
+                <derivative var="x4"> 0 </derivative>
+                <derivative var="x5"> 0 </derivative>
+                <derivative var="x6"> 0 </derivative>
+            </gradient>
+        </constraint>
+        <constraint>
+            <function> 1-x3 </function>
+            <gradient>
+                <derivative var="x1"> 0 </derivative>
+                <derivative var="x2"> 0 </derivative>
+                <derivative var="x3"> -1 </derivative>
+                <derivative var="x4"> 0 </derivative>
+                <derivative var="x5"> 0 </derivative>
+                <derivative var="x6"> 0 </derivative>
+            </gradient>
+        </constraint>
+        <constraint>
+            <function> -x4 </function>
+            <gradient>
+                <derivative var="x1"> 0 </derivative>
+                <derivative var="x2"> 0 </derivative>
+                <derivative var="x3"> 0 </derivative>
+                <derivative var="x4"> -1 </derivative>
+                <derivative var="x5"> 0 </derivative>
+                <derivative var="x6"> 0 </derivative>
+            </gradient>
+        </constraint>
+        <constraint>
+            <function> 1-x5 </function>
+            <gradient>
+                <derivative var="x1"> 0 </derivative>
+                <derivative var="x2"> 0 </derivative>
+                <derivative var="x3"> 0 </derivative>
+                <derivative var="x4"> 0 </derivative>
+                <derivative var="x5"> -1 </derivative>
+                <derivative var="x6"> 0 </derivative>
+            </gradient>
+        </constraint>
+        <constraint>
+            <function> -x6 </function>
+            <gradient>
+                <derivative var="x1"> 0 </derivative>
+                <derivative var="x2"> 0 </derivative>
+                <derivative var="x3"> 0 </derivative>
+                <derivative var="x4"> 0 </derivative>
+                <derivative var="x5"> 0 </derivative>
+                <derivative var="x6"> -1 </derivative>
+            </gradient>
+        </constraint>
+        <constraint>
+            <function> x1-10 </function>
+            <gradient>
+                <derivative var="x1"> 1 </derivative>
+                <derivative var="x2"> 0 </derivative>
+                <derivative var="x3"> 0 </derivative>
+                <derivative var="x4"> 0 </derivative>
+                <derivative var="x5"> 0 </derivative>
+                <derivative var="x6"> 0 </derivative>
+            </gradient>
+        </constraint>
+        <constraint>
+            <function> x2-10 </function>
+            <gradient>
+                <derivative var="x1"> 0 </derivative>
+                <derivative var="x2"> 1 </derivative>
+                <derivative var="x3"> 0 </derivative>
+                <derivative var="x4"> 0 </derivative>
+                <derivative var="x5"> 0 </derivative>
+                <derivative var="x6"> 0 </derivative>
+            </gradient>
+        </constraint>
+        <constraint>
+            <function> x3-5 </function>
+            <gradient>
+                <derivative var="x1"> 0 </derivative>
+                <derivative var="x2"> 0 </derivative>
+                <derivative var="x3"> 1 </derivative>
+                <derivative var="x4"> 0 </derivative>
+                <derivative var="x5"> 0 </derivative>
+                <derivative var="x6"> 0 </derivative>
+            </gradient>
+        </constraint>
+        <constraint>
+            <function> x4-6 </function>
+            <gradient>
+                <derivative var="x1"> 0 </derivative>
+                <derivative var="x2"> 0 </derivative>
+                <derivative var="x3"> 0 </derivative>
+                <derivative var="x4"> 1 </derivative>
+                <derivative var="x5"> 0 </derivative>
+                <derivative var="x6"> 0 </derivative>
+            </gradient>
+        </constraint>
+        <constraint>
+            <function> x5-5 </function>
+            <gradient>
+                <derivative var="x1"> 0 </derivative>
+                <derivative var="x2"> 0 </derivative>
+                <derivative var="x3"> 0 </derivative>
+                <derivative var="x4"> 0 </derivative>
+                <derivative var="x5"> 1 </derivative>
+                <derivative var="x6"> 0 </derivative>
+            </gradient>
+        </constraint>
+        <constraint>
+            <function> x6-10 </function>
+            <gradient>
+                <derivative var="x1"> 0 </derivative>
+                <derivative var="x2"> 0 </derivative>
+                <derivative var="x3"> 0 </derivative>
+                <derivative var="x4"> 0 </derivative>
+                <derivative var="x5"> 0 </derivative>
+                <derivative var="x6"> 1 </derivative>
+            </gradient>
+        </constraint>
+    </constraints>
+</problem>

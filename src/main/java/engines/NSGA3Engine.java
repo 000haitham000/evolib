@@ -4,6 +4,12 @@
  */
 package engines;
 
+import distancemetrics.DistanceMetric;
+import exceptions.MisplacedTokensException;
+import exceptions.TooManyDecimalPointsException;
+import kktpm.KKTPMCalculator;
+import parsing.KKTPM;
+import parsing.XMLParser;
 import utils.InputOutput;
 import utils.Mathematics;
 import utils.PerformanceMetrics;
@@ -12,17 +18,23 @@ import emo.DoubleAssignmentException;
 import emo.Individual;
 import emo.OptimizationProblem;
 import emo.OptimizationUtilities;
+
 import java.io.BufferedReader;
+
 import refdirs.ReferenceDirection;
 import refdirs.ReferenceDirectionsFactory;
+
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+
 import emo.VirtualIndividual;
+
 import java.io.File;
 import java.util.HashMap;
+
 import parsing.IndividualEvaluator;
 import refdirs.NestedReferenceDirectionsFactory;
 
@@ -39,7 +51,7 @@ import refdirs.NestedReferenceDirectionsFactory;
  *
  * @author Haitham Seada
  */
-public abstract class NSGA3Engine extends AbstractGeneticEngine {
+public class NSGA3Engine extends AbstractGeneticEngine {
 
     public static final double UTOPIAN_EPSILON = -0.001; // -0.0001
     public static final boolean REMOVE_ADDITIONAL_INDIVIDUALS = false;
@@ -51,15 +63,19 @@ public abstract class NSGA3Engine extends AbstractGeneticEngine {
     protected List<ReferenceDirection> referenceDirectionsList;
     protected File outDir;
 
+    protected DistanceMetric distanceMetric;
+
     public NSGA3Engine(
             OptimizationProblem optimizationProblem,
             IndividualEvaluator individualEvaluator,
-            int[] divisions) {
+            int[] divisions,
+            DistanceMetric distanceMetric) {
         super(optimizationProblem, individualEvaluator);
         // Create Reference Diretions
         referenceDirectionsList = new NestedReferenceDirectionsFactory(
                 optimizationProblem.objectives.length)
                 .generateDirections(divisions);
+        this.distanceMetric = distanceMetric;
         //adjustRefDirs(referenceDirectionsList, UTOPIAN_EPSILON);
         if (DEBUG_ALL || DEBUG_REFERENCE_DIRECTIONS) {
             InputOutput.displayReferenceDirections(
@@ -73,12 +89,14 @@ public abstract class NSGA3Engine extends AbstractGeneticEngine {
 
     public NSGA3Engine(
             OptimizationProblem optimizationProblem,
-            IndividualEvaluator individualEvaluator) {
+            IndividualEvaluator individualEvaluator,
+            DistanceMetric distanceMetric) {
         super(optimizationProblem, individualEvaluator);
         // Create Reference Diretions
         referenceDirectionsList = new ReferenceDirectionsFactory(
                 optimizationProblem.objectives.length)
                 .generateDirections(optimizationProblem.getSteps());
+        this.distanceMetric = distanceMetric;
         //adjustRefDirs(referenceDirectionsList, UTOPIAN_EPSILON);
         if (DEBUG_ALL || DEBUG_REFERENCE_DIRECTIONS) {
             InputOutput.displayReferenceDirections(
@@ -91,7 +109,6 @@ public abstract class NSGA3Engine extends AbstractGeneticEngine {
     }
 
     /**
-     *
      * @param optimizationProblem
      * @param individualEvaluator
      * @param directionsFilePath
@@ -99,7 +116,8 @@ public abstract class NSGA3Engine extends AbstractGeneticEngine {
     public NSGA3Engine(
             OptimizationProblem optimizationProblem,
             IndividualEvaluator individualEvaluator,
-            String directionsFilePath)
+            String directionsFilePath,
+            DistanceMetric distanceMetric)
             throws
             IOException {
         super(optimizationProblem, individualEvaluator);
@@ -126,6 +144,7 @@ public abstract class NSGA3Engine extends AbstractGeneticEngine {
                 reader.close();
             }
         }
+        this.distanceMetric = distanceMetric;
         InputOutput.displayReferenceDirections(
                 "Reference Directions",
                 referenceDirectionsList);
@@ -139,10 +158,10 @@ public abstract class NSGA3Engine extends AbstractGeneticEngine {
      * instead of the ideal point.
      *
      * @param referenceDirectionsList the list of reference directions to be
-     * fixed
-     * @param utopian_epsilon the distance between the ideal and the utopian
-     * point in one dimension (assuming that this distance is the same across
-     * all dimensions).
+     *                                fixed
+     * @param utopian_epsilon         the distance between the ideal and the utopian
+     *                                point in one dimension (assuming that this distance is the same across
+     *                                all dimensions).
      */
     protected final void adjustRefDirs(
             List<ReferenceDirection> referenceDirectionsList,
@@ -174,17 +193,18 @@ public abstract class NSGA3Engine extends AbstractGeneticEngine {
 //            return individual2;
 //        }
 //    }
+
     /**
      * Update the extreme points from one generation to the nextInt. Notice that
      * the code makes sure that a better extreme point (from an earlier
      * generation) is kept until a better one is encountered.
      *
-     * @param individuals an array of solutions
-     * @param previousExtremePoints the list of extreme points we have so far
-     * @param idealPoint the ideal point we have so far
-     * @param prevIdealPoint the ideal point prior to the current one
+     * @param individuals            an array of solutions
+     * @param previousExtremePoints  the list of extreme points we have so far
+     * @param idealPoint             the ideal point we have so far
+     * @param prevIdealPoint         the ideal point prior to the current one
      * @param optionalDisplayMessage a message to be displayed for debugging
-     * purposes
+     *                               purposes
      */
     protected void updateExtremePoints(
             VirtualIndividual[] individuals,
@@ -194,10 +214,10 @@ public abstract class NSGA3Engine extends AbstractGeneticEngine {
             String optionalDisplayMessage) {
         VirtualIndividual[] extremePoints
                 = OptimizationUtilities.getExtremePoints(
-                        previousExtremePoints,
-                        idealPoint,
-                        prevIdealPoint,
-                        individuals);
+                previousExtremePoints,
+                idealPoint,
+                prevIdealPoint,
+                individuals);
         // update currentExtremePoints (in all basic directions)
         currentExtremePoints = extremePoints;
         if (DEBUG_ALL || DEBUG_INTERCEPTS) {
@@ -212,10 +232,10 @@ public abstract class NSGA3Engine extends AbstractGeneticEngine {
      * Updates the current intercepts (used for normalization) according to the
      * spread of these individuals.
      *
-     * @param individuals an array of solutions
-     * @param extremePoints extreme points to be used
+     * @param individuals            an array of solutions
+     * @param extremePoints          extreme points to be used
      * @param optionalDisplayMessage a message to be displayed for debugging
-     * purposes
+     *                               purposes
      */
     protected void updateIntercepts(
             Individual[] individuals,
@@ -233,10 +253,10 @@ public abstract class NSGA3Engine extends AbstractGeneticEngine {
      * Calculates the intercepts of the current set of individuals using the
      * provided extreme points.
      *
-     * @param individuals an array of solutions
-     * @param extremePoints current extreme points
+     * @param individuals            an array of solutions
+     * @param extremePoints          current extreme points
      * @param optionalDisplayMessage a message to be displayed for debugging
-     * purposes
+     *                               purposes
      * @return
      */
     protected double[] getIntercepts(
@@ -376,13 +396,13 @@ public abstract class NSGA3Engine extends AbstractGeneticEngine {
      * normalized before association. Notice that, reference directions by
      * definition are already in the normalized space.
      *
-     * @param individuals an array of solutions
-     * @param referenceDirections a list of reference directions
-     * @param idealPoint current ideal point
-     * @param intercepts current intercepts
-     * @param utopianEpsilon distance between ideal and utopian points
+     * @param individuals            an array of solutions
+     * @param referenceDirections    a list of reference directions
+     * @param idealPoint             current ideal point
+     * @param intercepts             current intercepts
+     * @param utopianEpsilon         distance between ideal and utopian points
      * @param optionalDisplayMessage a message to be displayed for debugging
-     * purposes
+     *                               purposes
      * @return a 2D array whose (i, j) cell represents the perpendicular
      * distance from individual i to reference direction j.
      */
@@ -392,6 +412,7 @@ public abstract class NSGA3Engine extends AbstractGeneticEngine {
             double[] idealPoint,
             double[] intercepts,
             double utopianEpsilon,
+            DistanceMetric distanceMetric,
             String optionalDisplayMessage) {
         // Reset Reference Directions Information
         for (ReferenceDirection referenceDirection : referenceDirections) {
@@ -407,15 +428,15 @@ public abstract class NSGA3Engine extends AbstractGeneticEngine {
         /* Perpendicular distance calculation */
         for (int i = 0; i < referenceDirections.size(); i++) {
             for (int j = 0; j < individuals.length; j++) {
-                double perpendicularDistance
-                        = getPerpendicularDistance(
-                                individuals[j],
-                                referenceDirections.get(i),
-                                idealPoint,
-                                intercepts,
-                                utopianEpsilon);
+                double distance
+                        = distanceMetric.getDistance(
+                        individuals[j],
+                        referenceDirections.get(i),
+                        idealPoint,
+                        intercepts,
+                        utopianEpsilon);
                 // Store the distance in the matrix and in the individual object
-                distanceMatrix[j][i] = perpendicularDistance;
+                distanceMatrix[j][i] = distance;
                 individuals[j].distancesFromDirs[i] = distanceMatrix[j][i];
             }
         }
@@ -450,42 +471,15 @@ public abstract class NSGA3Engine extends AbstractGeneticEngine {
         return distanceMatrix;
     }
 
-    public static double getPerpendicularDistance(
-            VirtualIndividual individual,
-            ReferenceDirection referenceDirection,
-            double[] idealPoint,
-            double[] intercepts,
-            double utopianEpsilon) {
-        double[] normalizedObjectives = getNormalizedObjectives(
-                individual, idealPoint, intercepts, utopianEpsilon);
-        double requiredDistance = Mathematics.getPerpendicularDistance(
-                normalizedObjectives, referenceDirection.direction);
-        return requiredDistance;
-    }
-
-    protected static double[] getNormalizedObjectives(
-            VirtualIndividual individual,
-            double[] idealPoint,
-            double[] intercepts,
-            double utopianEpsilon) {
-        double[] normalizedVector = new double[individual.getObjectivesCount()];
-        for (int i = 0; i < individual.getObjectivesCount(); i++) {
-            normalizedVector[i]
-                    = (individual.getObjective(i) - idealPoint[i])
-                    / intercepts[i] - utopianEpsilon;
-        }
-        return normalizedVector;
-    }
-
     /**
      * Performs NSGA-III niching. It selects which individuals will make it to
      * the nextInt population out of all individuals found in the last front
      * that cannot be fully accommodated (in the nextInt population).
      *
-     * @param fronts a list of Pareto fronts where front i must have at least
-     * one individual that dominates at least another individual in front i+1.
+     * @param fronts              a list of Pareto fronts where front i must have at least
+     *                            one individual that dominates at least another individual in front i+1.
      * @param remainingIndvsCount the number of still-available slots in the
-     * nextInt population
+     *                            nextInt population
      * @return an array of those individuals that will make it to the nextInt
      * population
      */
@@ -514,7 +508,7 @@ public abstract class NSGA3Engine extends AbstractGeneticEngine {
         // accommodated.
         List<List<Individual>> lastFrontRefAssociations
                 = getLastFrontAssociations(
-                        referenceDirectionsListCopy, lastFrontCopy);
+                referenceDirectionsListCopy, lastFrontCopy);
         // Resolving common references (is this necessary?)
         checkCommonReferences(
                 lastFrontRefAssociations,
@@ -564,12 +558,12 @@ public abstract class NSGA3Engine extends AbstractGeneticEngine {
                     minDistanceIndividualIndex = 0;
                     double minDistance
                             = lastFrontRefAssociations
-                                    .get(dirIndex)
-                                    .get(0)
-                                    .getPerpendicularDistance();
+                            .get(dirIndex)
+                            .get(0)
+                            .getPerpendicularDistance();
                     for (int i = 1;
-                            i < lastFrontRefAssociations.get(dirIndex).size();
-                            i++) {
+                         i < lastFrontRefAssociations.get(dirIndex).size();
+                         i++) {
                         if (lastFrontRefAssociations
                                 .get(dirIndex)
                                 .get(i)
@@ -591,8 +585,8 @@ public abstract class NSGA3Engine extends AbstractGeneticEngine {
                 // Add the selected member to the final list
                 remainingIndividuals[remainingIndividuals.length - remainingIndvsCount]
                         = lastFrontRefAssociations
-                                .get(dirIndex)
-                                .get(newMemberIndex);
+                        .get(dirIndex)
+                        .get(newMemberIndex);
                 // Add the new member to the list of members associated with the
                 // direction under consideration.
                 associationCountList.set(
@@ -612,7 +606,7 @@ public abstract class NSGA3Engine extends AbstractGeneticEngine {
      * Calculates associations of the individuals of the last front.
      *
      * @param referenceDirectionsList list of reference directions
-     * @param lastFront last front Fl
+     * @param lastFront               last front Fl
      * @return a list of lists where element list.get(i).get(j) is an individual
      * that is associated with direction i.
      */
@@ -641,7 +635,6 @@ public abstract class NSGA3Engine extends AbstractGeneticEngine {
     }
 
     /**
-     *
      * @param referenceDirectionsList
      * @param fronts
      * @param lastFront
@@ -725,12 +718,12 @@ public abstract class NSGA3Engine extends AbstractGeneticEngine {
             // Non-dominated sorting
             List<List<Individual>> fronts
                     = rankIndividuals(
-                            mergedPopulation,
-                            epsilon,
-                            String.format(
-                                    "%d-population+%d-offspring",
-                                    currentGenerationIndex,
-                                    currentGenerationIndex));
+                    mergedPopulation,
+                    epsilon,
+                    String.format(
+                            "%d-population+%d-offspring",
+                            currentGenerationIndex,
+                            currentGenerationIndex));
             // Whatever logic is necessary after the non-dominated sorting
             postNondominatedSorting(fronts);
             // Update ideal point
@@ -783,8 +776,8 @@ public abstract class NSGA3Engine extends AbstractGeneticEngine {
         } else {
             finalPopulation
                     = OptimizationUtilities.getNonDominatedIndividuals(
-                            currentPopulation,
-                            epsilon);
+                    currentPopulation,
+                    epsilon);
         }
         return finalPopulation;
     }
@@ -838,7 +831,7 @@ public abstract class NSGA3Engine extends AbstractGeneticEngine {
         // Important Note 1:
         // Association and Normalization: Notice that in NSGA-III normalization
         // & association need not be performed unless the final front cannot be
-        // fully accomodated. However, in U-NSGA-III association (and 
+        // fully accommodated. However, in U-NSGA-III association (and
         // consequently normalization) must be performed in all cases, because
         // association is used in tournament selection. So, here we perform
         // association (and consequently normalization) no matter what the case
@@ -853,9 +846,9 @@ public abstract class NSGA3Engine extends AbstractGeneticEngine {
         // accommodated.
         Individual[] candidates
                 = OptimizationUtilities.getCandidates(
-                        mergedPopulation,
-                        fronts,
-                        optimizationProblem.getPopulationSize());
+                mergedPopulation,
+                fronts,
+                optimizationProblem.getPopulationSize());
         // Retrieve the feasible solutions only from all the candidates
         Individual[] feasibleCandidates
                 = OptimizationUtilities.getFeasibleIndividuals(candidates);
@@ -878,7 +871,9 @@ public abstract class NSGA3Engine extends AbstractGeneticEngine {
                     referenceDirectionsList,
                     currentIdealPoint,
                     currentIntercepts,
-                    UTOPIAN_EPSILON, "Merged Population");
+                    UTOPIAN_EPSILON,
+                    distanceMetric,
+                    "Merged Population");
             // Get reamining individuals i.e. the number of individuals needed
             // using niching in order to completely fill the population.
             int remainingIndividualsCount = getRemainingCount(fronts);
@@ -992,9 +987,9 @@ public abstract class NSGA3Engine extends AbstractGeneticEngine {
                 for (int i = 0; i < this.currentExtremePoints.length; i++) {
                     String extPts = String.format("extreme_point_%02d = [", i);
                     for (int j = 0;
-                            j < this.currentExtremePoints[i]
-                                    .getObjectivesCount();
-                            j++) {
+                         j < this.currentExtremePoints[i]
+                                 .getObjectivesCount();
+                         j++) {
                         extPts += this.currentExtremePoints[i].getObjective(j);
                         if (j != this.currentExtremePoints[i]
                                 .getObjectivesCount() - 1) {
@@ -1006,12 +1001,12 @@ public abstract class NSGA3Engine extends AbstractGeneticEngine {
                 }
             } else {
                 for (int i = 0;
-                        i < optimizationProblem.objectives.length;
-                        i++) {
+                     i < optimizationProblem.objectives.length;
+                     i++) {
                     String extPts = String.format("extreme_point_%02d = [", i);
                     for (int j = 0;
-                            j < optimizationProblem.objectives.length;
-                            j++) {
+                         j < optimizationProblem.objectives.length;
+                         j++) {
                         extPts += "NaN";
                         if (j != optimizationProblem.objectives.length - 1) {
                             extPts += ", ";

@@ -4,6 +4,7 @@
  */
 package engines;
 
+import distancemetrics.DistanceMetric;
 import utils.InputOutput;
 import utils.Mathematics;
 import utils.RandomNumberGenerator;
@@ -31,24 +32,26 @@ public class UnifiedNsga3Engine extends NSGA3Engine {
 
     public UnifiedNsga3Engine(
             OptimizationProblem optimizationProblem,
-            IndividualEvaluator individualEvaluator) {
-        super(optimizationProblem, individualEvaluator);
+            IndividualEvaluator individualEvaluator,
+            DistanceMetric distanceMetric) {
+        super(optimizationProblem, individualEvaluator, distanceMetric);
     }
 
     public UnifiedNsga3Engine(
             OptimizationProblem optimizationProblem,
-            IndividualEvaluator individualEvaluator, int[] divisions) {
-        super(optimizationProblem, individualEvaluator, divisions);
+            IndividualEvaluator individualEvaluator, int[] divisions, DistanceMetric distanceMetric) {
+        super(optimizationProblem, individualEvaluator, divisions, distanceMetric);
     }
 
     public UnifiedNsga3Engine(
             OptimizationProblem optimizationProblem,
             IndividualEvaluator individualEvaluator,
-            String directionsFilePath)
+            String directionsFilePath,
+            DistanceMetric distanceMetric)
             throws
             FileNotFoundException,
             IOException {
-        super(optimizationProblem, individualEvaluator);
+        super(optimizationProblem, individualEvaluator, distanceMetric);
         // Read Directions from File
         BufferedReader reader = null;
         try {

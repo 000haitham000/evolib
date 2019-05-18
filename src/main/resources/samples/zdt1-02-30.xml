@@ -60,7 +60,7 @@ or "many-objective" -->
     </population-size>
     <!-- number of generations -->
     <generations-count>
-        150
+        5
     </generations-count>
     <!-- real crossover & mutation probabilities -->
     <real-crossover-probability>0.9</real-crossover-probability>
