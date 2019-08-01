@@ -38,8 +38,8 @@ public class SampleScript extends TestScript {
         IndividualEvaluator individualEvaluator = new ZDT1Evaluator();
         // Create the distance metric
         URL url2 = SampleScript.class.getClassLoader().getResource(problemDefinitionFilePath);
-        DistanceMetric distanceMetric = new KKTPM2DistanceMetric(XMLParser.readXML(new File(url2.getFile())));
-//        DistanceMetric distanceMetric = new PerpendicularDistanceMetric();
+        //DistanceMetric distanceMetric = new KKTPM2DistanceMetric(XMLParser.readXML(new File(url2.getFile())));
+        DistanceMetric distanceMetric = new PerpendicularDistanceMetric();
         // -------------------------------------------------------------------------------------------------------------
         // Read problem
         URL url = SampleScript.class.getClassLoader().getResource(parametersFilePath);
