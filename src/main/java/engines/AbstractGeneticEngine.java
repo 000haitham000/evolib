@@ -1098,7 +1098,6 @@ public abstract class AbstractGeneticEngine {
                 || DUMP_ALL_GENERATIONS_OBJECTIVE_SPACE
                 || DUMP_ALL_GENERATIONS_MATLAB_SCRIPTS
                 || DUMP_ALL_GENERATIONS_NORMALIZED_MATLAB_SCRIPTS) {
-
             // <editor-fold desc="Extract non-dominated solutions of the current generation" defaultstate="collapsed">
             // Extract non-dominated solutions of the current generation
             Individual[] individualsToBePrinted
@@ -1158,10 +1157,10 @@ public abstract class AbstractGeneticEngine {
             // <editor-fold desc="Dumping variable-space data">
             if (DUMP_ALL_GENERATIONS_DECISION_SPACE) {
                 // Dump Decision Space
-                StringBuilder desSpace = InputOutput.collectRealDecisionSpace(
+                StringBuilder decSpace = InputOutput.collectRealDecisionSpace(
                         optimizationProblem,
                         individualsToBePrinted);
-                dumpMap.put("var.dat", desSpace);
+                dumpMap.put("var.dat", decSpace);
             }
             // </editor-fold>
         }

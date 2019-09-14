@@ -41,5 +41,5 @@ dependencies {
     //compile name: 'tx2ex'
     compile group: 'com.coin-laboratory', name: 'tx2ex', version: '2.0.1'
     // KKTPM dependency
-    compile group: 'com.coin-laboratory', name: 'kktpm-calculator', version: '2.0.0'
+    compile group: 'com.coin-laboratory', name: 'kktpm-calculator', version: '2.1.0'
 }

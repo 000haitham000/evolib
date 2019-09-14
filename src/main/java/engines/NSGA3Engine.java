@@ -5,6 +5,7 @@
 package engines;
 
 import distancemetrics.DistanceMetric;
+import distancemetrics.KKTPM2DistanceMetric;
 import exceptions.MisplacedTokensException;
 import exceptions.TooManyDecimalPointsException;
 import kktpm.KKTPMCalculator;
@@ -425,7 +426,7 @@ public class NSGA3Engine extends AbstractGeneticEngine {
             individual.distancesFromDirs
                     = new double[referenceDirections.size()];
         }
-        /* Perpendicular distance calculation */
+        /* Distance calculation */
         for (int i = 0; i < referenceDirections.size(); i++) {
             for (int j = 0; j < individuals.length; j++) {
                 double distance
@@ -1015,6 +1016,18 @@ public class NSGA3Engine extends AbstractGeneticEngine {
                     extPts += String.format("]%n");
                     metaDataSb.append(extPts);
                 }
+            }
+            // Append the KKTPM2 metric if a KKTPM2-based distance is used
+            if (distanceMetric instanceof KKTPM2DistanceMetric) {
+                metaDataSb.append(
+                        String.format("KKTPM2 = %f%n",
+                                KKTPM2DistanceMetric.getPopulationMetric(
+                                        distanceMetric,
+                                        OptimizationUtilities.getNonDominatedIndividuals(
+                                                this.currentPopulation,
+                                                epsilon),
+                                        this.referenceDirectionsList,
+                                        this.currentIdealPoint)));
             }
         }
         // </editor-fold>
