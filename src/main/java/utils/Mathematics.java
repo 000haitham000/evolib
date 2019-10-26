@@ -62,7 +62,7 @@ public class Mathematics {
         for (int i = 0; i < decimalPlaces; i++) {
             approxString += "#";
         }
-        DecimalFormat df = new DecimalFormat("#.####");
+        DecimalFormat df = new DecimalFormat(approxString);
         df.setRoundingMode(RoundingMode.CEILING);
         return Double.parseDouble(df.format(x));
     }

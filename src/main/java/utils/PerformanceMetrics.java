@@ -243,7 +243,7 @@ public class PerformanceMetrics {
             XMLStreamException {
         // Load ZDT1 problem
         OptimizationProblem optimizationProblem
-                = InputOutput.getProblem("../samples/zdt1-02-30.xml");
+                = InputOutput.getProblem("../configurations/zdt1-02-30.xml");
         // Create a random population
         Individual[] paretoFront = new Individual[n];
         for (int i = 0; i < paretoFront.length; i++) {
@@ -300,7 +300,7 @@ public class PerformanceMetrics {
             XMLStreamException {
         // Load ZDT2 problem
         OptimizationProblem optimizationProblem
-                = InputOutput.getProblem("../samples/zdt2-02-30.xml");
+                = InputOutput.getProblem("../configurations/zdt2-02-30.xml");
         // Create a random population
         Individual[] paretoFront = new Individual[n];
         for (int i = 0; i < paretoFront.length; i++) {
@@ -356,7 +356,7 @@ public class PerformanceMetrics {
             XMLStreamException {
         // Load ZDT3 problem
         OptimizationProblem optimizationProblem
-                = InputOutput.getProblem("../samples/zdt3-02-30.xml");
+                = InputOutput.getProblem("../configurations/zdt3-02-30.xml");
         // Create a random population
         Individual[] paretoFront = new Individual[n];
         for (int i = 0; i < paretoFront.length; i++) {
@@ -524,7 +524,7 @@ public class PerformanceMetrics {
             XMLStreamException {
         // Load ZDT4 problem
         OptimizationProblem optimizationProblem
-                = InputOutput.getProblem("../samples/zdt4-02-30.xml");
+                = InputOutput.getProblem("../configurations/zdt4-02-30.xml");
         // Create a random population
         Individual[] paretoFront = new Individual[n];
         for (int i = 0; i < paretoFront.length; i++) {
@@ -571,7 +571,7 @@ public class PerformanceMetrics {
             XMLStreamException {
         // Load ZDT6 problem
         OptimizationProblem optimizationProblem
-                = InputOutput.getProblem("../samples/zdt6-02-10.xml");
+                = InputOutput.getProblem("../configurations/zdt6-02-10.xml");
         // Create a random population
         Individual[] paretoFront = new Individual[n];
         for (int i = 0; i < paretoFront.length; i++) {
@@ -631,7 +631,7 @@ public class PerformanceMetrics {
             XMLStreamException {
         // Load problem
         OptimizationProblem optimizationProblem
-                = InputOutput.getProblem("../samples/osy_full.xml");
+                = InputOutput.getProblem("../configurations/osy_full.xml");
         // Create a random population
         Individual[] paretoFront = new Individual[n1 + n2 + n3 + n4 + n5];
         for (int i = 0; i < paretoFront.length; i++) {

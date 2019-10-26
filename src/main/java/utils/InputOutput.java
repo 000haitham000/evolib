@@ -766,28 +766,40 @@ public class InputOutput {
     }
 
     public static void printDirectionMatlabCode(int objCount, List<ReferenceDirection> dirs, PrintWriter printer) {
-        System.out.println("MATLAB CODE");
-        StringBuilder[] dimBuilderArr = new StringBuilder[objCount];
-        for (int i = 0; i < dimBuilderArr.length; i++) {
-            dimBuilderArr[i] = new StringBuilder("[");
-        }
-        for (int i = 0; i < dirs.size(); i++) {
-            for (int j = 0; j < dimBuilderArr.length; j++) {
-                dimBuilderArr[j].append(dirs.get(i).direction[j]);
+        if(objCount == 2 || objCount == 3) {
+            System.out.println("MATLAB CODE (for visualizing final reference directions)");
+            StringBuilder[] dimBuilderArr = new StringBuilder[objCount];
+            for (int i = 0; i < dimBuilderArr.length; i++) {
+                dimBuilderArr[i] = new StringBuilder("[");
             }
-            if (i != dirs.size() - 1) {
-                for (StringBuilder dimBuilder : dimBuilderArr) {
-                    dimBuilder.append(", ");
+            for (int i = 0; i < dirs.size(); i++) {
+                for (int j = 0; j < dimBuilderArr.length; j++) {
+                    dimBuilderArr[j].append(dirs.get(i).direction[j]);
+                }
+                if (i != dirs.size() - 1) {
+                    for (StringBuilder dimBuilder : dimBuilderArr) {
+                        dimBuilder.append(", ");
+                    }
                 }
             }
+            for (StringBuilder dimBuilder : dimBuilderArr) {
+                dimBuilder.append("]");
+            }
+            for (int i = 0; i < dimBuilderArr.length; i++) {
+                printer.format("Dim%02d = %s;%n", i, dimBuilderArr[i].toString());
+            }
+            printer.println("xlim([0 1.1])");
+            printer.println("ylim([0 1.1])");
+            if (objCount == 3) {
+                printer.println("zlim([0 1.1])");
+            }
+            if (objCount == 2) {
+                printer.println("scatter(Dim00, Dim01);");
+            } else if (objCount == 3) {
+                printer.println("scatter3(Dim00, Dim01, Dim02);");
+            }
+            printer.flush();
         }
-        for (StringBuilder dimBuilder : dimBuilderArr) {
-            dimBuilder.append("]");
-        }
-        for (int i = 0; i < dimBuilderArr.length; i++) {
-            printer.format("Dim%02d = %s;%n", i, dimBuilderArr[i].toString());
-        }
-        printer.flush();
     }
 
     public static StringBuilder createMatlabScript3D(Individual[] individuals) throws IOException {
@@ -927,36 +939,6 @@ public class InputOutput {
         }
     }
 
-//    public static void collectObjectiveSpace(
-//            OptimizationProblem optimizationProblem,
-//            Individual[] individuals,
-//            String filePath)
-//            throws FileNotFoundException {
-//        PrintWriter printer = null;
-//        try {
-//            printer = new PrintWriter(filePath);
-//            for (int i = 0; i < individuals.length; i++) {
-//                for (int j = 0; j < optimizationProblem.objectives.length; j++) {
-//                    // Write objective value (or NaN if the individual is infeasible)
-//                    if (individuals[i].isFeasible()) {
-//                        printer.format("%7.7f", individuals[i].getObjective(j));
-//                    } else {
-//                        printer.format("%s", "NaN");
-//                    }
-//                    // Write a space if this is not the last objective value
-//                    if (j != optimizationProblem.objectives.length - 1) {
-//                        printer.print(" ");
-//                    }
-//                }
-//                // Write a line separator (Enter)
-//                printer.println();
-//            }
-//        } finally {
-//            if (printer != null) {
-//                printer.close();
-//            }
-//        }
-//    }
     public static StringBuilder collectObjectiveSpace(
             OptimizationProblem optimizationProblem,
             Individual[] individuals)
@@ -981,7 +963,7 @@ public class InputOutput {
         return sb;
     }
 
-    /* DO NOT USE IF THE PROBLEM HAS BUINARY VARIABLES */
+    /* DO NOT USE IF THE PROBLEM HAS BINARY VARIABLES */
     public static StringBuilder collectRealDecisionSpace(
             OptimizationProblem optimizationProblem,
             Individual[] individuals)

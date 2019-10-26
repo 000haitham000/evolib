@@ -10,8 +10,9 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="Gradle: org.apache.commons:commons-lang3:3.0" level="project" />
-    <orderEntry type="library" name="Gradle: com.coin-laboratory:kktpm-calculator:2.1.0" level="project" />
-    <orderEntry type="library" name="Gradle: com.coin-laboratory:tx2ex:2.0.1" level="project" />
+    <orderEntry type="library" name="Gradle: commons-io:commons-io:2.6" level="project" />
+    <orderEntry type="library" name="Gradle: com.github.000haitham000:kktpm-calculator:2.1.0" level="project" />
+    <orderEntry type="library" name="Gradle: com.github.000haitham000:tx2ex:2.0.1" level="project" />
     <orderEntry type="library" name="Gradle: org.apache.commons:commons-math3:3.0" level="project" />
   </component>
 </module>

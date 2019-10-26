@@ -7,6 +7,8 @@ package emo;
 import static engines.AbstractGeneticEngine.EXTREME_POINTS_DEEP_DEBUG;
 import utils.Mathematics;
 import static engines.AbstractGeneticEngine.MAX_DOUBLE_VALUE;
+
+import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.List;
 import parsing.IndividualEvaluator;
@@ -735,6 +737,17 @@ public class OptimizationUtilities {
         } else {
             throw new IllegalArgumentException(
                     "Pull factor must be greater than or equal to Zero.");
+        }
+    }
+
+    /**
+     * Display all population members.
+     *
+     * @param population a population of individuals
+     */
+    public static void display(Individual[] population, PrintStream out) {
+        for (Individual individual : population) {
+            out.println(individual.toString());
         }
     }
 }

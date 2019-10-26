@@ -4,7 +4,7 @@
  */
 package emo;
 
-import refdirs.InvalidReferenceDirectionValue;
+import refdirs.InvalidReferenceDirectionValueException;
 import refdirs.ReferenceDirection;
 import utils.Mathematics;
 import utils.RandomNumberGenerator;
@@ -438,7 +438,7 @@ public class Individual extends VirtualIndividual
                             this.referenceDirection.direction,
                             this.referenceDirection.direction.length));
         } else {
-            throw new InvalidReferenceDirectionValue(this);
+            throw new InvalidReferenceDirectionValueException(this);
         }
     }
 

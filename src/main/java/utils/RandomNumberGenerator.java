@@ -24,7 +24,7 @@ public class RandomNumberGenerator {
     /**
      * Restarts the random number generator using a new seed. Notice that a seed
      * should be a real number in the range [0, 1] and this number is then
-     * translated to an integer number in the range [0, MAX_LONG] in order to
+     * translated to a long number in the range [0, MAX_LONG] in order to
      * fit Java's random number generator.
      *
      * @param seed the seed to set
@@ -36,7 +36,7 @@ public class RandomNumberGenerator {
     /**
      * Fetch a single random integer between low and high including the bounds.
      *
-     * @param low minimum limit
+     * @param low  minimum limit
      * @param high maximum limit
      * @return a random integer number between the two limits inclusively
      */
@@ -57,7 +57,7 @@ public class RandomNumberGenerator {
     /**
      * Fetch a single random real between low and high including the bounds.
      *
-     * @param low minimum limit
+     * @param low  minimum limit
      * @param high maximum limit
      * @return a random real number between the two limits inclusively
      */

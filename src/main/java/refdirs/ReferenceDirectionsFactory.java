@@ -162,7 +162,7 @@ public class ReferenceDirectionsFactory {
             List<ReferenceDirection> dirs,
             double[] shiftingVector) {
         List<ReferenceDirection> shiftedList
-                = new ArrayList<ReferenceDirection>();
+                = new ArrayList<>();
         outerLoop:
         for (int i = 0; i < dirs.size(); i++) {
             double[] shiftedVector = new double[objectivesCount];

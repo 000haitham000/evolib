@@ -62,16 +62,16 @@ public class NSGA3Engine extends AbstractGeneticEngine {
     protected double[] currentIntercepts;
     protected VirtualIndividual[] currentExtremePoints;
     protected List<ReferenceDirection> referenceDirectionsList;
-    protected File outDir;
 
     protected DistanceMetric distanceMetric;
 
     public NSGA3Engine(
             OptimizationProblem optimizationProblem,
             IndividualEvaluator individualEvaluator,
-            int[] divisions,
-            DistanceMetric distanceMetric) {
-        super(optimizationProblem, individualEvaluator);
+            DistanceMetric distanceMetric,
+            File outputDirectory,
+            int[] divisions) {
+        super(optimizationProblem, individualEvaluator, outputDirectory);
         // Create Reference Diretions
         referenceDirectionsList = new NestedReferenceDirectionsFactory(
                 optimizationProblem.objectives.length)
@@ -91,8 +91,9 @@ public class NSGA3Engine extends AbstractGeneticEngine {
     public NSGA3Engine(
             OptimizationProblem optimizationProblem,
             IndividualEvaluator individualEvaluator,
-            DistanceMetric distanceMetric) {
-        super(optimizationProblem, individualEvaluator);
+            DistanceMetric distanceMetric,
+            File outputDirectory) {
+        super(optimizationProblem, individualEvaluator, outputDirectory);
         // Create Reference Diretions
         referenceDirectionsList = new ReferenceDirectionsFactory(
                 optimizationProblem.objectives.length)
@@ -117,11 +118,12 @@ public class NSGA3Engine extends AbstractGeneticEngine {
     public NSGA3Engine(
             OptimizationProblem optimizationProblem,
             IndividualEvaluator individualEvaluator,
-            String directionsFilePath,
-            DistanceMetric distanceMetric)
+            DistanceMetric distanceMetric,
+            File outputDirectory,
+            String directionsFilePath)
             throws
             IOException {
-        super(optimizationProblem, individualEvaluator);
+        super(optimizationProblem, individualEvaluator, outputDirectory);
         // Read Directions from File
         BufferedReader reader = null;
         try {
@@ -173,27 +175,6 @@ public class NSGA3Engine extends AbstractGeneticEngine {
             }
         }
     }
-
-//    @Override
-//    protected Individual tournamentSelect(IndividualsSet subset) {
-//        Individual individual1 = subset.getIndividual1();
-//        Individual individual2 = subset.getIndividual2();
-//        if (individual1.isFeasible() && !individual2.isFeasible()) {
-//            return individual1;
-//        } else if (!individual1.isFeasible() && individual2.isFeasible()) {
-//            return individual2;
-//        } else if (!individual1.isFeasible() && !individual2.isFeasible()) {
-//            if (individual1.getTotalConstraintViolation() < individual2.getTotalConstraintViolation()) {
-//                return individual1;
-//            } else {
-//                return individual2;
-//            }
-//        } else if (RandomNumberGenerator.nextInt() <= 0.5) {
-//            return individual1;
-//        } else {
-//            return individual2;
-//        }
-//    }
 
     /**
      * Update the extreme points from one generation to the nextInt. Notice that
@@ -680,8 +661,6 @@ public class NSGA3Engine extends AbstractGeneticEngine {
 
     @Override
     public Individual[] start(
-            File outputDir,
-            int runIndex,
             double epsilon,
             double hvLimit,
             int funcEvaluationsLimit
@@ -691,15 +670,14 @@ public class NSGA3Engine extends AbstractGeneticEngine {
             DoubleAssignmentException,
             IOException {
         // Set necessary fields
-        this.runIndex = runIndex;
         this.epsilon = epsilon;
         this.hvLimit = hvLimit;
         this.funcEvaluationsLimit = funcEvaluationsLimit;
-        this.outDir = outputDir;
         // Generate the initial population and perform all necessary
         // initializations before starting the main loop
         currentPopulation = initialize();
-        report(outputDir);
+        // Report initial population
+        report();
         // Each loop represents one generation
         do {
             // Whatever logic is needed at the beginning of every iteration
@@ -747,7 +725,7 @@ public class NSGA3Engine extends AbstractGeneticEngine {
             // Whatever logic is needed at the end of every iteration
             iterationEnd();
             // Report generation-wise information
-            report(outputDir);
+            report();
         } while (!terminationCondition());
         // Prepare the final population.
         Individual[] finalPopulation = prepareFinalPopulation();
@@ -969,70 +947,72 @@ public class NSGA3Engine extends AbstractGeneticEngine {
             IOException {
         HashMap<String, StringBuilder> dumpMap
                 = super.reportGenerationWiseInfo();
-        // <editor-fold desc="Dumping reference directions data" defaultstate="collapsed">
-        if (DUMP_ALL_GENERATIONS_REF_DIRS && DUMP_ALL_GENERATIONS_META_DATA) {
-            // Dump all reference directions list
-            // This section needs to be modified to write ref-dirs files in
-            // a separate directory.
-            // See the desired directiory structure at:
-            // D:/corrected plotting script/version_2_11March2015
-            StringBuilder refDirsSb
-                    = InputOutput.collectRefDirs(this.referenceDirectionsList);
-            dumpMap.put("refdirs.dat", refDirsSb);
-        }
-        // </editor-fold>
-        // <editor-fold desc="Append extreme points to the meta data" defaultstate="collapsed">
-        if (DUMP_ALL_GENERATIONS_EXTREME_POINTS && DUMP_ALL_GENERATIONS_META_DATA) {
-            StringBuilder metaDataSb = dumpMap.get("meta.txt");
-            if (this.currentExtremePoints != null) {
-                for (int i = 0; i < this.currentExtremePoints.length; i++) {
-                    String extPts = String.format("extreme_point_%02d = [", i);
-                    for (int j = 0;
-                         j < this.currentExtremePoints[i]
-                                 .getObjectivesCount();
-                         j++) {
-                        extPts += this.currentExtremePoints[i].getObjective(j);
-                        if (j != this.currentExtremePoints[i]
-                                .getObjectivesCount() - 1) {
-                            extPts += ", ";
+        if (outputDir != null) {
+            // <editor-fold desc="Dumping reference directions data" defaultstate="collapsed">
+            if (DUMP_ALL_GENERATIONS_REF_DIRS && DUMP_ALL_GENERATIONS_META_DATA) {
+                // Dump all reference directions list
+                // This section needs to be modified to write ref-dirs files in
+                // a separate directory.
+                // See the desired directiory structure at:
+                // D:/corrected plotting script/version_2_11March2015
+                StringBuilder refDirsSb
+                        = InputOutput.collectRefDirs(this.referenceDirectionsList);
+                dumpMap.put("refdirs.dat", refDirsSb);
+            }
+            // </editor-fold>
+            // <editor-fold desc="Append extreme points to the meta data" defaultstate="collapsed">
+            if (DUMP_ALL_GENERATIONS_EXTREME_POINTS && DUMP_ALL_GENERATIONS_META_DATA) {
+                StringBuilder metaDataSb = dumpMap.get("meta.txt");
+                if (this.currentExtremePoints != null) {
+                    for (int i = 0; i < this.currentExtremePoints.length; i++) {
+                        String extPts = String.format("extreme_point_%02d = [", i);
+                        for (int j = 0;
+                             j < this.currentExtremePoints[i]
+                                     .getObjectivesCount();
+                             j++) {
+                            extPts += this.currentExtremePoints[i].getObjective(j);
+                            if (j != this.currentExtremePoints[i]
+                                    .getObjectivesCount() - 1) {
+                                extPts += ", ";
+                            }
                         }
+                        extPts += String.format("]%n");
+                        metaDataSb.append(extPts);
                     }
-                    extPts += String.format("]%n");
-                    metaDataSb.append(extPts);
+                } else {
+                    for (int i = 0;
+                         i < optimizationProblem.objectives.length;
+                         i++) {
+                        String extPts = String.format("extreme_point_%02d = [", i);
+                        for (int j = 0;
+                             j < optimizationProblem.objectives.length;
+                             j++) {
+                            extPts += "NaN";
+                            if (j != optimizationProblem.objectives.length - 1) {
+                                extPts += ", ";
+                            }
+                        }
+                        extPts += String.format("]%n");
+                        metaDataSb.append(extPts);
+                    }
                 }
-            } else {
-                for (int i = 0;
-                     i < optimizationProblem.objectives.length;
-                     i++) {
-                    String extPts = String.format("extreme_point_%02d = [", i);
-                    for (int j = 0;
-                         j < optimizationProblem.objectives.length;
-                         j++) {
-                        extPts += "NaN";
-                        if (j != optimizationProblem.objectives.length - 1) {
-                            extPts += ", ";
-                        }
-                    }
-                    extPts += String.format("]%n");
-                    metaDataSb.append(extPts);
+                // Append the KKTPM2 metric if a KKTPM2-based distance is used
+                if (distanceMetric instanceof KKTPM2DistanceMetric) {
+                    metaDataSb.append(
+                            String.format("KKTPM2 = %f%n",
+                                    KKTPM2DistanceMetric.getPopulationMetric(
+                                            distanceMetric,
+                                            OptimizationUtilities.getNonDominatedIndividuals(
+                                                    this.currentPopulation,
+                                                    epsilon),
+                                            this.referenceDirectionsList,
+                                            this.currentIdealPoint)));
                 }
             }
-            // Append the KKTPM2 metric if a KKTPM2-based distance is used
-            if (distanceMetric instanceof KKTPM2DistanceMetric) {
-                metaDataSb.append(
-                        String.format("KKTPM2 = %f%n",
-                                KKTPM2DistanceMetric.getPopulationMetric(
-                                        distanceMetric,
-                                        OptimizationUtilities.getNonDominatedIndividuals(
-                                                this.currentPopulation,
-                                                epsilon),
-                                        this.referenceDirectionsList,
-                                        this.currentIdealPoint)));
-            }
         }
-        // </editor-fold>
         return dumpMap;
     }
+    // </editor-fold>
 
     @Override
     public String getAlgorithmName() {

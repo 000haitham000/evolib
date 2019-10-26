@@ -18,7 +18,7 @@ import java.util.List;
  */
 public class ReferenceDirection implements Serializable {
 
-    public static final double DIR_EPSILON = 10e-5;
+    public static final double DIR_EPSILON = 10e-10;
 
     public double[] direction;
     public List<Individual> surroundingIndividuals

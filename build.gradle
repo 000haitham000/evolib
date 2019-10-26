@@ -31,15 +31,14 @@ repositories {
 }
 
 dependencies {
-    // TODO: Add dependencies here ...
-    // You can read more about how to add dependency here:
-    //   http://www.gradle.org/docs/current/userguide/dependency_management.html#sec:how_to_declare_your_dependencies
+    // JUnit
     testCompile group: 'junit', name: 'junit', version: '4.10'
     // https://mvnrepository.com/artifact/org.apache.commons/commons-lang3
     compile group: 'org.apache.commons', name: 'commons-lang3', version: '3.0'
-    // TX2EX Jar Dependency
-    //compile name: 'tx2ex'
-    compile group: 'com.coin-laboratory', name: 'tx2ex', version: '2.0.1'
-    // KKTPM dependency
-    compile group: 'com.coin-laboratory', name: 'kktpm-calculator', version: '2.1.0'
+    // https://mvnrepository.com/artifact/commons-io/commons-io
+    compile group: 'commons-io', name: 'commons-io', version: '2.6'
+    // TX2EX
+    implementation 'com.github.000haitham000:tx2ex:2.0.1'
+    // KKTPM
+    implementation 'com.github.000haitham000:kktpm-calculator:2.1.0'
 }

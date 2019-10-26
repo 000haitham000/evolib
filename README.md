@@ -1,4 +1,4 @@
-# EvoLib Version 2.0.0 - 8/8/2018
+# EvoLib Version 2.1.0 - 10/26/2019
 EvoLib is an open source implementation of NSGA-II and Unified NSGA-III
 (U-NSGA-III). NSGA-II is a well known Evolutionary Multiobjective Optimization (EMO) algorithm
 than can handle up to two objectives efficiently.

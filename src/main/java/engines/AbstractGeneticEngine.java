@@ -40,12 +40,12 @@ public abstract class AbstractGeneticEngine {
     public final OptimizationProblem optimizationProblem;
     public final IndividualEvaluator individualEvaluator;
     //Individual[] population;
+    public static boolean DISPLAY_GENERATION_COUNTER_ON_STANDARD_OUTPUT = true;
     public static boolean DEBUG_ALL = false;
-    public static boolean DEBUG_REFERENCE_DIRECTIONS = true;
+    public static boolean DEBUG_REFERENCE_DIRECTIONS = false;
     public static boolean DEBUG_POPULATIONS = false;
     public static boolean DEBUG_RANKING = false;
     public static boolean DEBUG_IDEAL_POINT = false;
-    public static boolean DEBUG_TRANSLATION = false;
     public static boolean DEBUG_INTERCEPTS = false;
     public static boolean DEBUG_ASSOCIATION = false;
     public static boolean EXTREME_POINTS_DEEP_DEBUG = false;
@@ -59,13 +59,11 @@ public abstract class AbstractGeneticEngine {
     // DUMP_ALL_GENERATIONS_OBJECTIVE_SPACE is also true,
     // otherwise DUMP_ALL_GENERATIONS_NORMALIZED_MATLAB_SCRIPTS value will be
     // ignored.
-    public final static boolean DUMP_ALL_GENERATIONS_NORMALIZED_MATLAB_SCRIPTS
-            = false;
+    public final static boolean DUMP_ALL_GENERATIONS_NORMALIZED_MATLAB_SCRIPTS = false;
     // If DUMP_ANIMATED_MATLAB_SCRIPT is true if and only if
     // DUMP_ALL_GENERATIONS_OBJECTIVE_SPACE is also true,
     // otherwise DUMP_ANIMATED_MATLAB_SCRIPT value will be ignored.
-    public final static boolean DUMP_ANIMATED_MATLAB_SCRIPT
-            = false;
+    public final static boolean DUMP_ANIMATED_MATLAB_SCRIPT = false;
 
     // <editor-fold defaultstate="collapsed" desc="Fields">
     protected int currentGenerationIndex = -1;
@@ -79,14 +77,19 @@ public abstract class AbstractGeneticEngine {
     protected double hvLimit;
     protected int funcEvaluationsLimit;
     protected double epsilon;
-    protected int runIndex;
+    protected File outputDir;
     // </editor-fold>
 
     public AbstractGeneticEngine(
             OptimizationProblem optimizationProblem,
-            IndividualEvaluator individualEvaluator) {
+            IndividualEvaluator individualEvaluator,
+            File outputDir) {
         this.optimizationProblem = optimizationProblem;
         this.individualEvaluator = individualEvaluator;
+        this.outputDir = outputDir;
+        if(this.outputDir!= null && !this.outputDir.exists()) {
+            outputDir.mkdirs();
+        }
         RandomNumberGenerator.setSeed(optimizationProblem.getSeed());
     }
 
@@ -1025,29 +1028,29 @@ public abstract class AbstractGeneticEngine {
             throws
             DoubleAssignmentException;
 
-    public Individual[] start(
-            File outputDir,
-            int runIndex,
-            double epsilon)
+    public Individual[] start()
             throws
-            FileNotFoundException,
-            DoubleAssignmentException,
-            IOException {
-        return start(outputDir, runIndex, epsilon, Double.MAX_VALUE);
+            IOException,
+            DoubleAssignmentException {
+        return start(0);
     }
 
     public Individual[] start(
-            File outputDir,
-            int runIndex,
+            double epsilon)
+            throws
+            DoubleAssignmentException,
+            IOException {
+        return start(epsilon, Double.MAX_VALUE);
+    }
+
+    public Individual[] start(
             double epsilon,
             double hvLimit
     ) throws FileNotFoundException, DoubleAssignmentException, IOException {
-        return start(outputDir, runIndex, epsilon, hvLimit, Integer.MAX_VALUE);
+        return start(epsilon, hvLimit, Integer.MAX_VALUE);
     }
 
     public abstract Individual[] start(
-            File outputDir,
-            int runIndex,
             double epsilon,
             double hvLimit,
             int funcEvaluationsLimit
@@ -1068,8 +1071,9 @@ public abstract class AbstractGeneticEngine {
     public abstract String getAlgorithmName();
 
     protected void iterationStart() {
-        System.out.println("-----");
-        System.out.format("Generation (%04d)%n", currentGenerationIndex);
+        if(DISPLAY_GENERATION_COUNTER_ON_STANDARD_OUTPUT) {
+            System.out.format("Generation (%04d)%n", currentGenerationIndex);
+        }
     }
 
     protected void iterationEnd() {
@@ -1084,11 +1088,13 @@ public abstract class AbstractGeneticEngine {
     protected void finalize(Individual[] finalPopulation) {
     }
 
-    protected void report(File outputDir) throws IOException {
-        HashMap<String, StringBuilder> dumpMap = reportGenerationWiseInfo();
-        dumpMap.put("gen_count",
-                new StringBuilder(String.valueOf(this.currentGenerationIndex)));
-        InputOutput.dumpAll(outputDir, dumpMap);
+    protected void report() throws IOException {
+        if(this.outputDir != null) {
+            HashMap<String, StringBuilder> dumpMap = reportGenerationWiseInfo();
+            dumpMap.put("gen_count",
+                    new StringBuilder(String.valueOf(this.currentGenerationIndex)));
+            InputOutput.dumpAll(outputDir, dumpMap);
+        }
     }
 
     public HashMap<String, StringBuilder> reportGenerationWiseInfo() throws IOException {

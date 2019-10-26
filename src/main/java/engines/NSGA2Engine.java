@@ -20,14 +20,19 @@ import java.io.File;
 import parsing.IndividualEvaluator;
 
 /**
- * @author toshiba
+ * Implements the standard NSGA-III algorithm. Details of the algorithm can be
+ * found at: Deb, Kalyanmoy, Amrit Pratap, Sameer Agarwal, and T. A. M. T. Meyarivan. "A fast and elitist
+ * multiobjective genetic algorithm: NSGA-II." IEEE transactions on evolutionary computation 6, no. 2 (2002): 182-197.
+ *
+ * @author Haitham Seada
  */
 public class NSGA2Engine extends AbstractGeneticEngine {
 
     public NSGA2Engine(
             OptimizationProblem optimizationProblem,
-            IndividualEvaluator individualEvaluator) {
-        super(optimizationProblem, individualEvaluator);
+            IndividualEvaluator individualEvaluator,
+            File outputDir) {
+        super(optimizationProblem, individualEvaluator, outputDir);
     }
 
     @Override
@@ -97,20 +102,19 @@ public class NSGA2Engine extends AbstractGeneticEngine {
 
     @Override
     public Individual[] start(
-            File outputDir,
-            int runIndex,
             double epsilon,
             double hvLimit,
             int funcEvaluationsLimit
-    ) throws FileNotFoundException, DoubleAssignmentException, IOException {
+    ) throws DoubleAssignmentException, IOException {
         // Set necessary fields
-        this.runIndex = runIndex;
         this.epsilon = epsilon;
         this.hvLimit = hvLimit;
         this.funcEvaluationsLimit = funcEvaluationsLimit;
         // Generate the initial population and perform all necessary
         // initializations before starting the main loop
         currentPopulation = initialize();
+        // Report initial population
+        report();
         // Each loop represents one generation
         do {
             // Whatever logic is needed at the beginning of every iteration
@@ -134,8 +138,6 @@ public class NSGA2Engine extends AbstractGeneticEngine {
             // Create a new population for the next generation, according to the
             // non-dominated sorting performed and using niching if necessary.
             fillUpPopulation(fronts, mergedPopulation);
-            // Report generation-wise information
-            report(outputDir);
             // Update all the metrics that might be used for termination.
             updateTerminationMetrics();
             // Display the population at the end of this generation if debugging
@@ -143,6 +145,8 @@ public class NSGA2Engine extends AbstractGeneticEngine {
             displayPopulationIfDebug(currentGenerationIndex, currentPopulation);
             // Whatever logic is needed at the end of every iteration
             iterationEnd();
+            // Report generation-wise information
+            report();
         } while (!terminationCondition());
         // Prepare the final population.
         Individual[] finalPopulation = prepareFinalPopulation();
