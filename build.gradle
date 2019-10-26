@@ -1,34 +1,79 @@
 apply plugin: 'java-library'
 apply plugin: 'maven'
 apply plugin: 'maven-publish'
+apply plugin: 'signing'
 
-group 'com.coin-laboratory'
-version '2.0.0'
+group 'com.github.000haitham000'
+version '2.1.0'
 
-sourceCompatibility = '1.8'
-[compileJava, compileTestJava]*.options*.encoding = 'UTF-8'
+task javadocJar(type: Jar) {
+    classifier = 'javadoc'
+    from javadoc
+}
 
-// NetBeans will automatically add "run" and "debug" tasks relying on the
-// "mainClass" property. You may however define the property prior executing
-// tasks by passing a "-PmainClass=<QUALIFIED_CLASS_NAME>" argument.
-//
-// Note however, that you may define your own "run" and "debug" task if you
-// prefer. In this case NetBeans will not add these tasks but you may rely on
-// your own implementation.
-if (!hasProperty('mainClass')) {
-    ext.mainClass = 'optimization.SampleScript'
+task sourcesJar(type: Jar) {
+    classifier = 'sources'
+    from sourceSets.main.allSource
+}
+
+artifacts {
+    archives javadocJar, sourcesJar
+}
+
+signing {
+    sign configurations.archives
 }
 
 repositories {
-    mavenLocal()
     mavenCentral()
-    // You may define additional repositories, or even remove "mavenCentral()".
-    // Read more about repositories here:
-    //   http://www.gradle.org/docs/current/userguide/dependency_management.html#sec:repositories
-    //flatDir {
-    //    dirs 'libs'
-    //}
 }
+
+uploadArchives {
+    repositories {
+        mavenDeployer {
+            beforeDeployment { MavenDeployment deployment -> signing.signPom(deployment) }
+
+            repository(url: "https://oss.sonatype.org/service/local/staging/deploy/maven2/") {
+                authentication(userName: ossrhUsername, password: ossrhPassword)
+            }
+
+            snapshotRepository(url: "https://oss.sonatype.org/content/repositories/snapshots/") {
+                authentication(userName: ossrhUsername, password: ossrhPassword)
+            }
+            pom.project {
+                name 'evolib'
+                packaging 'jar'
+                // optionally artifactId can be defined here
+                description 'An open source Java implementation of NSGA-II, NSGA-III and Unified NSGA-III (U-NSGA-III)'
+                url 'https://github.com/000haitham000/evolib'
+
+                scm {
+                    connection 'scm:git:git://github.com/000haitham000/evolib.git'
+                    developerConnection 'scm:git:ssh://github.com/000haitham000/evolib.git'
+                    url 'https://github.com/000haitham000/evolib'
+                }
+
+                licenses {
+                    license {
+                        name 'The Apache License, Version 2.0'
+                        url 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+                    }
+                }
+
+                developers {
+                    developer {
+                        id 'hseada'
+                        name 'Haitham Seada'
+                        email '000haitham000@gmail.com'
+                    }
+                }
+            }
+        }
+    }
+}
+
+sourceCompatibility = '1.8'
+[compileJava, compileTestJava]*.options*.encoding = 'UTF-8'
 
 dependencies {
     // JUnit
