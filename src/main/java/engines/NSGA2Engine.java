@@ -105,7 +105,7 @@ public class NSGA2Engine extends AbstractGeneticEngine {
             double epsilon,
             double hvLimit,
             int funcEvaluationsLimit
-    ) throws DoubleAssignmentException, IOException {
+    ) throws Throwable {
         // Set necessary fields
         this.epsilon = epsilon;
         this.hvLimit = hvLimit;

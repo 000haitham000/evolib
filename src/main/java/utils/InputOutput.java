@@ -10,7 +10,11 @@ import emo.OptimizationProblem;
 import emo.OptimizationUtilities;
 import emo.RealVariableSpecs;
 import emo.VirtualIndividual;
+import exceptions.MisplacedTokensException;
+import exceptions.TooManyDecimalPointsException;
+import kktpm.KKTPMCalculator;
 import refdirs.ReferenceDirection;
+
 import java.awt.Color;
 import java.io.BufferedReader;
 import java.io.File;
@@ -26,6 +30,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import javax.xml.stream.XMLStreamException;
+
 import parsing.IndividualEvaluator;
 import parsing.InvalidOptimizationProblemException;
 import parsing.StaXParser;
@@ -317,7 +322,6 @@ public class InputOutput {
     }
 
     /**
-     *
      * @param optimizationProblem
      * @param populationLabel
      * @param individuals
@@ -766,7 +770,7 @@ public class InputOutput {
     }
 
     public static void printDirectionMatlabCode(int objCount, List<ReferenceDirection> dirs, PrintWriter printer) {
-        if(objCount == 2 || objCount == 3) {
+        if (objCount == 2 || objCount == 3) {
             System.out.println("MATLAB CODE (for visualizing final reference directions)");
             StringBuilder[] dimBuilderArr = new StringBuilder[objCount];
             for (int i = 0; i < dimBuilderArr.length; i++) {
@@ -844,8 +848,8 @@ public class InputOutput {
      */
     public static void printMatlabCode2D(StringBuilder sb, VirtualIndividual[]... individualsArrays) {
         Color[] colors = {
-            Color.BLACK, Color.RED, Color.BLUE, Color.GREEN,
-            Color.YELLOW, Color.gray, Color.pink};
+                Color.BLACK, Color.RED, Color.BLUE, Color.GREEN,
+                Color.YELLOW, Color.gray, Color.pink};
         int count = 0;
         sb.append(String.format("clear all%n"));
         sb.append(String.format("hold on%n"));
@@ -860,10 +864,10 @@ public class InputOutput {
                 if (individuals[i].getObjectivesCount() != 2) {
                     throw new UnsupportedOperationException(
                             String.format("Unable to generate Matlab script: "
-                                    + "Individual(%d) has (%d) objectives. "
-                                    + "All individuals must have exactly 2 "
-                                    + "objectives in order to be plotted on a "
-                                    + "2D plot.",
+                                            + "Individual(%d) has (%d) objectives. "
+                                            + "All individuals must have exactly 2 "
+                                            + "objectives in order to be plotted on a "
+                                            + "2D plot.",
                                     i, individuals[i].getObjectivesCount())
                     );
                 }
@@ -941,8 +945,7 @@ public class InputOutput {
 
     public static StringBuilder collectObjectiveSpace(
             OptimizationProblem optimizationProblem,
-            Individual[] individuals)
-            throws FileNotFoundException {
+            Individual[] individuals) {
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < individuals.length; i++) {
             for (int j = 0; j < optimizationProblem.objectives.length; j++) {
@@ -957,6 +960,23 @@ public class InputOutput {
                     sb.append(" ");
                 }
             }
+            // Write a line separator (Enter)
+            sb.append(String.format("%n"));
+        }
+        return sb;
+    }
+
+    public static StringBuilder collectKKTPM2(
+            parsing.OptimizationProblem problemDescription,
+            Individual[] individuals,
+            double[] idealPoint) throws TooManyDecimalPointsException, MisplacedTokensException {
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < individuals.length; i++) {
+            // Write objective value (or NaN if the individual is infeasible)
+            sb.append(String.format("%7.7f", KKTPMCalculator.getKKTPM2(
+                    problemDescription,
+                    idealPoint,
+                    individuals[i].getReferenceDirection().direction)));
             // Write a line separator (Enter)
             sb.append(String.format("%n"));
         }

@@ -23,8 +23,7 @@ public class AlgorithmTestUtilities {
             int[] divisions,
             String[] outFilePrefixList)
             throws
-            IOException,
-            DoubleAssignmentException {
+            Throwable {
         // Create the distance metric
         DistanceMetric distanceMetric = new PerpendicularDistanceMetric();
         // Specify output directory

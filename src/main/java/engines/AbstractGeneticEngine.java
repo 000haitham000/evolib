@@ -4,24 +4,25 @@
  */
 package engines;
 
-import distancemetrics.DistanceMetric;
+import emo.*;
+import exceptions.MisplacedTokensException;
+import exceptions.TooManyDecimalPointsException;
+import parsing.InvalidOptimizationProblemException;
 import utils.InputOutput;
 import utils.Mathematics;
+import utils.PerformanceMetrics;
 import utils.RandomNumberGenerator;
-import emo.DoubleAssignmentException;
-import emo.Individual;
-import emo.IndividualsSet;
-import emo.OptimizationProblem;
-import emo.OptimizationUtilities;
-import emo.RealVariableSpecs;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
+
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.HashMap;
+import java.util.Map;
+
 import org.apache.commons.lang3.SerializationUtils;
 import parsing.IndividualEvaluator;
+
+import javax.xml.stream.XMLStreamException;
 
 /**
  * This is the superclass of all evolutionary engines. It has the full
@@ -53,7 +54,6 @@ public abstract class AbstractGeneticEngine {
     public static boolean DUMP_ALL_GENERATIONS_DECISION_SPACE = true;
     public static boolean DUMP_ALL_GENERATIONS_OBJECTIVE_SPACE = true;
     public static boolean DUMP_ALL_GENERATIONS_MATLAB_SCRIPTS = true;
-    public static boolean DUMP_ALL_GENERATIONS_KKTPM = true;
     public static boolean DUMP_ALL_GENERATIONS_META_DATA = true;
     // If DUMP_ALL_GENERATIONS_NORMALIZED_MATLAB_SCRIPTS is true if and only if
     // DUMP_ALL_GENERATIONS_OBJECTIVE_SPACE is also true,
@@ -64,6 +64,11 @@ public abstract class AbstractGeneticEngine {
     // DUMP_ALL_GENERATIONS_OBJECTIVE_SPACE is also true,
     // otherwise DUMP_ANIMATED_MATLAB_SCRIPT value will be ignored.
     public final static boolean DUMP_ANIMATED_MATLAB_SCRIPT = false;
+    // Print metrics
+    public boolean DUMP_GD = false;
+    public boolean DUMP_IGD = false;
+    public boolean DUMP_GD_PLUS = false;
+    public boolean DUMP_IGD_PLUS = false;
 
     // <editor-fold defaultstate="collapsed" desc="Fields">
     protected int currentGenerationIndex = -1;
@@ -78,6 +83,7 @@ public abstract class AbstractGeneticEngine {
     protected int funcEvaluationsLimit;
     protected double epsilon;
     protected File outputDir;
+    protected Map<String, Object> additionalParameters = new HashMap<>();
     // </editor-fold>
 
     public AbstractGeneticEngine(
@@ -1030,23 +1036,21 @@ public abstract class AbstractGeneticEngine {
 
     public Individual[] start()
             throws
-            IOException,
-            DoubleAssignmentException {
+            Throwable {
         return start(0);
     }
 
     public Individual[] start(
             double epsilon)
             throws
-            DoubleAssignmentException,
-            IOException {
+            Throwable {
         return start(epsilon, Double.MAX_VALUE);
     }
 
     public Individual[] start(
             double epsilon,
             double hvLimit
-    ) throws FileNotFoundException, DoubleAssignmentException, IOException {
+    ) throws Throwable {
         return start(epsilon, hvLimit, Integer.MAX_VALUE);
     }
 
@@ -1054,11 +1058,7 @@ public abstract class AbstractGeneticEngine {
             double epsilon,
             double hvLimit,
             int funcEvaluationsLimit
-    )
-            throws
-            FileNotFoundException,
-            DoubleAssignmentException,
-            IOException;
+    ) throws Throwable;
 
     protected abstract void fillUpPopulation(
             List<List<Individual>> fronts,
@@ -1088,7 +1088,11 @@ public abstract class AbstractGeneticEngine {
     protected void finalize(Individual[] finalPopulation) {
     }
 
-    protected void report() throws IOException {
+    protected void report()
+            throws
+            IOException,
+            TooManyDecimalPointsException,
+            MisplacedTokensException, InvalidOptimizationProblemException, XMLStreamException {
         if(this.outputDir != null) {
             HashMap<String, StringBuilder> dumpMap = reportGenerationWiseInfo();
             dumpMap.put("gen_count",
@@ -1097,7 +1101,11 @@ public abstract class AbstractGeneticEngine {
         }
     }
 
-    public HashMap<String, StringBuilder> reportGenerationWiseInfo() throws IOException {
+    public HashMap<String, StringBuilder> reportGenerationWiseInfo()
+            throws
+            IOException,
+            TooManyDecimalPointsException,
+            MisplacedTokensException, InvalidOptimizationProblemException, XMLStreamException {
         // Create the hash map to be returned
         HashMap<String, StringBuilder> dumpMap = new HashMap<>();
         if (DUMP_ALL_GENERATIONS_DECISION_SPACE
@@ -1131,6 +1139,40 @@ public abstract class AbstractGeneticEngine {
                         this.currentPopulation, hvIdealPoint, hvReferencePoint,
                         this.individualEvaluator.getFunctionEvaluationsCount(),
                         epsilon);
+                // Generational Distance (GD)
+                if(DUMP_GD) {
+                    double gd = PerformanceMetrics.calculateGenerationalDistance(
+                            this.currentIdealPoint.length,
+                            individualsToBePrinted,
+                            getVirtualIndividualsFromFile((File)getParameter("pareto-front-file")),
+                            2);
+                    metaDataSb.append(String.format("GD = %f%n", gd));
+                }
+                // Generational Distance Plus (GD Plus)
+                if(DUMP_GD_PLUS) {
+                    double gdPlus = PerformanceMetrics.calculateGenerationalDistancePlus(
+                            this.currentIdealPoint.length,
+                            individualsToBePrinted,
+                            getVirtualIndividualsFromFile((File)getParameter("pareto-front-file")));
+                    metaDataSb.append(String.format("GD Plus = %f%n", gdPlus));
+                }
+                // Inverted Generational Distance (IGD)
+                if(DUMP_IGD) {
+                    double igd = PerformanceMetrics.calculateInvertedGenerationalDistance(
+                            this.currentIdealPoint.length,
+                            individualsToBePrinted,
+                            getVirtualIndividualsFromFile((File)getParameter("pareto-front-file")),
+                            2);
+                    metaDataSb.append(String.format("IGD = %f%n", igd));
+                }
+                // Inverted Generational Distance Plus (IGD Plus)
+                if(DUMP_IGD_PLUS) {
+                    double igdPlus = PerformanceMetrics.calculateInvertedGenerationalDistancePlus(
+                            this.currentIdealPoint.length,
+                            individualsToBePrinted,
+                            getVirtualIndividualsFromFile((File)getParameter("pareto-front-file")));
+                    metaDataSb.append(String.format("IGD Plus = %f%n", igdPlus));
+                }
                 dumpMap.put("meta.txt", metaDataSb);
             }
             // </editor-fold>
@@ -1172,5 +1214,29 @@ public abstract class AbstractGeneticEngine {
         }
         // Finally, return the map containing all the information to dump
         return dumpMap;
+    }
+
+    protected VirtualIndividual[] getVirtualIndividualsFromFile(File file) throws IOException {
+        List<VirtualIndividual> vIndList = new ArrayList<>();
+        BufferedReader reader = new BufferedReader(new FileReader(file));
+        String line;
+        while((line = reader.readLine()) != null) {
+            String[] splits = line.trim().split("\\s+");
+            VirtualIndividual virtualIndividual = new VirtualIndividual(splits.length);
+            for (int i = 0; i < splits.length; i++) {
+                virtualIndividual.setObjective(i, Double.parseDouble(splits[i].trim()));
+            }
+            vIndList.add(virtualIndividual);
+        }
+        VirtualIndividual[] vIndArr = new VirtualIndividual[vIndList.size()];
+        return vIndList.toArray(vIndArr);
+    }
+
+    public Object getParameter(String paramName) {
+        return additionalParameters.get(paramName);
+    }
+
+    public Object addParameter(String paramName, Object paramValue) {
+        return additionalParameters.put(paramName, paramValue);
     }
 }

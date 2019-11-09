@@ -19,11 +19,7 @@ public class UnifiedNSGA3EngineTest {
     @Test
     public void solveBiObjectiveZDT1()
             throws
-            IOException,
-            DoubleAssignmentException,
-            URISyntaxException,
-            InvalidOptimizationProblemException,
-            XMLStreamException {
+            Throwable {
         File configurationFile = new File(
                 getClass().getClassLoader().getResource("configurations/zdt1-02-30.xml").toURI());
         // Read problem
@@ -42,11 +38,7 @@ public class UnifiedNSGA3EngineTest {
     @Test
     public void solveBiObjectiveOSY()
             throws
-            IOException,
-            DoubleAssignmentException,
-            URISyntaxException,
-            InvalidOptimizationProblemException,
-            XMLStreamException {
+            Throwable {
         File configurationFile = new File(
                 getClass().getClassLoader().getResource("configurations/osy.xml").toURI());
         // Read problem
@@ -65,11 +57,7 @@ public class UnifiedNSGA3EngineTest {
     @Test
     public void solveMultiObjectiveDTLZ1()
             throws
-            IOException,
-            DoubleAssignmentException,
-            URISyntaxException,
-            InvalidOptimizationProblemException,
-            XMLStreamException {
+            Throwable {
         File configurationFile = new File(
                 getClass().getClassLoader().getResource("configurations/dtlz1_05var_03obj.xml").toURI());
         // Read problem
@@ -88,11 +76,7 @@ public class UnifiedNSGA3EngineTest {
     @Test
     public void solveManyObjectiveDTLZ1()
             throws
-            IOException,
-            DoubleAssignmentException,
-            URISyntaxException,
-            InvalidOptimizationProblemException,
-            XMLStreamException {
+            Throwable {
         File configurationFile = new File(
                 getClass().getClassLoader().getResource("configurations/dtlz1_12var_10obj.xml").toURI());
         // Read problem
@@ -111,11 +95,7 @@ public class UnifiedNSGA3EngineTest {
     @Test
     public void solveManyObjectiveC3DTLZ1()
             throws
-            IOException,
-            DoubleAssignmentException,
-            URISyntaxException,
-            InvalidOptimizationProblemException,
-            XMLStreamException {
+            Throwable {
         File configurationFile = new File(
                 getClass().getClassLoader().getResource("configurations/c3-dtlz1_14var_10obj_10con.xml").toURI());
         // Read problem
@@ -134,11 +114,7 @@ public class UnifiedNSGA3EngineTest {
     @Test
     public void solveSingleObjectiveRastrigin()
             throws
-            IOException,
-            DoubleAssignmentException,
-            URISyntaxException,
-            InvalidOptimizationProblemException,
-            XMLStreamException {
+            Throwable {
         File configurationFile = new File(
                 getClass().getClassLoader().getResource("configurations/single-objective-rastrigin.xml").toURI());
         // Read problem
@@ -157,11 +133,7 @@ public class UnifiedNSGA3EngineTest {
     @Test
     public void solveSingleObjectiveG1()
             throws
-            IOException,
-            DoubleAssignmentException,
-            URISyntaxException,
-            InvalidOptimizationProblemException,
-            XMLStreamException {
+            Throwable {
         File configurationFile = new File(
                 getClass().getClassLoader().getResource("configurations/single-objective-g01.xml").toURI());
         // Read problem

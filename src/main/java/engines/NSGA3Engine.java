@@ -9,6 +9,7 @@ import distancemetrics.KKTPM2DistanceMetric;
 import exceptions.MisplacedTokensException;
 import exceptions.TooManyDecimalPointsException;
 import kktpm.KKTPMCalculator;
+import parsing.InvalidOptimizationProblemException;
 import parsing.KKTPM;
 import parsing.XMLParser;
 import utils.InputOutput;
@@ -38,6 +39,8 @@ import java.util.HashMap;
 
 import parsing.IndividualEvaluator;
 import refdirs.NestedReferenceDirectionsFactory;
+
+import javax.xml.stream.XMLStreamException;
 
 /**
  * Implements the standard NSGA-III algorithm. Details of the algorithm can be
@@ -664,11 +667,7 @@ public class NSGA3Engine extends AbstractGeneticEngine {
             double epsilon,
             double hvLimit,
             int funcEvaluationsLimit
-    )
-            throws
-            FileNotFoundException,
-            DoubleAssignmentException,
-            IOException {
+    ) throws Throwable {
         // Set necessary fields
         this.epsilon = epsilon;
         this.hvLimit = hvLimit;
@@ -943,8 +942,7 @@ public class NSGA3Engine extends AbstractGeneticEngine {
 
     @Override
     public HashMap<String, StringBuilder> reportGenerationWiseInfo()
-            throws
-            IOException {
+            throws MisplacedTokensException, TooManyDecimalPointsException, IOException, InvalidOptimizationProblemException, XMLStreamException {
         HashMap<String, StringBuilder> dumpMap
                 = super.reportGenerationWiseInfo();
         if (outputDir != null) {

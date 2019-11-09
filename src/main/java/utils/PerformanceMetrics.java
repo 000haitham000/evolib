@@ -174,6 +174,51 @@ public class PerformanceMetrics {
      * @param objCount
      * @param individuals
      * @param paretoFrontMembers
+     * @return
+     */
+    public static double calculateGenerationalDistancePlus(
+            int objCount,
+            VirtualIndividual[] individuals,
+            VirtualIndividual[] paretoFrontMembers) {
+        double generationalDistance = 0.0;
+        for (int i = 0; i < individuals.length; i++) {
+            double minDistance = getDistanceBetween(
+                    objCount,
+                    individuals[i],
+                    paretoFrontMembers[0]);
+            int minDistanceParetoIndex = 0;
+            for (int j = 1; j < paretoFrontMembers.length; j++) {
+                double temp = getDistanceBetween(
+                        objCount,
+                        individuals[i],
+                        paretoFrontMembers[j]);
+                if (temp < minDistance) {
+                    minDistance = temp;
+                    minDistanceParetoIndex = j;
+                }
+            }
+            // Calculate d+ vector
+            double[] dPlus = new double[individuals[i].getObjectivesCount()];
+            for (int k = 0; k < dPlus.length; k++) {
+                double aMinusZ = individuals[i].getObjective(k) -
+                        paretoFrontMembers[minDistanceParetoIndex].getObjective(k);
+                dPlus[k] = aMinusZ > 0 ? aMinusZ : 0;
+            }
+            generationalDistance += Math.pow(Mathematics.getNorm(dPlus), 2);
+        }
+        double result = Math.pow(generationalDistance, 1.0 / 2)
+                / individuals.length;
+        return result;
+    }
+
+    /**
+     * Note that the algorithm assumes that all the solutions are non-dominated.
+     * No check is made to ensure this property i.e. if it is not true, the
+     * method will return wrong result with NO exceptions or flags.
+     *
+     * @param objCount
+     * @param individuals
+     * @param paretoFrontMembers
      * @param power
      * @return
      */
@@ -189,6 +234,28 @@ public class PerformanceMetrics {
                 paretoFrontMembers,
                 individuals,
                 power);
+    }
+
+    /**
+     * Note that the algorithm assumes that all the solutions are non-dominated.
+     * No check is made to ensure this property i.e. if it is not true, the
+     * method will return wrong result with NO exceptions or flags.
+     *
+     * @param objCount
+     * @param individuals
+     * @param paretoFrontMembers
+     * @return
+     */
+    public static double calculateInvertedGenerationalDistancePlus(
+            int objCount,
+            VirtualIndividual[] individuals,
+            VirtualIndividual[] paretoFrontMembers) {
+        // To calculate the IGD, just switch the two populations when calling
+        // the GD method.
+        return calculateGenerationalDistancePlus(
+                objCount,
+                paretoFrontMembers,
+                individuals);
     }
 
     public static double calculateSetCoverageMetric(
@@ -209,7 +276,6 @@ public class PerformanceMetrics {
     /**
      * Get the Euclidean distance between two solutions
      *
-     * @param optimizationProblem
      * @param individual1
      * @param individual2
      * @return
