@@ -1,6 +1,7 @@
 # Created by .ignore support plugin (hsz.mobi)
 ### Gradle template
 .gradle
+.idea
 /build/
 
 # Ignore Gradle GUI config
@@ -43,5 +44,4 @@ hs_err_pid*
 /src/main/java/refdirs/notes.txt
 /gradle/
 /.idea/
-.idea
 *.iml
