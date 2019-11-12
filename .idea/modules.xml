@@ -3,8 +3,8 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/evolib.iml" filepath="$PROJECT_DIR$/evolib.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/evolib_main.iml" filepath="$PROJECT_DIR$/.idea/modules/evolib_main.iml" group="evolib" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/evolib_test.iml" filepath="$PROJECT_DIR$/.idea/modules/evolib_test.iml" group="evolib" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/evolib.main.iml" filepath="$PROJECT_DIR$/.idea/modules/evolib.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/evolib.test.iml" filepath="$PROJECT_DIR$/.idea/modules/evolib.test.iml" />
     </modules>
   </component>
 </project>

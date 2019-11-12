@@ -40,3 +40,6 @@ gradle-app.setting
 hs_err_pid*
 /src/main/java/utils/PerformanceMetrics_bak.java
 /src/main/java/refdirs/notes.txt
+/gradle/
+/.idea/
+*.iml

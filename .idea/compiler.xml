@@ -2,6 +2,8 @@
 <project version="4">
   <component name="CompilerConfiguration">
     <bytecodeTargetLevel>
+      <module name="evolib.main" target="1.8" />
+      <module name="evolib.test" target="1.8" />
       <module name="evolib_main" target="1.8" />
       <module name="evolib_test" target="1.8" />
     </bytecodeTargetLevel>

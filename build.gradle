@@ -28,43 +28,47 @@ repositories {
     mavenCentral()
 }
 
-uploadArchives {
-    repositories {
-        mavenDeployer {
-            beforeDeployment { MavenDeployment deployment -> signing.signPom(deployment) }
+def uploadToOSSRH = false;
 
-            repository(url: "https://oss.sonatype.org/service/local/staging/deploy/maven2/") {
-                authentication(userName: ossrhUsername, password: ossrhPassword)
-            }
+if (uploadToOSSRH) {
+    uploadArchives {
+        repositories {
+            mavenDeployer {
+                beforeDeployment { MavenDeployment deployment -> signing.signPom(deployment) }
 
-            snapshotRepository(url: "https://oss.sonatype.org/content/repositories/snapshots/") {
-                authentication(userName: ossrhUsername, password: ossrhPassword)
-            }
-            pom.project {
-                name 'evolib'
-                packaging 'jar'
-                // optionally artifactId can be defined here
-                description 'An open source Java implementation of NSGA-II, NSGA-III and Unified NSGA-III (U-NSGA-III)'
-                url 'https://github.com/000haitham000/evolib'
+                repository(url: "https://oss.sonatype.org/service/local/staging/deploy/maven2/") {
+                    authentication(userName: ossrhUsername, password: ossrhPassword)
+                }
 
-                scm {
-                    connection 'scm:git:git://github.com/000haitham000/evolib.git'
-                    developerConnection 'scm:git:ssh://github.com/000haitham000/evolib.git'
+                snapshotRepository(url: "https://oss.sonatype.org/content/repositories/snapshots/") {
+                    authentication(userName: ossrhUsername, password: ossrhPassword)
+                }
+                pom.project {
+                    name 'evolib'
+                    packaging 'jar'
+                    // optionally artifactId can be defined here
+                    description 'An open source Java implementation of NSGA-II, NSGA-III and Unified NSGA-III (U-NSGA-III)'
                     url 'https://github.com/000haitham000/evolib'
-                }
 
-                licenses {
-                    license {
-                        name 'The Apache License, Version 2.0'
-                        url 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+                    scm {
+                        connection 'scm:git:git://github.com/000haitham000/evolib.git'
+                        developerConnection 'scm:git:ssh://github.com/000haitham000/evolib.git'
+                        url 'https://github.com/000haitham000/evolib'
                     }
-                }
 
-                developers {
-                    developer {
-                        id 'hseada'
-                        name 'Haitham Seada'
-                        email '000haitham000@gmail.com'
+                    licenses {
+                        license {
+                            name 'The Apache License, Version 2.0'
+                            url 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+                        }
+                    }
+
+                    developers {
+                        developer {
+                            id 'hseada'
+                            name 'Haitham Seada'
+                            email '000haitham000@gmail.com'
+                        }
                     }
                 }
             }
